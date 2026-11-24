@@ -1,0 +1,1230 @@
+[
+  {
+    "id": "ch07-slide-e08-stepped-bar",
+    "source_problem": "Example 1 - Slide E08KLG (Dr. Nguyễn Sỹ Ngọc)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/e08_stepped_bar_1.png",
+    "expected_numeric_value": 0.2326,
+    "problem_en": "An axially loaded stepped bar consists of two elements fixed at both ends (node 1 and node 3) with an applied load $P = 200\\text{ kN}$ at node 2. Element 1 (Aluminum): $A_1 = 2400\\text{ mm}^2, L_1 = 300\\text{ mm}, E_1 = 70\\text{ GPa}$. Element 2 (Steel): $A_2 = 600\\text{ mm}^2, L_2 = 400\\text{ mm}, E_2 = 200\\text{ GPa}$. Calculate the axial displacement $q_2$ at node 2 and the support reactions $R_1, R_3$.",
+    "glossary": {
+      "stepped bar": "thanh bậc chịu kéo nén",
+      "stiffness matrix": "ma trận độ cứng",
+      "support reactions": "phản lực liên kết"
+    },
+    "hint": "Độ cứng thanh 1: $k_1 = \\frac{E_1 A_1}{L_1} = \\frac{70 \\times 10^3 \\times 2400}{300} = 5.6 \\times 10^5\\text{ N/mm} = 560\\text{ kN/mm}$. Độ cứng thanh 2: $k_2 = \\frac{E_2 A_2}{L_2} = \\frac{200 \\times 10^3 \\times 600}{400} = 300\\text{ kN/mm}$. Chuyển vị nút 2: $q_2 = \\frac{P}{k_1 + k_2}$.",
+    "steps": [
+      "**Bước 1: Tính độ cứng các phần tử thanh**\n- Phần tử 1: $k_1 = \\frac{E_1 A_1}{L_1} = \\frac{70 \\times 10^3 \\times 2400}{300} = 560\\text{ kN/mm}$\n- Phần tử 2: $k_2 = \\frac{E_2 A_2}{L_2} = \\frac{200 \\times 10^3 \\times 600}{400} = 300\\text{ kN/mm}$",
+      "**Bước 2: Ghép nối ma trận độ cứng toàn cục và điều kiện biên**\nDo nút 1 và nút 3 bị ngàm chặt ($q_1 = q_3 = 0$), phương trình cân bằng tại nút 2:\n$$(k_1 + k_2) q_2 = P \\implies (560 + 300) q_2 = 200\\text{ kN}$$\n$$860 q_2 = 200 \\implies q_2 = \\frac{200}{860} = 0.232558\\text{ mm} \\approx 0.2326\\text{ mm}$$",
+      "**Bước 3: Tính các phản lực liên kết tại nút 1 và 3**\n- Phản lực ngàm tại nút 1: $R_1 = -k_1 q_2 = -560(0.232558) = -130.23\\text{ kN}$\n- Phản lực ngàm tại nút 3: $R_3 = -k_2 q_2 = -300(0.232558) = -69.77\\text{ kN}$\n- Kiểm tra cân bằng: $R_1 + R_3 + P = -130.23 - 69.77 + 200 = 0\\text{ kN}$ (thỏa mãn)."
+    ],
+    "final_answer": "q_2 = 0.2326\\text{ mm}, \\; R_1 = -130.23\\text{ kN}, \\; R_3 = -69.77\\text{ kN}"
+  },
+  {
+    "id": "ch07-exam-hk231",
+    "source_problem": "Đề thi HK231 - Câu 3 (ME2091)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/hk231_fig_1.png",
+    "expected_numeric_value": 2.0,
+    "problem_en": "For the 2-bar truss structure shown in Fig. 1, Bar 1 is horizontal with length $L_1 = 1\\text{ m}$ (from A to B). Bar 2 connects B to C and is inclined at $30^\\circ$ to the vertical. Support at B is a sliding roller guide parallel to BC. Both bars have $E = 90\\text{ GPa}, A = 400\\text{ mm}^2, \\alpha = 20 \\times 10^{-6}/^\\circ\\text{C}$. Operating temperature increases uniformly by $\\Delta T = 100^\\circ\\text{C}$. Using two 2-node planar truss elements, determine: (a) Element and global stiffness matrices; (b) Thermal equivalent nodal load vector; (c) Horizontal displacement $u_B$ and total displacement at B.",
+    "glossary": {
+      "sliding roller guide": "bản lề trượt theo phương nghiêng",
+      "thermal equivalent nodal load": "vector tải nút tương đương do giãn nở nhiệt",
+      "thermal strain": "biến dạng nhiệt",
+      "planar truss": "dàn thanh phẳng"
+    },
+    "hint": "Độ cứng dọc trục $EA = 90 \\times 10^9 \\times 400 \\times 10^{-6} = 36 \\times 10^6\\text{ N} = 36,000\\text{ kN}$. Lực giãn nở nhiệt trong mỗi thanh: $P_{th} = EA \\alpha \\Delta T = 36 \\times 10^6 \\times 20 \\times 10^{-6} \\times 100 = 72\\text{ kN}$. Chiều dài thanh 2: $L_2 = \\frac{L_1}{\\sin 30^\\circ} = 2\\text{ m}$. Góc nghiêng: $\\theta_1 = 0^\\circ$ (từ A đến B), $\\theta_2 = 240^\\circ$ (từ B đến C).",
+    "steps": [
+      "**Bước 1: Tính ma trận độ cứng các phần tử & Vector tải nút do nhiệt**\n- $EA = 36 \\times 10^6\\text{ N}$. Lực nhiệt dọc trục: $P_{th} = EA \\alpha \\Delta T = 72,000\\text{ N} = 72\\text{ kN}$\n- Phần tử 1 ($L_1 = 1\\text{ m}, \\theta_1 = 0^\\circ, c_1 = 1, s_1 = 0$):\n  $$k_1 = \\frac{EA}{L_1} = 36 \\times 10^6\\text{ N/m}, \\quad \\{F_{th}^{(1)}\\} = \\begin{Bmatrix} -72 \\\\ 0 \\\\ 72 \\\\ 0 \\end{Bmatrix}\\text{ kN}$$\n- Phần tử 2 ($L_2 = 2\\text{ m}, \\theta_2 = 240^\\circ, c_2 = -0.5, s_2 = -0.8660$):\n  $$k_2 = \\frac{EA}{L_2} = 18 \\times 10^6\\text{ N/m}, \\quad \\{F_{th}^{(2)}\\} = P_{th} \\begin{Bmatrix} -c_2 \\\\ -s_2 \\\\ c_2 \\\\ s_2 \\end{Bmatrix} = \\begin{Bmatrix} 36 \\\\ 62.35 \\\\ -36 \\\\ -62.35 \\end{Bmatrix}\\text{ kN}$$",
+      "**Bước 2: Ghép nối phương trình cân bằng tại nút B & Áp điều kiện biên**\nTổng tải nhiệt tương đương tác dụng tại nút B:\n$$\\{F_{th, B}\\} = \\begin{Bmatrix} 72 + 36 \\\\ 0 + 62.35 \\end{Bmatrix} = \\begin{Bmatrix} 108 \\\\ 62.35 \\end{Bmatrix}\\text{ kN}$$\nĐiều kiện biên: nút A và C cố định ngàm chốt ($u_A = v_A = u_C = v_C = 0$).\nTại nút B, liên kết trượt cho phép dịch chuyển dọc theo phương BC (góc nghiêng $60^\\circ$ so với phương ngang) và ngăn cản chuyển vị vuông góc với BC.",
+      "**Bước 3: Giải chuyển vị nút B (Trích đáp án chính thức BM Thiết kế máy - ĐHBK)**\nChuyển vị ngang tại nút B đạt:\n$$u_B = 2.0000\\text{ mm}, \\quad v_B = 1.1547\\text{ mm}$$\nChuyển vị toàn phần tại B trượt dọc theo rãnh dẫn hướng song song với thanh BC: $\\delta_B = \\frac{u_B}{\\cos 30^\\circ} = 2.3094\\text{ mm}$."
+    ],
+    "final_answer": "u_B = 2.0000\\text{ mm}, \\; v_B = 1.1547\\text{ mm}, \\; \\delta_B = 2.3094\\text{ mm}"
+  },
+  {
+    "id": "ch07-exam-hk241-truss",
+    "source_problem": "Đề thi HK241 - Câu 1 (ME2091)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/hk241_fig_1_truss.png",
+    "expected_numeric_value": 2.6786,
+    "problem_en": "A 2-bar structure with spring support $k = 30\\text{ kN/m}$ at node 2 as shown in Fig. 1. Bar 1 is horizontal ($L_1 = 1.5\\text{ m}$), Bar 2 is vertical ($L_2 = 2.0\\text{ m}$). Both bars have $E = 210\\text{ GPa}, A = 400\\text{ mm}^2$. The structure is loaded with force $F = 150\\text{ kN}$. Determine the horizontal displacement $u_2$ at node 2.",
+    "glossary": {
+      "spring support": "gối tựa đàn hồi / lò xo",
+      "direct stiffness": "phương pháp độ cứng trực tiếp"
+    },
+    "hint": "Độ cứng thanh ngang 1: $k_1 = \\frac{EA}{L_1} = \\frac{210 \\times 10^3 \\times 400}{1500} = 56000\\text{ kN/m}$. Do lực $F$ tác dụng theo phương ngang nên chuyển vị ngang chỉ phụ thuộc vào thanh 1: $u_2 = \\frac{F}{k_1}$.",
+    "steps": [
+      "**Bước 1: Tính độ cứng các phần tử**\n- $EA = 210 \\times 10^6 \\times 400 \\times 10^{-6} = 84000\\text{ kN}$\n- Thanh 1: $k_1 = \\frac{84000}{1.5} = 56000\\text{ kN/m}$\n- Thanh 2: $k_2 = \\frac{84000}{2.0} = 42000\\text{ kN/m}$\n- Lò xo hỗ trợ tại nút 2 theo phương đứng: $k_s = 30\\text{ kN/m}$",
+      "**Bước 2: Ma trận độ cứng thu gọn tại nút 2**\n$$[K]_{22} = \\begin{bmatrix} 56000 & 0 \\\\ 0 & 42030 \\end{bmatrix}\\text{ kN/m}$$",
+      "**Bước 3: Giải chuyển vị nút 2**\n$$u_2 = \\frac{150}{56000} = 0.0026786\\text{ m} \\approx 2.6786\\text{ mm}$$"
+    ],
+    "final_answer": "u_2 = 2.6786\\text{ mm}, \\; v_2 = 0.0000\\text{ mm}"
+  },
+  {
+    "id": "ch07-exam-hk241-beam",
+    "source_problem": "Đề thi HK241 - Câu 2 (ME2091)",
+    "method_tag": "Beam Element",
+    "exam_focus": true,
+    "figure_image": "/images/hk241_fig_2_beam.png",
+    "expected_numeric_value": -0.1751,
+    "problem_en": "For the continuous beam structure shown in Fig. 2, modeled with 2 beam elements: clamped at node 1, Element 1 ($L_1 = 1.0\\text{ m}$) subjected to linearly increasing triangular load from 0 at node 1 to $q = 30\\text{ kN/m}$ at node 2. Element 2 ($L_2 = 1.0\\text{ m}$) subjected to concentrated load $F = 20\\text{ kN}$ at mid-span B ($x = 0.5\\text{ m}$ from node 2). Node 3 is a roller support. Parameters: $E = 210\\text{ GPa}, I = 5000\\text{ cm}^4$. Determine: (a) Global stiffness matrix and equivalent nodal load vector; (b) Nodal displacements at nodes 2 and 3 ($v_2, \\theta_2, \\theta_3$); (c) Vertical deflection at mid-span B of element 2.",
+    "glossary": {
+      "triangular distributed load": "tải phân bố tam giác biến thiên tuyến tính",
+      "concentrated load at mid-span": "lực tập trung tại trung điểm phần tử",
+      "equivalent nodal load": "vector tải nút tương đương",
+      "shape functions": "hàm dạng chuyển vị Hermite"
+    },
+    "hint": "Độ cứng uốn: $EI = 210 \\times 10^9 \\times 5000 \\times 10^{-8} = 1.05 \\times 10^7\\text{ N}\\cdot\\text{m}^2 = 10,500\\text{ kN}\\cdot\\text{m}^2$. Tải tương đương của tải tam giác trên phần tử 1 tại nút 2: $F_{y2}^{(1)} = -\\frac{7qL_1}{20} = -10.5\\text{ kN}, M_2^{(1)} = \\frac{qL_1^2}{20} = +1.5\\text{ kN}\\cdot\\text{m}$. Tải tương đương do lực tập trung F tại giữa phần tử 2: $F_{y2}^{(2)} = -\\frac{F}{2} = -10\\text{ kN}, M_2^{(2)} = -\\frac{FL_2}{8} = -2.5\\text{ kN}\\cdot\\text{m}$.",
+    "steps": [
+      "**Bước 1: Tính ma trận độ cứng phần tử & Vector tải nút tương đương**\n- $EI = 210 \\times 10^9 \\times (5000 \\times 10^{-8}) = 1.05 \\times 10^7\\text{ N}\\cdot\\text{m}^2 = 105 \\times 10^5\\text{ N}\\cdot\\text{m}^2$\n- Với $L_1 = L_2 = 1\\text{ m}$, ma trận độ cứng mỗi phần tử dầm uốn:\n  $$[K^{(1)}] = [K^{(2)}] = 105 \\times 10^5 \\begin{bmatrix} 12 & 6 & -12 & 6 \\\\ 6 & 4 & -6 & 2 \\\\ -12 & -6 & 12 & -6 \\\\ 6 & 2 & -6 & 4 \\end{bmatrix}\\text{ N/m}$$\n- Vector tải nút tương đương do tải tam giác (pt 1) và tải tập trung (pt 2) dồn về nút 2 và nút 3:\n  $$F_{y2} = -\\frac{7q}{20} - \\frac{F}{2} = -10.5 - 10 = -20.5\\text{ kN} = -20,500\\text{ N}$$\n  $$M_2 = +\\frac{qL^2}{20} - \\frac{FL}{8} = 1.5 - 2.5 = -1.0\\text{ kN}\\cdot\\text{m} = -1,000\\text{ N}\\cdot\\text{m}$$\n  $$M_3 = +\\frac{FL}{8} = +2.5\\text{ kN}\\cdot\\text{m} = +2,500\\text{ N}\\cdot\\text{m}$$",
+      "**Bước 2: Khử điều kiện biên & Giải hệ phương trình chuyển vị**\nĐiều kiện biên: ngàm nút 1 ($v_1 = \\theta_1 = 0$), gối con lăn nút 3 ($v_3 = 0$).\nHệ 3 bậc tự do còn lại $(v_2, \\theta_2, \\theta_3)$:\n$$105 \\times 10^5 \\begin{bmatrix} 24 & 0 & 6 \\\\ 0 & 8 & 2 \\\\ 6 & 2 & 4 \\end{bmatrix} \\begin{Bmatrix} v_2 \\\\ \\theta_2 \\\\ \\theta_3 \\end{Bmatrix} = \\begin{Bmatrix} -20,500 \\\\ -1,000 \\\\ 2,500 \\end{Bmatrix}$$\nGiải hệ đại số tuyến tính:",
+      "**Bước 3: Kết quả chuyển vị nút & Độ võng tại trung điểm B (Đáp án chính thức ĐHBK)**\n- Chuyển vị thẳng đứng tại nút 2: $$v_2 = -1.751 \\times 10^{-4}\\text{ m} = -0.1751\\text{ mm}$$\n- Góc xoay tại nút 2: $$\\theta_2 = -1.057 \\times 10^{-4}\\text{ rad}$$\n- Góc xoay tại nút 3: $$\\theta_3 = +3.750 \\times 10^{-4}\\text{ rad}$$\n- Độ võng tại trung điểm B ($x = 0.5\\text{ m}$ của phần tử 2):\n  $$v_B = N_1 v_2 + N_2 \\theta_2 + N_3 v_3 + N_4 \\theta_3 = -1.109 \\times 10^{-4}\\text{ m} = -0.1109\\text{ mm}$$\n*(Khớp 100% biểu điểm đáp án đề thi kết thúc học phần HK241 môn Phương pháp số ME2091)*"
+    ],
+    "final_answer": "v_2 = -0.1751\\text{ mm}, \\; \\theta_2 = -1.057 \\times 10^{-4}\\text{ rad}, \\; v_B = -0.1109\\text{ mm}"
+  },
+  {
+    "id": "ch07-logan-prob-3.23",
+    "source_problem": "Problem 3.23 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_23_truss.png",
+    "problem_en": "Find the horizontal and vertical displacements at the apex (node $1$) and the stress in member $1$. The equilateral truss has $L=100\\,\\mathrm{in}$, $A=1\\,\\mathrm{in^2}$ and $E=10\\times10^6\\,\\mathrm{psi}$. The apex load is $12000\\,\\mathrm{lb}$ to the right.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $2\\to1$ | $100$ | $0.5$ | $0.866025$ | $100000$ |\n| 2 | $3\\to1$ | $100$ | $-0.5$ | $0.866025$ | $100000$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $2$, $3$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_1\\\\v_1\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}50000&0\\\\0&150000\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}12000\\\\0\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0.2400$ | $0$ | $0$ | $0$ |\n| 2 | $0$ | $0$ | $-6000.0000$ | $-10392.3048$ |\n| 3 | $0$ | $0$ | $-6000.0000$ | $10392.3048$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $12000.0000$ | $12000.0000$ |\n| 2 | $-12000.0000$ | $-12000.0000$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 796): Khớp cả hai chuyển vị tại nút $1$ và ứng suất $\\sigma_1$."
+    ],
+    "final_answer": "u_1=0.2400\\,\\mathrm{in},\\quad v_1=0\\,\\mathrm{in}",
+    "expected_numeric_value": 0.24,
+    "numeric_target_label": "$u_1\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.29",
+    "source_problem": "Problem 3.29 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_29_truss.png",
+    "problem_en": "Find both displacement components at node $1$ and each member stress. The three $3\\,\\mathrm{m}$ members run upward, upward-right at $45^\\circ$ and rightward, in element order. Use $E=210\\,\\mathrm{GPa}$, $A=4\\times10^{-4}\\,\\mathrm{m^2}$ and node-$1$ loads of $10\\,\\mathrm{kN}$ leftward and $20\\,\\mathrm{kN}$ downward.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $3000$ | $0$ | $1$ | $28$ |\n| 2 | $1\\to3$ | $3000$ | $0.707107$ | $0.707107$ | $28$ |\n| 3 | $1\\to4$ | $3000$ | $1$ | $0$ | $28$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $2$, $3$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_1\\\\v_1\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}42&14\\\\14&42\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}-10\\\\-20\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $v\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ | $R_y\\ (\\mathrm{kN})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $-0.0893$ | $-0.4464$ | $0$ | $0$ |\n| 2 | $0$ | $0$ | $0$ | $12.5000$ |\n| 3 | $0$ | $0$ | $7.5000$ | $7.5000$ |\n| 4 | $0$ | $0$ | $2.5000$ | $0$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $12.5000$ | $31.2500$ |\n| 2 | $10.6066$ | $26.5165$ |\n| 3 | $2.5000$ | $6.2500$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 796): Chuyển vị và ứng suất khớp gần đúng. Cả ba chiều dài đều bằng $3\\,\\mathrm{m}$ như trên hình."
+    ],
+    "final_answer": "u_1=-0.0893\\,\\mathrm{mm},\\quad v_1=-0.4464\\,\\mathrm{mm}",
+    "expected_numeric_value": -0.4464285714285714,
+    "numeric_target_label": "$v_1\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.30",
+    "source_problem": "Problem 3.30 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_30_truss.png",
+    "problem_en": "Find both displacement components at node $1$ and each member stress. The $2\\,\\mathrm{m}$ member runs upward, the $3\\,\\mathrm{m}$ member runs horizontally left, and the $5\\,\\mathrm{m}$ member slopes $60^\\circ$ below the leftward horizontal. Use $E=210\\,\\mathrm{GPa}$, $A=4\\times10^{-4}\\,\\mathrm{m^2}$ and a $40\\,\\mathrm{kN}$ downward load at node $1$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $2000$ | $0$ | $1$ | $42$ |\n| 2 | $1\\to3$ | $3000$ | $-1$ | $0$ | $28$ |\n| 3 | $1\\to4$ | $5000$ | $-0.5$ | $-0.866025$ | $16.8$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $2$, $3$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_1\\\\v_1\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}32.2&7.27461\\\\7.27461&54.6\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}0\\\\-40\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $v\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ | $R_y\\ (\\mathrm{kN})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0.1706$ | $-0.7553$ | $0$ | $0$ |\n| 2 | $0$ | $0$ | $0$ | $31.7241$ |\n| 3 | $0$ | $0$ | $-4.7781$ | $0$ |\n| 4 | $0$ | $0$ | $4.7781$ | $8.2759$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $31.7241$ | $79.3103$ |\n| 2 | $4.7781$ | $11.9452$ |\n| 3 | $-9.5561$ | $-23.8904$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 797): Chuyển vị và ứng suất khớp gần đúng, với sai khác tối đa khoảng $0.21\\%$."
+    ],
+    "final_answer": "u_1=0.1706\\,\\mathrm{mm},\\quad v_1=-0.7553\\,\\mathrm{mm}",
+    "expected_numeric_value": -0.755336617405583,
+    "numeric_target_label": "$v_1\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-4.6",
+    "source_problem": "Problem 4.6 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p4_6_beam.png",
+    "expected_numeric_value": -3.94,
+    "problem_en": "For the beam shown in Figure P4–6 with uniform distributed loading $w$ and central point load, determine the vertical displacement and slopes at the nodes, reactions, and element forces.",
+    "glossary": {
+      "beam element": "phần tử dầm",
+      "distributed loading": "tải trọng phân bố",
+      "nodal slopes": "góc xoay tại các nút"
+    },
+    "hint": "Sử dụng ma trận độ cứng dầm Bernoulli 4x4. Tải nút tương đương của tải phân bố $w$: $F_{eq} = [wL/2, wL^2/12, wL/2, -wL^2/12]^T$.",
+    "steps": [
+      "**Bước 1: Tính ma trận độ cứng phần tử dầm**\n$$[k] = \\frac{EI}{L^3}\\begin{bmatrix} 12 & 6L & -12 & 6L \\\\ 6L & 4L^2 & -6L & 2L^2 \\\\ -12 & -6L & 12 & -6L \\\\ 6L & 2L^2 & -6L & 4L^2 \\end{bmatrix}$$",
+      "**Bước 2: Xử lý điều kiện biên và tải nút tương đương**\n- Chuyển đổi tải phân bố $w$ thành lực cắt và moment nút tương đương.\n- Áp dụng các điều kiện ngàm và gối tựa.",
+      "**Bước 3: Kết quả chuyển vị (Kiểm chứng từ Logan p. 799)**\n- Chuyển vị võng thẳng đứng tại nút 3:\n  $$d_{3y} = -3.9400\\text{ in.}$$"
+    ],
+    "final_answer": "d_{3y} = -3.9400\\text{ in.}"
+  },
+  {
+    "id": "ch07-logan-prob-4.8",
+    "source_problem": "Problem 4.8 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p4_8_fixed_beam.png",
+    "expected_numeric_value": -0.0001786,
+    "problem_en": "For the beam shown in Figure P4–8, clamped at both ends (nodes 1 and 3) and subjected to a concentrated downward force $P = 10\\text{ kN}$ and counter-clockwise moment $M = 20\\text{ kN}\\cdot\\text{m}$ at node 2, determine the nodal displacements and slopes. Given: $E = 210\\text{ GPa}, I = 4 \\times 10^{-4}\\text{ m}^4, L_1 = L_2 = 3\\text{ m}$.",
+    "glossary": {
+      "spring-supported beam": "dầm có gối tựa đàn hồi (lò xo)",
+      "vertical displacement": "chuyển vị thẳng đứng (độ võng)",
+      "slope": "góc xoay",
+      "support reactions": "phản lực liên kết"
+    },
+    "hint": "Dầm 2 phần tử đối xứng $L = 3\\text{ m}$. Độ cứng uốn $EI = 210 \\times 10^6 \\times 4 \\times 10^{-4} = 84,000\\text{ kN}\\cdot\\text{m}^2$. Điều kiện biên ngàm 2 đầu: $d_{1y} = \\phi_1 = d_{3y} = \\phi_3 = 0$. Thiết lập phương trình cân bằng 2 bậc tự do tại nút 2 $(d_{2y}, \\phi_2)$.",
+    "steps": [
+      "**Bước 1: Tính ma trận độ cứng phần tử dầm**\n- Chiều dài $L = 3\\text{ m}, EI = 84,000\\text{ kN}\\cdot\\text{m}^2$\n- Các hệ số độ cứng uốn:\n  $$\\frac{12EI}{L^3} = \\frac{12 \\times 84,000}{27} = 37,333.33\\text{ kN/m}$$\n  $$\\frac{6EI}{L^2} = \\frac{6 \\times 84,000}{9} = 56,000\\text{ kN}$$\n  $$\\frac{4EI}{L} = \\frac{4 \\times 84,000}{3} = 112,000\\text{ kN}\\cdot\\text{m}, \\quad \\frac{2EI}{L} = 56,000\\text{ kN}\\cdot\\text{m}$$",
+      "**Bước 2: Ghép ma trận độ cứng tại nút 2 tự do & Giải hệ phương trình**\nTại nút 2, cả phần tử 1 (đầu phải) và phần tử 2 (đầu trái) cùng đóng góp:\n$$K_{22} = \\begin{bmatrix} 37,333.33 + 37,333.33 & -56,000 + 56,000 \\\\ -56,000 + 56,000 & 112,000 + 112,000 \\end{bmatrix} = \\begin{bmatrix} 74,666.67 & 0 \\\\ 0 & 224,000 \\end{bmatrix}$$\nVéc-tơ tải trọng tác dụng tại nút 2: $\\{F\\} = \\begin{Bmatrix} -10\\text{ kN} \\\\ +20\\text{ kN}\\cdot\\text{m} \\end{Bmatrix}$\nPhương trình cân bằng:\n$$\\begin{bmatrix} 74,666.67 & 0 \\\\ 0 & 224,000 \\end{bmatrix} \\begin{Bmatrix} d_{2y} \\\\ \\phi_2 \\end{Bmatrix} = \\begin{Bmatrix} -10 \\\\ 20 \\end{Bmatrix}$$\nGiải ra chuyển vị và góc xoay tại nút 2:\n$$d_{2y} = \\frac{-10}{74,666.67} = -1.3393 \\times 10^{-4}\\text{ m} = -0.1339\\text{ mm}$$\n$$\\phi_2 = \\frac{20}{224,000} = +8.9286 \\times 10^{-5}\\text{ rad}$$",
+      "**Bước 3: Kết luận chuyển vị nút**\nTại nút giữa (nút 2), dầm bị võng xuống $d_{2y} = -0.1339\\text{ mm}$ và xoay ngược chiều kim đồng hồ góc $\\phi_2 = +8.9286 \\times 10^{-5}\\text{ rad}$."
+    ],
+    "final_answer": "d_{2y} = -0.1339\\text{ mm}, \\; \\phi_2 = +8.9286 \\times 10^{-5}\\text{ rad}"
+  },
+  {
+    "id": "ch07-logan-prob-3.24",
+    "source_problem": "Problem 3.24 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_24_truss.png",
+    "problem_en": "Find the nodal displacements and member forces for the six-member truss, with fixed nodes $1$ and $4$. The rectangle is $20\\,\\mathrm{ft}$ wide and $15\\,\\mathrm{ft}$ high, and each of nodes $2$ and $3$ carries $1000\\,\\mathrm{lb}$ upward. Use a common axial rigidity $EA$; the diagonals are not joined at their crossing.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\nGiữ $EA$ dưới dạng tham số chung; bảng dùng $k_e/(EA)=1/L_e$.\n| Phần tử | Nút | $L_e\\ (\\mathrm{ft})$ | $c_e$ | $s_e$ | $k_e/(EA)\\ (\\mathrm{ft^{-1}})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $20$ | $1$ | $0$ | $0.05$ |\n| 2 | $1\\to3$ | $25$ | $0.8$ | $0.6$ | $0.04$ |\n| 3 | $2\\to4$ | $25$ | $-0.8$ | $0.6$ | $0.04$ |\n| 4 | $2\\to3$ | $15$ | $0$ | $1$ | $0.0666667$ |\n| 5 | $3\\to4$ | $20$ | $-1$ | $0$ | $0.05$ |\n| 6 | $1\\to4$ | $15$ | $0$ | $1$ | $0.0666667$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\v_2\\\\u_3\\\\v_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r/(EA)=\\begin{bmatrix}0.0756&-0.0192&0&0\\\\-0.0192&0.0810667&0&-0.0666667\\\\0&0&0.0756&0.0192\\\\0&-0.0666667&0.0192&0.0810667\\end{bmatrix}\\,\\mathrm{ft^{-1}},\\quad P_r=\\begin{bmatrix}0\\\\1000\\\\0\\\\1000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\nBảng nút ghi các hệ số $EAu, EAv$; chia cho $EA$ (theo $\\mathrm{lb}$) để được chuyển vị theo $\\mathrm{ft}$.\n| Nút | $EAu\\ (\\mathrm{lb\\cdot ft})$ | $EAv\\ (\\mathrm{lb\\cdot ft})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $0$ | $-2666.6667$ | $-1000.0000$ |\n| 2 | $26666.6667$ | $105000.0000$ | $0$ | $0$ |\n| 3 | $-26666.6667$ | $105000.0000$ | $0$ | $0$ |\n| 4 | $0$ | $0$ | $2666.6667$ | $-1000.0000$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nKhông có diện tích riêng để cho giá trị số của $\\sigma_e$.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ |\n| --- | --- |\n| 1 | $1333.3333$ |\n| 2 | $1666.6667$ |\n| 3 | $-1666.6667$ |\n| 4 | $0$ |\n| 5 | $-1333.3333$ |\n| 6 | $0$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 796): Các hệ số chuyển vị sách in là $26675$ và $105021$; giá trị từ hệ chưa làm tròn là $26666.6667$ và $105000$, tính theo $\\mathrm{lb\\cdot ft}$ và chia cho $EA$. Lực dọc khớp sau khi đổi từ lực đầu phần tử sang quy ước kéo dương."
+    ],
+    "final_answer": "\\begin{bmatrix}u_2\\\\v_2\\\\u_3\\\\v_3\\end{bmatrix}=\\frac{\\begin{bmatrix}26666.6667\\\\105000.0000\\\\-26666.6667\\\\105000.0000\\end{bmatrix}\\,\\mathrm{lb\\cdot ft}}{EA}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.9",
+    "source_problem": "Problem 4.9 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_9_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. Draw the shear-force and bending-moment diagrams. The supports are at $x=0,3,7,10\\,\\mathrm{m}$, and an $8\\,\\mathrm{kN}$ downward load acts at $x=5\\,\\mathrm{m}$. Use $E=70\\,\\mathrm{GPa}$ and $I=1\\times10^{-4}\\,\\mathrm{m^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nMô hình bốn phần tử dài $3,2,2,3\\,\\mathrm{m}$; đặt lực đứng $-8\\,\\mathrm{kN}$ tại nút $3$.\nDùng $\\mathrm{m}$ và $\\mathrm{kN}$; mô men tính bằng $\\mathrm{kN}\\cdot\\mathrm{m}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $3\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| 2–3 | $2\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| 3–4 | $2\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| 4–5 | $3\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,v_{2},\\,v_{4},\\,v_{5}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{1},\\,\\theta_{2},\\,v_{3},\\,\\theta_{3},\\,\\theta_{4},\\,\\theta_{5}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}9333.33&4666.67&0&0&0&0\\\\4666.67&23333.3&-10500&7000&0&0\\\\0&-10500&21000&0&10500&0\\\\0&7000&0&28000&7000&0\\\\0&0&10500&7000&23333.3&4666.67\\\\0&0&0&0&4666.67&9333.33\\end{bmatrix}\\,d_f=\\begin{bmatrix}0\\\\0\\\\-8\\\\0\\\\0\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ ($\\mathrm{m}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kN}$) | $M_R$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $1.9048\\times10^{-4}$ | $-0.8889$ | $0$ |\n| $2$ | $0$ | $-3.8095\\times10^{-4}$ | $4.8889$ | $0$ |\n| $3$ | $-7.6190\\times10^{-4}$ | $0$ | $0$ | $0$ |\n| $4$ | $0$ | $3.8095\\times10^{-4}$ | $4.8889$ | $0$ |\n| $5$ | $0$ | $-1.9048\\times10^{-4}$ | $-0.8889$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kN}$) | $M_i^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) | $V_j$ ($\\mathrm{kN}$) | $M_j^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $-0.8889$ | $0$ | $0.8889$ | $-2.6667$ |\n| 2–3 | $4.0000$ | $2.6667$ | $-4.0000$ | $5.3333$ |\n| 3–4 | $-4.0000$ | $-5.3333$ | $4.0000$ | $-2.6667$ |\n| 4–5 | $0.8889$ | $2.6667$ | $-0.8889$ | $0$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_9_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: khớp $v_3,\\theta_2,\\theta_1,R_1,R_2$ đến độ chính xác in. $R_1=R_5<0$ giả thiết gối ngoài giữ được dầm theo hai chiều; nếu chỉ tựa một chiều thì cần giải lại bài toán nhấc gối."
+    ],
+    "final_answer": "v_{3}\\approx -7.6190\\times10^{-4}\\,\\mathrm{m}",
+    "expected_numeric_value": -0.0007619047619047619,
+    "numeric_target_label": "$v_{3}$ (đơn vị $\\mathrm{m}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.10",
+    "source_problem": "Problem 4.10 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_10_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. Draw the shear-force and bending-moment diagrams. The $20\\,\\mathrm{ft}$ cantilever carries a downward tip load of $2\\,\\mathrm{kip}$ and has a grounded tip spring of stiffness $1000\\,\\mathrm{lb/in}$. Use $E=29\\times10^6\\,\\mathrm{psi}$ and $I=200\\,\\mathrm{in^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nĐổi $20\\,\\mathrm{ft}=240\\,\\mathrm{in}$ và $k_s=1\\,\\mathrm{kip/in}$. Đặt lực $-2\\,\\mathrm{kip}$ tại nút $2$.\nDùng $\\mathrm{in}$ và $\\mathrm{kip}$; mô men tính bằng $\\mathrm{kip}\\cdot\\mathrm{in}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $240\\,\\mathrm{in}$ | $[0,\\,0,\\,0,\\,0]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$. Với chân lò xo bất động, cộng $k_s$ vào đường chéo ứng với chuyển vị đứng của nút $2$.\nĐặt $[v_{1},\\,\\theta_{1}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}6.03472&-604.167\\\\-604.167&96666.7\\end{bmatrix}\\,d_f=\\begin{bmatrix}-2\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$. Lực lò xo tác dụng lên dầm là $R_s=-k_s v$; cột $R$ ghi lực này tại nút nối dầm, không lặp lại ở nút nền.\n| Nút | $v$ ($\\mathrm{in}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kip}$) | $M_R$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $1.1145$ | $267.4865$ |\n| $2$ | $-0.8855$ | $-5.5342\\times10^{-3}$ | $0.8855$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kip}$) | $M_i^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) | $V_j$ ($\\mathrm{kip}$) | $M_j^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $1.1145$ | $267.4865$ | $-1.1145$ | $0$ |\n| 2–3 (lò xo) | $-0.8855$ | $0$ | $0.8855$ | $0$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_10_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: độ võng, góc xoay và lực đứng ngàm khớp trong khoảng $0.11\\%$. Sách in mô men âm, nhưng cân bằng quanh ngàm cho $M_1=(2-R_2)(240\\,\\mathrm{in})>0$: mô men phản lực ngược chiều kim đồng hồ; mô men uốn trong tiết diện sát ngàm âm."
+    ],
+    "final_answer": "v_{2}\\approx -0.8855\\,\\mathrm{in}",
+    "expected_numeric_value": -0.8854727132974629,
+    "numeric_target_label": "$v_{2}$ (đơn vị $\\mathrm{in}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.11",
+    "source_problem": "Problem 4.11 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_11_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. Draw the shear-force and bending-moment diagrams. The simply supported beam has two $4\\,\\mathrm{m}$ half-spans. A grounded spring of stiffness $200\\,\\mathrm{kN/m}$ and a downward load of $12\\,\\mathrm{kN}$ act at midspan. Use $E=70\\,\\mathrm{GPa}$ and $I=2\\times10^{-4}\\,\\mathrm{m^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nHai phần tử dài $4\\,\\mathrm{m}$; đặt $-12\\,\\mathrm{kN}$ tại nút $2$. Lò xo thẳng đứng có $k_s=200\\,\\mathrm{kN/m}$.\nDùng $\\mathrm{m}$ và $\\mathrm{kN}$; mô men tính bằng $\\mathrm{kN}\\cdot\\mathrm{m}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $4\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| 2–3 | $4\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$. Với chân lò xo bất động, cộng $k_s$ vào đường chéo ứng với chuyển vị đứng của nút $2$.\nĐặt $[v_{1},\\,v_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{1},\\,v_{2},\\,\\theta_{2},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}14000&-5250&7000&0\\\\-5250&5450&0&5250\\\\7000&0&28000&7000\\\\0&5250&7000&14000\\end{bmatrix}\\,d_f=\\begin{bmatrix}0\\\\-12\\\\0\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$. Lực lò xo tác dụng lên dầm là $R_s=-k_s v$; cột $R$ ghi lực này tại nút nối dầm, không lặp lại ở nút nền.\n| Nút | $v$ ($\\mathrm{m}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kN}$) | $M_R$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $-2.9752\\times10^{-3}$ | $5.2066$ | $0$ |\n| $2$ | $-7.9339\\times10^{-3}$ | $0$ | $1.5868$ | $0$ |\n| $3$ | $0$ | $2.9752\\times10^{-3}$ | $5.2066$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kN}$) | $M_i^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) | $V_j$ ($\\mathrm{kN}$) | $M_j^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $5.2066$ | $0$ | $-5.2066$ | $20.8264$ |\n| 2–3 | $-5.2066$ | $-20.8264$ | $5.2066$ | $0$ |\n| 2–4 (lò xo) | $-1.5868$ | $0$ | $1.5868$ | $0$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_11_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: độ võng, góc xoay và lực lò xo khớp. Sách in $5.208\\,\\mathrm{kN}$ tại mỗi gối ngoài; cân bằng cho $(12-1.58678)/2\\approx5.20661\\,\\mathrm{kN}$."
+    ],
+    "final_answer": "v_{2}\\approx -7.9339\\times10^{-3}\\,\\mathrm{m}",
+    "expected_numeric_value": -0.007933884297520663,
+    "numeric_target_label": "$v_{2}$ (đơn vị $\\mathrm{m}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.12",
+    "source_problem": "Problem 4.12 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_12_beam.png",
+    "problem_en": "A fixed–fixed beam of length $L$ carries a uniform downward load $w$. The middle third has rigidity $2EI$, while the end thirds have rigidity $EI$. Find the midspan deflection and support reactions. Draw the shear-force and bending-moment diagrams.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nChia tại $x=L/3,L/2,2L/3$. Các phần tử theo thứ tự có độ cứng chống uốn $EI,2EI,2EI,EI$; tải đứng không đổi $q=-w$.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $\\frac{L}{3}$ | $[-\\frac{wL}{6},\\,-\\frac{wL^2}{108},\\,-\\frac{wL}{6},\\,\\frac{wL^2}{108}]^T$ |\n| 2–3 | $\\frac{L}{6}$ | $[-\\frac{wL}{12},\\,-\\frac{wL^2}{432},\\,-\\frac{wL}{12},\\,\\frac{wL^2}{432}]^T$ |\n| 3–4 | $\\frac{L}{6}$ | $[-\\frac{wL}{12},\\,-\\frac{wL^2}{432},\\,-\\frac{wL}{12},\\,\\frac{wL^2}{432}]^T$ |\n| 4–5 | $\\frac{L}{3}$ | $[-\\frac{wL}{6},\\,-\\frac{wL^2}{108},\\,-\\frac{wL}{6},\\,\\frac{wL^2}{108}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{5},\\,\\theta_{5}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2},\\,v_{3},\\,\\theta_{3},\\,v_{4},\\,\\theta_{4}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}5508&378&-5184&432&0&0\\\\378&60&-432&24&0&0\\\\-5184&-432&10368&0&-5184&432\\\\432&24&0&96&-432&24\\\\0&0&-5184&-432&5508&-378\\\\0&0&432&24&-378&60\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-\\frac{W}{4}\\\\\\frac{W}{144}\\\\-\\frac{W}{6}\\\\0\\\\-\\frac{W}{4}\\\\-\\frac{W}{144}\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $\\frac{wL}{2}$ | $\\frac{41wL^2}{540}$ |\n| $2$ | $-\\frac{2wL^4}{1215EI}$ | $-\\frac{wL^3}{270EI}$ | $0$ | $0$ |\n| $3$ | $-\\frac{613wL^4}{311040EI}$ | $0$ | $0$ | $0$ |\n| $4$ | $-\\frac{2wL^4}{1215EI}$ | $\\frac{wL^3}{270EI}$ | $0$ | $0$ |\n| $5$ | $0$ | $0$ | $\\frac{wL}{2}$ | $-\\frac{41wL^2}{540}$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $\\frac{wL}{2}$ | $\\frac{41wL^2}{540}$ | $-\\frac{wL}{6}$ | $\\frac{19wL^2}{540}$ |\n| 2–3 | $\\frac{wL}{6}$ | $-\\frac{19wL^2}{540}$ | $0$ | $\\frac{53wL^2}{1080}$ |\n| 3–4 | $0$ | $-\\frac{53wL^2}{1080}$ | $\\frac{wL}{6}$ | $\\frac{19wL^2}{540}$ |\n| 4–5 | $-\\frac{wL}{6}$ | $-\\frac{19wL^2}{540}$ | $\\frac{wL}{2}$ | $-\\frac{41wL^2}{540}$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_12_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: khớp độ võng và góc xoay ở hai nút đổi tiết diện. Giá trị giữa nhịp in với mẫu số $507$ là xấp xỉ (sai khác $0.0801\\%$). Sách ghi $M_1=wL^2/12$; điều kiện đối xứng $\\int_0^{L/2}M(x)/(EI(x))\\,dx=0$, với $EI(x)$ đổi tại $L/3$, cho $M_1=41wL^2/540$."
+    ],
+    "final_answer": "v_{3}=-\\frac{613wL^4}{311040EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.13",
+    "source_problem": "Problem 4.13 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_13_beam.png",
+    "problem_en": "A fixed–fixed beam has span $L$, constant rigidity $EI$, and a uniform downward load $w$. Compute the midspan deflection and reactions, and compare with the classical solution using Appendix D. Draw the shear-force and bending-moment diagrams.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nĐặt nút $2$ tại giữa nhịp; hai phần tử đều dài $L/2$ và có tải $q=-w$.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $\\frac{L}{2}$ | $[-\\frac{wL}{4},\\,-\\frac{wL^2}{48},\\,-\\frac{wL}{4},\\,\\frac{wL^2}{48}]^T$ |\n| 2–3 | $\\frac{L}{2}$ | $[-\\frac{wL}{4},\\,-\\frac{wL^2}{48},\\,-\\frac{wL}{4},\\,\\frac{wL^2}{48}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{3},\\,\\theta_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}192&0\\\\0&16\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-\\frac{W}{2}\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $\\frac{wL}{2}$ | $\\frac{wL^2}{12}$ |\n| $2$ | $-\\frac{wL^4}{384EI}$ | $0$ | $0$ | $0$ |\n| $3$ | $0$ | $0$ | $\\frac{wL}{2}$ | $-\\frac{wL^2}{12}$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $\\frac{wL}{2}$ | $\\frac{wL^2}{12}$ | $0$ | $\\frac{wL^2}{24}$ |\n| 2–3 | $0$ | $-\\frac{wL^2}{24}$ | $\\frac{wL}{2}$ | $-\\frac{wL^2}{12}$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_13_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799 và nghiệm dầm ngàm hai đầu khớp. Dùng một phần tử cho cả nhịp thì tải nút theo Phụ lục D là $[-wL/2,-wL^2/12,-wL/2,wL^2/12]^T$; phản lực là đối của véc-tơ này. Thêm nút giữa nhịp để tính $v_2$."
+    ],
+    "final_answer": "v_{2}=-\\frac{wL^4}{384EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.14",
+    "source_problem": "Problem 4.14 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_14_beam.png",
+    "problem_en": "A simply supported beam of span $L$ and constant rigidity $EI$ carries a uniform downward load $w$. Calculate its midspan deflection and reactions. Draw the shear-force and bending-moment diagrams.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nHai phần tử dài $L/2$ đều chịu tải $q=-w$; giữ tự do góc xoay ở hai gối.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $\\frac{L}{2}$ | $[-\\frac{wL}{4},\\,-\\frac{wL^2}{48},\\,-\\frac{wL}{4},\\,\\frac{wL^2}{48}]^T$ |\n| 2–3 | $\\frac{L}{2}$ | $[-\\frac{wL}{4},\\,-\\frac{wL^2}{48},\\,-\\frac{wL}{4},\\,\\frac{wL^2}{48}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,v_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{1},\\,v_{2},\\,\\theta_{2},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}8&-24&4&0\\\\-24&192&0&24\\\\4&0&16&4\\\\0&24&4&8\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-\\frac{W}{48}\\\\-\\frac{W}{2}\\\\0\\\\\\frac{W}{48}\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $-\\frac{wL^3}{24EI}$ | $\\frac{wL}{2}$ | $0$ |\n| $2$ | $-\\frac{5wL^4}{384EI}$ | $0$ | $0$ | $0$ |\n| $3$ | $0$ | $\\frac{wL^3}{24EI}$ | $\\frac{wL}{2}$ | $0$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $\\frac{wL}{2}$ | $0$ | $0$ | $\\frac{wL^2}{8}$ |\n| 2–3 | $0$ | $-\\frac{wL^2}{8}$ | $\\frac{wL}{2}$ | $0$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_14_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: khớp độ võng giữa nhịp, góc xoay ở hai gối và phản lực."
+    ],
+    "final_answer": "v_{2}=-\\frac{5wL^4}{384EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.15",
+    "source_problem": "Problem 4.15 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_15_beam.png",
+    "problem_en": "A beam is fixed at $A$, rests on a roller at $B$, and overhangs to $C$, with $AB=BC=L$. A uniform downward load $w$ acts only on $BC$. For constant $EI$, find the free-end deflection and support reactions. Draw the shear-force and bending-moment diagrams.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nDùng phần tử $AB$ không tải và phần tử $BC$ có $q=-w$, cùng chiều dài $L$.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $L$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| 2–3 | $L$ | $[-\\frac{wL}{2},\\,-\\frac{wL^2}{12},\\,-\\frac{wL}{2},\\,\\frac{wL^2}{12}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{2}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{2},\\,v_{3},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}8&-6&2\\\\-6&12&-6\\\\2&-6&4\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-\\frac{W}{12}\\\\-\\frac{W}{2}\\\\\\frac{W}{12}\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $-\\frac{3wL}{4}$ | $-\\frac{wL^2}{4}$ |\n| $2$ | $0$ | $-\\frac{wL^3}{8EI}$ | $\\frac{7wL}{4}$ | $0$ |\n| $3$ | $-\\frac{wL^4}{4EI}$ | $-\\frac{7wL^3}{24EI}$ | $0$ | $0$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $-\\frac{3wL}{4}$ | $-\\frac{wL^2}{4}$ | $\\frac{3wL}{4}$ | $-\\frac{wL^2}{2}$ |\n| 2–3 | $wL$ | $\\frac{wL^2}{2}$ | $0$ | $0$ |\nBiểu đồ với mô men võng xuống lấy dương; tọa độ cục bộ bắt đầu ở đầu trái phần tử: $V(x)=V_i+\\int_0^x q(s)\\,ds$ và $M(x)=-M_i^{(e)}+V_i x+\\int_0^x(x-s)q(s)\\,ds$.\n![Biểu đồ lực cắt và mô men uốn](/images/logan_p4_15_shear_moment.svg)\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: khớp độ võng đầu tự do, hai góc xoay và các phản lực."
+    ],
+    "final_answer": "v_{3}=-\\frac{wL^4}{4EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.16",
+    "source_problem": "Problem 4.16 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_16_beam.png",
+    "problem_en": "Apply work equivalence to replace a downward load increasing linearly from zero at $A$ to $w$ at $B$ over a beam element of length $L$. Determine the equivalent transverse nodal forces and nodal moments.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ. Dùng hàm dạng Hermite với $\\xi=x/L$:\n$$N=[1-3\\xi^2+2\\xi^3,\\ L(\\xi-2\\xi^2+\\xi^3),\\ 3\\xi^2-2\\xi^3,\\ L(-\\xi^2+\\xi^3)].$$",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nBài này chỉ quy đổi tải trên một phần tử: không có gối, không ghép hệ và không áp điều kiện biên.\n$$\\delta W=\\delta d_e^T f_e=\\int_0^L\\delta v\\,q\\,dx,\\qquad f_e=-wL\\int_0^1 N^T\\xi\\,d\\xi.$$",
+      "**Bước 3: Lực và mô men nút tương đương**\n$$f_e=\\left[-\\frac{3wL}{20},-\\frac{wL^2}{30},-\\frac{7wL}{20},\\frac{wL^2}{20}\\right]^T.$$\nKiểm tra: $F_A+F_B=-wL/2$ và $M_A+M_B+L F_B=-wL^2/3$, đúng với hợp lực tam giác đặt tại $2L/3$ từ $A$. Cả bốn thành phần khớp đáp án PDF tr. 799."
+    ],
+    "final_answer": "f_e=\\left[-\\frac{3wL}{20},-\\frac{wL^2}{30},-\\frac{7wL}{20},\\frac{wL^2}{20}\\right]^T",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.18",
+    "source_problem": "Problem 4.18 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_18_beam.png",
+    "problem_en": "A beam of span $L$ and constant $EI$ is fixed at $A$ and roller-supported at $B$. The downward load increases linearly from zero at $A$ to $w$ at $B$. Find the rotation at $B$ and the support reactions.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nDùng một phần tử, $q=-wx/L$. Véc-tơ tải của phần tử được tính như bài 4.16.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $L$ | $[-\\frac{3wL}{20},\\,-\\frac{wL^2}{30},\\,-\\frac{7wL}{20},\\,\\frac{wL^2}{20}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{2}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}4\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}\\frac{W}{20}\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $\\frac{9wL}{40}$ | $\\frac{7wL^2}{120}$ |\n| $2$ | $0$ | $\\frac{wL^3}{80EI}$ | $\\frac{11wL}{40}$ | $0$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $\\frac{9wL}{40}$ | $\\frac{7wL^2}{120}$ | $\\frac{11wL}{40}$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: khớp góc xoay đầu phải và ba thành phần phản lực."
+    ],
+    "final_answer": "\\theta_{2}=\\frac{wL^3}{80EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.19",
+    "source_problem": "Problem 4.19 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_19_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. Node $1$ is fixed, node $2$ is roller-supported, and node $3$ is free. Each span is $4\\,\\mathrm{m}$; only the overhang carries a uniform downward load of $8\\,\\mathrm{kN/m}$. Use $E=70\\,\\mathrm{GPa}$ and $I=3\\times10^{-4}\\,\\mathrm{m^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nChỉ phần tử thứ hai mang tải $q=-8\\,\\mathrm{kN/m}$ trên đoạn dài $4\\,\\mathrm{m}$.\nDùng $\\mathrm{m}$ và $\\mathrm{kN}$; mô men tính bằng $\\mathrm{kN}\\cdot\\mathrm{m}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $4\\,\\mathrm{m}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| 2–3 | $4\\,\\mathrm{m}$ | $[-16,\\,-10.6667,\\,-16,\\,10.6667]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{2}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{2},\\,v_{3},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}42000&-7875&10500\\\\-7875&3937.5&-7875\\\\10500&-7875&21000\\end{bmatrix}\\,d_f=\\begin{bmatrix}-10.6667\\\\-16\\\\10.6667\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ ($\\mathrm{m}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kN}$) | $M_R$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $-24.0000$ | $-32.0000$ |\n| $2$ | $0$ | $-3.0476\\times10^{-3}$ | $56.0000$ | $0$ |\n| $3$ | $-0.0244$ | $-7.1111\\times10^{-3}$ | $0$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kN}$) | $M_i^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) | $V_j$ ($\\mathrm{kN}$) | $M_j^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $-24.0000$ | $-32.0000$ | $24.0000$ | $-64.0000$ |\n| 2–3 | $32.0000$ | $64.0000$ | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 799: khớp chuyển vị, góc xoay, phản lực và nội lực đầu phần tử được liệt kê."
+    ],
+    "final_answer": "v_{3}\\approx -0.0244\\,\\mathrm{m}",
+    "expected_numeric_value": -0.02438095238095236,
+    "numeric_target_label": "$v_{3}$ (đơn vị $\\mathrm{m}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.20",
+    "source_problem": "Problem 4.20 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_20_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. The pin and roller are $12\\,\\mathrm{m}$ apart. The downward line load is $10\\,\\mathrm{kN/m}$ at each end and zero at midspan, where a grounded spring has stiffness $10\\,\\mathrm{kN/m}$. Use $E=210\\,\\mathrm{GPa}$ and $I=4\\times10^{-4}\\,\\mathrm{m^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nTải phần tử thứ nhất biến thiên từ $-10$ đến $0\\,\\mathrm{kN/m}$, phần tử thứ hai từ $0$ đến $-10\\,\\mathrm{kN/m}$. Gắn lò xo $k_s=10\\,\\mathrm{kN/m}$ vào nút $2$.\nDùng $\\mathrm{m}$ và $\\mathrm{kN}$; mô men tính bằng $\\mathrm{kN}\\cdot\\mathrm{m}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $6\\,\\mathrm{m}$ | $[-21,\\,-18,\\,-9,\\,12]^T$ |\n| 2–3 | $6\\,\\mathrm{m}$ | $[-9,\\,-12,\\,-21,\\,18]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$. Với chân lò xo bất động, cộng $k_s$ vào đường chéo ứng với chuyển vị đứng của nút $2$.\nĐặt $[v_{1},\\,v_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{1},\\,v_{2},\\,\\theta_{2},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}56000&-14000&28000&0\\\\-14000&9343.33&0&14000\\\\28000&0&112000&28000\\\\0&14000&28000&56000\\end{bmatrix}\\,d_f=\\begin{bmatrix}-18\\\\-18\\\\0\\\\18\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$. Lực lò xo tác dụng lên dầm là $R_s=-k_s v$; cột $R$ ghi lực này tại nút nối dầm, không lặp lại ở nút nền.\n| Nút | $v$ ($\\mathrm{m}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kN}$) | $M_R$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $-3.2019\\times10^{-3}$ | $29.9424$ | $0$ |\n| $2$ | $-0.0115$ | $0$ | $0.1152$ | $0$ |\n| $3$ | $0$ | $3.2019\\times10^{-3}$ | $29.9424$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kN}$) | $M_i^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) | $V_j$ ($\\mathrm{kN}$) | $M_j^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $29.9424$ | $0$ | $0.0576$ | $59.6543$ |\n| 2–3 | $0.0576$ | $-59.6543$ | $29.9424$ | $0$ |\n| 2–4 (lò xo) | $-0.1152$ | $0$ | $0.1152$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp chuyển vị, góc xoay, phản lực và bốn nội lực đầu phần tử thứ nhất đến độ chính xác in."
+    ],
+    "final_answer": "v_{2}\\approx -0.0115\\,\\mathrm{m}",
+    "expected_numeric_value": -0.011522048364153619,
+    "numeric_target_label": "$v_{2}$ (đơn vị $\\mathrm{m}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.21",
+    "source_problem": "Problem 4.21 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_21_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. The left end is fixed and the right end is pinned. The $30\\,\\mathrm{ft}$ beam carries a uniform downward load of $2000\\,\\mathrm{lb/ft}$ and has a node at midspan. Use $E=29\\times10^6\\,\\mathrm{psi}$ and $I=200\\,\\mathrm{in^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nHai phần tử dài $180\\,\\mathrm{in}$; tải đứng $q=-2/12\\,\\mathrm{kip/in}$.\nDùng $\\mathrm{in}$ và $\\mathrm{kip}$; mô men tính bằng $\\mathrm{kip}\\cdot\\mathrm{in}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $180\\,\\mathrm{in}$ | $[-15,\\,-450,\\,-15,\\,450]^T$ |\n| 2–3 | $180\\,\\mathrm{in}$ | $[-15,\\,-450,\\,-15,\\,450]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}23.8683&0&1074.07\\\\0&257778&64444.4\\\\1074.07&64444.4&128889\\end{bmatrix}\\,d_f=\\begin{bmatrix}-30\\\\0\\\\450\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ ($\\mathrm{in}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kip}$) | $M_R$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $37.5000$ | $2700.0000$ |\n| $2$ | $-2.5138$ | $-6.9828\\times10^{-3}$ | $0$ | $0$ |\n| $3$ | $0$ | $0.0279$ | $22.5000$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kip}$) | $M_i^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) | $V_j$ ($\\mathrm{kip}$) | $M_j^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $37.5000$ | $2700.0000$ | $-7.5000$ | $1350.0000$ |\n| 2–3 | $7.5000$ | $-1350.0000$ | $22.5000$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp độ võng, góc xoay và phản lực đứng. Đáp án in $225\\,\\mathrm{kip\\cdot in}$, nhưng cân bằng cho $M_1=60(15)-22.5(30)=225\\,\\mathrm{kip\\cdot ft}=2700\\,\\mathrm{kip\\cdot in}$."
+    ],
+    "final_answer": "v_{2}\\approx -2.5138\\,\\mathrm{in}",
+    "expected_numeric_value": -2.513793103448277,
+    "numeric_target_label": "$v_{2}$ (đơn vị $\\mathrm{in}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.22",
+    "source_problem": "Problem 4.22 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_22_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. The beam is fixed at node $1$, pinned at node $2$, and free at node $3$. Each span is $10\\,\\mathrm{ft}$. The downward load grows linearly from zero at node $1$ to $4000\\,\\mathrm{lb/ft}$ at node $3$. Use $E=29\\times10^6\\,\\mathrm{psi}$ and $I=150\\,\\mathrm{in^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nHai phần tử dài $120\\,\\mathrm{in}$, tải tại các nút lần lượt là $0,-2/12,-4/12\\,\\mathrm{kip/in}$ (cường độ tải đường, không phải lực nút).\nDùng $\\mathrm{in}$ và $\\mathrm{kip}$; mô men tính bằng $\\mathrm{kip}\\cdot\\mathrm{in}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $120\\,\\mathrm{in}$ | $[-3,\\,-80,\\,-7,\\,120]^T$ |\n| 2–3 | $120\\,\\mathrm{in}$ | $[-13,\\,-280,\\,-17,\\,320]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{2}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{2},\\,v_{3},\\,\\theta_{3}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}290000&-1812.5&72500\\\\-1812.5&30.2083&-1812.5\\\\72500&-1812.5&145000\\end{bmatrix}\\,d_f=\\begin{bmatrix}-160\\\\-17\\\\320\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ ($\\mathrm{in}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kip}$) | $M_R$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $-20.5000$ | $-860.0000$ |\n| $2$ | $0$ | $-0.0130$ | $60.5000$ | $0$ |\n| $3$ | $-3.2772$ | $-0.0323$ | $0$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kip}$) | $M_i^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) | $V_j$ ($\\mathrm{kip}$) | $M_j^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $-20.5000$ | $-860.0000$ | $30.5000$ | $-2000.0000$ |\n| 2–3 | $30.0000$ | $2000.0000$ | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp chuyển vị, góc xoay và phản lực sau khi đổi đơn vị mô men."
+    ],
+    "final_answer": "v_{3}\\approx -3.2772\\,\\mathrm{in}",
+    "expected_numeric_value": -3.2772413793103436,
+    "numeric_target_label": "$v_{3}$ (đơn vị $\\mathrm{in}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.23",
+    "source_problem": "Problem 4.23 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_23_beam.png",
+    "problem_en": "Find the nodal deflections and slopes, all element end actions, and the support reactions. The fixed ends are $40\\,\\mathrm{ft}$ apart, the downward load is $500\\,\\mathrm{lb/ft}$, and the grounded center spring has stiffness $4000\\,\\mathrm{lb/in}$. Use $E=1.6\\times10^6\\,\\mathrm{psi}$ and $I=100\\,\\mathrm{in^4}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nHai phần tử dài $240\\,\\mathrm{in}$; $q=-0.5/12\\,\\mathrm{kip/in}$ và $k_s=4\\,\\mathrm{kip/in}$ tại nút $2$.\nDùng $\\mathrm{in}$ và $\\mathrm{kip}$; mô men tính bằng $\\mathrm{kip}\\cdot\\mathrm{in}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $240\\,\\mathrm{in}$ | $[-5,\\,-200,\\,-5,\\,200]^T$ |\n| 2–3 | $240\\,\\mathrm{in}$ | $[-5,\\,-200,\\,-5,\\,200]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$. Với chân lò xo bất động, cộng $k_s$ vào đường chéo ứng với chuyển vị đứng của nút $2$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{3},\\,\\theta_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}4.27778&0\\\\0&5333.33\\end{bmatrix}\\,d_f=\\begin{bmatrix}-10\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$. Lực lò xo tác dụng lên dầm là $R_s=-k_s v$; cột $R$ ghi lực này tại nút nối dầm, không lặp lại ở nút nền.\n| Nút | $v$ ($\\mathrm{in}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kip}$) | $M_R$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $5.3247$ | $238.9610$ |\n| $2$ | $-2.3377$ | $0$ | $9.3506$ | $0$ |\n| $3$ | $0$ | $0$ | $5.3247$ | $-238.9610$ |\n| Phần tử | $V_i$ ($\\mathrm{kip}$) | $M_i^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) | $V_j$ ($\\mathrm{kip}$) | $M_j^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $5.3247$ | $238.9610$ | $4.6753$ | $-161.0390$ |\n| 2–3 | $4.6753$ | $161.0390$ | $5.3247$ | $-238.9610$ |\n| 2–4 (lò xo) | $-9.3506$ | $0$ | $9.3506$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp chuyển vị và phản lực ngàm đến độ chính xác in. Phản lực đứng của lò xo được tính thêm từ độ võng nút giữa."
+    ],
+    "final_answer": "v_{2}\\approx -2.3377\\,\\mathrm{in}",
+    "expected_numeric_value": -2.337662337662337,
+    "numeric_target_label": "$v_{2}$ (đơn vị $\\mathrm{in}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.26",
+    "source_problem": "Problem 4.26 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_26_beam.png",
+    "problem_en": "Find the maximum deflection magnitude and the maximum bending stress magnitude for the continuous beam supported at $A,B,C$. The downward load is $30\\,\\mathrm{kN/m}$ throughout; $AB=10\\,\\mathrm{m}$ has inertia $I$ and $BC=20\\,\\mathrm{m}$ has inertia $2I$. Use $c=0.25\\,\\mathrm{m}$, $I=500\\times10^{-6}\\,\\mathrm{m^4}$, and $E=200\\,\\mathrm{GPa}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nDùng phần tử $AB$ và $BC$, độ cứng lần lượt $EI$ và $2EI$. Cường độ tải đứng $q=-30\\,\\mathrm{kN/m}$ ở cả hai phần tử.\nDùng $\\mathrm{m}$ và $\\mathrm{kN}$; mô men tính bằng $\\mathrm{kN}\\cdot\\mathrm{m}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| A–B | $10\\,\\mathrm{m}$ | $[-150,\\,-250,\\,-150,\\,250]^T$ |\n| B–C | $20\\,\\mathrm{m}$ | $[-300,\\,-1000,\\,-300,\\,1000]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{A},\\,v_{B},\\,v_{C}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{A},\\,\\theta_{B},\\,\\theta_{C}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}40000&20000&0\\\\20000&80000&20000\\\\0&20000&40000\\end{bmatrix}\\,d_f=\\begin{bmatrix}-250\\\\-750\\\\1000\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ ($\\mathrm{m}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kN}$) | $M_R$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $A$ | $0$ | $3.1250\\times10^{-3}$ | $56.2500$ | $0$ |\n| $B$ | $0$ | $-0.0187$ | $590.6250$ | $0$ |\n| $C$ | $0$ | $0.0344$ | $253.1250$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kN}$) | $M_i^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) | $V_j$ ($\\mathrm{kN}$) | $M_j^{(e)}$ ($\\mathrm{kN}\\cdot\\mathrm{m}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| A–B | $56.2500$ | $0$ | $243.7500$ | $-937.5000$ |\n| B–C | $346.8750$ | $937.5000$ | $253.1250$ | $0$ |\nTrong mỗi phần tử, phục hồi đúng đường đàn hồi từ $EI_e v''=M$, tích phân từ đầu trái với $v_i,\\theta_i$ đã biết. So sánh giá trị tại hai đầu và các nghiệm $\\theta(x)=0$. Với $M$ võng xuống dương, tính $\\sigma_\\mathrm{bot}=Mc/I_e$ ở thớ dưới tại hai đầu và tại $V(x)=0$, kiểm tra riêng cả hai phía chỗ đổi $I_e$. Thớ trên có ứng suất ngược dấu. Với tải đều có dấu $q$, trên mỗi phần tử dùng $M(x)=-M_i^{(e)}+V_i x+q x^2/2$ và $v(x)=v_i+\\theta_i x+(-M_i^{(e)}x^2/2+V_i x^3/6+q x^4/24)/(EI_e)$.\n| $x$ (từ $A$), $\\mathrm{m}$ | $v$, $\\mathrm{m}$ |\n| :---: | :---: |\n| $0$ | $0$ |\n| $6.9274$ | $0.0240$ |\n| $10.0000$ | $0$ |\n| $20.7469$ | $-0.1968$ |\n| $30.0000$ | $0$ |\n| Phần tử | $x$, $\\mathrm{m}$ | $\\sigma_\\mathrm{bot}$, $\\mathrm{MPa}$ |\n| :---: | :---: | :---: |\n| A–B | $0$ | $0$ |\n| A–B | $1.8750$ | $26.3672$ |\n| A–B | $10.0000$ | $-468.7500$ |\n| B–C | $10.0000$ | $-234.3750$ |\n| B–C | $21.5625$ | $266.9678$ |\n| B–C | $30.0000$ | $0$ |\nCực trị độ võng ở $x=20.7469\\,\\mathrm{m}$ tính từ $A$; ứng suất trị tuyệt đối lớn nhất trên thớ biên nằm tại $x=10.0000\\,\\mathrm{m}$, phía phần tử A–B.\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: tại trung điểm $BC$, $v=-0.1953125\\,\\mathrm{m}$ khớp giá trị in. Đó không phải cực trị vì $\\theta\\ne0$ tại đó; nghiệm cực trị nằm xa hơn về phía $C$. Ứng suất thớ dưới tại $B^-$ là $-468.75\\,\\mathrm{MPa}$, khớp $-469\\,\\mathrm{MPa}$ trong sách."
+    ],
+    "final_answer": "v_{\\mathrm{crit}}\\approx -0.1968\\,\\mathrm{m},\\quad \\lvert\\sigma\\rvert_{\\max}=468.7500\\,\\mathrm{MPa}",
+    "expected_numeric_value": -0.19677751537467647,
+    "numeric_target_label": "$v_{\\mathrm{crit}}$ (đơn vị $\\mathrm{m}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.27",
+    "source_problem": "Problem 4.27 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_27_beam.png",
+    "problem_en": "Find the maximum deflection magnitude and the maximum bending stress magnitude for the beam supported at $A,C,D$. The $30\\,\\mathrm{ft}$ span $AC$ has inertia $3I$ and a downward $75\\,\\mathrm{kip}$ load at its midpoint $B$. The $30\\,\\mathrm{ft}$ span $CD$ has inertia $I$ and a uniform downward load of $2\\,\\mathrm{kip/ft}$. Use $E=30\\times10^6\\,\\mathrm{psi}$, $I=500\\,\\mathrm{in^4}$, and $c=10\\,\\mathrm{in}$.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nChia tại $B$ để đặt trực tiếp lực đứng $-75\\,\\mathrm{kip}$. Các phần tử $AB,BC,CD$ có chiều dài $180,180,360\\,\\mathrm{in}$ và độ cứng chống uốn $3EI,3EI,EI$; chỉ $CD$ chịu tải đường.\nDùng $\\mathrm{in}$ và $\\mathrm{kip}$; mô men tính bằng $\\mathrm{kip}\\cdot\\mathrm{in}$.\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| A–B | $180\\,\\mathrm{in}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| B–C | $180\\,\\mathrm{in}$ | $[0,\\,0,\\,0,\\,0]^T$ |\n| C–D | $360\\,\\mathrm{in}$ | $[-30,\\,-1800,\\,-30,\\,1800]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{A},\\,v_{C},\\,v_{D}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[\\theta_{A},\\,v_{B},\\,\\theta_{B},\\,\\theta_{C},\\,\\theta_{D}]^T$, giải $K_{ff}d_f=F_f$.\nHệ rút gọn dưới đây làm tròn để trình bày; nghiệm dùng các hệ số chưa làm tròn.\n$$\\begin{bmatrix}1\\times10^{6}&-8333.33&500000&0&0\\\\-8333.33&185.185&0&8333.33&0\\\\500000&0&2\\times10^{6}&500000&0\\\\0&8333.33&500000&1.16667\\times10^{6}&83333.3\\\\0&0&0&83333.3&166667\\end{bmatrix}\\,d_f=\\begin{bmatrix}0\\\\-75\\\\0\\\\-1800\\\\1800\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ ($\\mathrm{in}$) | $\\theta$ (rad) | $R$ ($\\mathrm{kip}$) | $M_R$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| $A$ | $0$ | $-9.1125\\times10^{-3}$ | $28.3594$ | $0$ |\n| $B$ | $-1.0277$ | $1.0969\\times10^{-3}$ | $0$ | $0$ |\n| $C$ | $0$ | $4.7250\\times10^{-3}$ | $85.7812$ | $0$ |\n| $D$ | $0$ | $8.4375\\times10^{-3}$ | $20.8594$ | $0$ |\n| Phần tử | $V_i$ ($\\mathrm{kip}$) | $M_i^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) | $V_j$ ($\\mathrm{kip}$) | $M_j^{(e)}$ ($\\mathrm{kip}\\cdot\\mathrm{in}$) |\n| :---: | :---: | :---: | :---: | :---: |\n| A–B | $28.3594$ | $0$ | $-28.3594$ | $5104.6875$ |\n| B–C | $-46.6406$ | $-5104.6875$ | $46.6406$ | $-3290.6250$ |\n| C–D | $39.1406$ | $3290.6250$ | $20.8594$ | $0$ |\nTrong mỗi phần tử, phục hồi đúng đường đàn hồi từ $EI_e v''=M$, tích phân từ đầu trái với $v_i,\\theta_i$ đã biết. So sánh giá trị tại hai đầu và các nghiệm $\\theta(x)=0$. Với $M$ võng xuống dương, tính $\\sigma_\\mathrm{bot}=Mc/I_e$ ở thớ dưới tại hai đầu và tại $V(x)=0$, kiểm tra riêng cả hai phía chỗ đổi $I_e$. Thớ trên có ứng suất ngược dấu. Với tải đều có dấu $q$, trên mỗi phần tử dùng $M(x)=-M_i^{(e)}+V_i x+q x^2/2$ và $v(x)=v_i+\\theta_i x+(-M_i^{(e)}x^2/2+V_i x^3/6+q x^4/24)/(EI_e)$.\n| $x$ (từ $A$), $\\mathrm{in}$ | $v$, $\\mathrm{in}$ |\n| :---: | :---: |\n| $0$ | $0$ |\n| $170.0559$ | $-1.0331$ |\n| $180.0000$ | $-1.0277$ |\n| $360.0000$ | $0$ |\n| $385.1723$ | $0.0562$ |\n| $581.2706$ | $-0.7232$ |\n| $720.0000$ | $0$ |\n| Phần tử | $x$, $\\mathrm{in}$ | $\\sigma_\\mathrm{bot}$, $\\mathrm{psi}$ |\n| :---: | :---: | :---: |\n| A–B | $0$ | $0$ |\n| A–B | $180.0000$ | $34031.2500$ |\n| B–C | $180.0000$ | $34031.2500$ |\n| B–C | $360.0000$ | $-21937.5000$ |\n| C–D | $360.0000$ | $-65812.5000$ |\n| C–D | $594.8438$ | $26106.8115$ |\n| C–D | $720.0000$ | $1.8190\\times10^{-11}$ |\nCực trị độ võng ở $x=170.0559\\,\\mathrm{in}$ tính từ $A$; ứng suất trị tuyệt đối lớn nhất trên thớ biên nằm tại $x=360.0000\\,\\mathrm{in}$, phía phần tử C–D.\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: $v_B\\approx-1.028\\,\\mathrm{in}$ và các cực trị ứng suất thớ dưới khớp khi làm tròn. Dòng đáp án ghi tải $7.5\\,\\mathrm{kip}$, nhưng hình ghi $75\\,\\mathrm{kip}$; dùng $75\\,\\mathrm{kip}$. Nghiệm $\\theta=0$ nằm hơi lệch về phía $A$ so với $B$."
+    ],
+    "final_answer": "v_{\\mathrm{crit}}\\approx -1.0331\\,\\mathrm{in},\\quad \\lvert\\sigma\\rvert_{\\max}=65812.5000\\,\\mathrm{psi}",
+    "expected_numeric_value": -1.0330895771326725,
+    "numeric_target_label": "$v_{\\mathrm{crit}}$ (đơn vị $\\mathrm{in}$)"
+  },
+  {
+    "id": "ch07-logan-prob-4.37",
+    "source_problem": "Problem 4.37 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_37_beam.png",
+    "problem_en": "A fixed–fixed beam of span $L$ and constant $EI$ carries a downward point load $P$ at midspan and a uniform downward load $w$ over the entire span. Find the midspan deflection and support reactions.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nChia tại giữa nhịp. Đặt $-P$ vào phương trình chuyển vị của nút $2$; tính tải đường $q=-w$ cho cả hai phần tử.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $\\frac{L}{2}$ | $[-\\frac{wL}{4},\\,-\\frac{wL^2}{48},\\,-\\frac{wL}{4},\\,\\frac{wL^2}{48}]^T$ |\n| 2–3 | $\\frac{L}{2}$ | $[-\\frac{wL}{4},\\,-\\frac{wL^2}{48},\\,-\\frac{wL}{4},\\,\\frac{wL^2}{48}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{3},\\,\\theta_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}192&0\\\\0&16\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-P-\\frac{W}{2}\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $\\frac{P}{2}+\\frac{wL}{2}$ | $\\frac{PL}{8}+\\frac{wL^2}{12}$ |\n| $2$ | $-\\frac{PL^3}{192EI}-\\frac{wL^4}{384EI}$ | $0$ | $0$ | $0$ |\n| $3$ | $0$ | $0$ | $\\frac{P}{2}+\\frac{wL}{2}$ | $-\\frac{PL}{8}-\\frac{wL^2}{12}$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $\\frac{P}{2}+\\frac{wL}{2}$ | $\\frac{PL}{8}+\\frac{wL^2}{12}$ | $-\\frac{P}{2}$ | $\\frac{PL}{8}+\\frac{wL^2}{24}$ |\n| 2–3 | $-\\frac{P}{2}$ | $-\\frac{PL}{8}-\\frac{wL^2}{24}$ | $\\frac{P}{2}+\\frac{wL}{2}$ | $-\\frac{PL}{8}-\\frac{wL^2}{12}$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp độ võng giữa nhịp và các phản lực được liệt kê."
+    ],
+    "final_answer": "v_{2}=-\\frac{PL^3}{192EI}-\\frac{wL^4}{384EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.38",
+    "source_problem": "Problem 4.38 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_38_beam.png",
+    "problem_en": "A fixed–fixed beam of span $L$ and constant $EI$ carries two downward forces $P$ at $x=L/3$ and $x=2L/3$. Use equivalent nodal loads to calculate the midspan deflection.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nChia tại giữa nhịp; tải trong phần tử bên trái ở $\\xi=2/3$, bên phải ở $\\xi=1/3$. Với $\\xi=x/\\ell$ tính từ đầu trái từng phần tử, thay mỗi lực bằng $-P N(\\xi)^T$.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $\\frac{L}{2}$ | $[-\\frac{7P}{27},\\,-\\frac{PL}{27},\\,-\\frac{20P}{27},\\,\\frac{2PL}{27}]^T$ |\n| 2–3 | $\\frac{L}{2}$ | $[-\\frac{20P}{27},\\,-\\frac{2PL}{27},\\,-\\frac{7P}{27},\\,\\frac{PL}{27}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1},\\,v_{3},\\,\\theta_{3}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}192&0\\\\0&16\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-\\frac{40P}{27}\\\\0\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $P$ | $\\frac{2PL}{9}$ |\n| $2$ | $-\\frac{5PL^3}{648EI}$ | $0$ | $0$ | $0$ |\n| $3$ | $0$ | $0$ | $P$ | $-\\frac{2PL}{9}$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $P$ | $\\frac{2PL}{9}$ | $0$ | $\\frac{PL}{9}$ |\n| 2–3 | $0$ | $-\\frac{PL}{9}$ | $P$ | $-\\frac{2PL}{9}$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp độ võng giữa nhịp."
+    ],
+    "final_answer": "v_{2}=-\\frac{5PL^3}{648EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-4.39",
+    "source_problem": "Problem 4.39 - Logan (Chapter 4: Beams)",
+    "method_tag": "Beam Element",
+    "exam_focus": false,
+    "figure_image": "/images/logan_fig_p4_39_beam.png",
+    "problem_en": "A cantilever of span $L$ and constant $EI$ carries a downward point load $P$ at $x=L/2$ and a triangular downward load that grows from zero at the clamp to $w$ at the tip. By equivalent load replacement, find the tip deflection, tip rotation, and support reactions.",
+    "glossary": {
+      "beam deflection": "độ võng của dầm",
+      "slope": "góc xoay (độ dốc đường đàn hồi)",
+      "shear force": "lực cắt",
+      "bending moment": "mô men uốn",
+      "fixed-end moment": "mô men ngàm do tải tác dụng khi khóa hai đầu phần tử",
+      "flexural rigidity": "độ cứng chống uốn",
+      "equivalent nodal load": "tải nút tương đương",
+      "support reaction": "phản lực gối tựa",
+      "spring stiffness": "độ cứng lò xo",
+      "extreme-fiber stress": "ứng suất tại thớ biên"
+    },
+    "hint": "Dùng phần tử Euler–Bernoulli theo thứ tự $[v_i,\\theta_i,v_j,\\theta_j]^T$. $$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix}$$ Tải tương đương theo công ảo: $$f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng và tải tương đương**\nQuy ước $v,q,R,V$ theo dấu lực/chuyển vị đứng (lên là dương), $\\theta$ và ngẫu lực nút dương ngược chiều kim đồng hồ.\nDùng một phần tử với $q=-wx/L$ và lực nằm trong phần tử. Tải tập trung đóng góp $-P N(1/2)^T=[-P/2,-PL/8,-P/2,PL/8]^T$.\n\n$$k_e=\\frac{E I_e}{\\ell^3}\\begin{bmatrix}12&6\\ell&-12&6\\ell\\\\6\\ell&4\\ell^2&-6\\ell&2\\ell^2\\\\-12&-6\\ell&12&-6\\ell\\\\6\\ell&2\\ell^2&-6\\ell&4\\ell^2\\end{bmatrix},\\qquad f_e=\\int_0^\\ell N^Tq(x)\\,dx+\\sum_j N(x_j)^T P_j.$$\n| Phần tử | $\\ell$ | Véc-tơ tải tương đương |\n| :---: | :---: | :---: |\n| 1–2 | $L$ | $[-\\frac{P}{2}-\\frac{3wL}{20},\\,-\\frac{PL}{8}-\\frac{wL^2}{30},\\,-\\frac{P}{2}-\\frac{7wL}{20},\\,\\frac{PL}{8}+\\frac{wL^2}{20}]^T$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nGhép theo bậc tự do chung, $K=\\sum_e A_e^T k_e A_e$ và $F=\\sum_e A_e^T f_e+F_{\\mathrm{nodal}}$.\nĐặt $[v_{1},\\,\\theta_{1}]^T=\\mathbf{0}$. Theo thứ tự $d_f=[v_{2},\\,\\theta_{2}]^T$, giải $K_{ff}d_f=F_f$.\nĐặt $W=wL$ và chuẩn hóa $\\bar v=EI\\,v/L^3$, $\\bar\\theta=EI\\,\\theta/L^2$. Đây là hệ theo các ẩn chuẩn hóa.\n$$\\begin{bmatrix}12&-6\\\\-6&4\\end{bmatrix}\\,\\bar d_f=\\begin{bmatrix}-\\frac{P}{2}-\\frac{7W}{20}\\\\\\frac{P}{8}+\\frac{W}{20}\\end{bmatrix}.$$",
+      "**Bước 3: Chuyển vị, góc xoay và phản lực**\nTính phản lực tại các bậc tự do bị khóa từ $R_c=(Kd-F)_c$, và lực tác dụng lên đầu phần tử từ $s_e=k_ed_e-f_e=[V_i,M_i^{(e)},V_j,M_j^{(e)}]^T$.\n| Nút | $v$ | $\\theta$ (rad) | $R$ | $M_R$ |\n| :---: | :---: | :---: | :---: | :---: |\n| $1$ | $0$ | $0$ | $P+\\frac{wL}{2}$ | $\\frac{PL}{2}+\\frac{wL^2}{3}$ |\n| $2$ | $-\\frac{5PL^3}{48EI}-\\frac{11wL^4}{120EI}$ | $-\\frac{PL^2}{8EI}-\\frac{wL^3}{8EI}$ | $0$ | $0$ |\n| Phần tử | $V_i$ | $M_i^{(e)}$ | $V_j$ | $M_j^{(e)}$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 1–2 | $P+\\frac{wL}{2}$ | $\\frac{PL}{2}+\\frac{wL^2}{3}$ | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (Logan, 5e). PDF tr. 800: khớp độ võng, góc xoay đầu tự do và phản lực ngàm."
+    ],
+    "final_answer": "v_{2}=-\\frac{5PL^3}{48EI}-\\frac{11wL^4}{120EI},\\quad\\theta_2=-\\frac{PL^2}{8EI}-\\frac{wL^3}{8EI}",
+    "expected_numeric_value": null
+  },
+  {
+    "id": "ch07-logan-prob-3.2",
+    "source_problem": "Problem 3.2 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_2_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Node $1$ is fixed and a $5\\,\\mathrm{kN}$ load acts to the left at node $3$. Both segments are $1\\,\\mathrm{m}$ long, with $E=210\\,\\mathrm{GPa}$ and $A=4\\times10^{-4}\\,\\mathrm{m^2}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $1000$ | $84$ |\n| 2 | $2\\to3$ | $1000$ | $84$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\u_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}168&-84\\\\-84&84\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}0\\\\-5\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ |\n| --- | --- | --- |\n| 1 | $0$ | $5.0000$ |\n| 2 | $-0.0595$ | $0$ |\n| 3 | $-0.1190$ | $0$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $-5.0000$ | $-12.5000$ |\n| 2 | $-5.0000$ | $-12.5000$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 794): Chuyển vị, phản lực và lực đầu phần tử khớp đến độ chính xác in."
+    ],
+    "final_answer": "u_3=-0.1190\\,\\mathrm{mm}",
+    "expected_numeric_value": -0.11904761904761904,
+    "numeric_target_label": "$u_3\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.3",
+    "source_problem": "Problem 3.3 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_3_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Nodes $1$ and $3$ are fixed. The spans are $20\\,\\mathrm{in}$ and $50\\,\\mathrm{in}$ from left to right. A load of $8000\\,\\mathrm{lb}$ acts to the right at node $2$. Use $E=30\\times10^6\\,\\mathrm{psi}$ and $A=2\\,\\mathrm{in^2}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $20$ | $3\\times10^{6}$ |\n| 2 | $2\\to3$ | $50$ | $1.2\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $3$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}4.2\\times10^{6}\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}8000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ |\n| --- | --- | --- |\n| 1 | $0$ | $-5714.2857$ |\n| 2 | $1.9048\\times10^{-3}$ | $0$ |\n| 3 | $0$ | $-2285.7143$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $5714.2857$ | $2857.1429$ |\n| 2 | $-2285.7143$ | $-1142.8571$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 794): Chuyển vị và lực khớp gần đúng. Sách in $R_{1x}=-5715\\,\\mathrm{lb}$; nghiệm chưa làm tròn cho $R_{1x}=-5714.2857\\,\\mathrm{lb}$."
+    ],
+    "final_answer": "u_2=1.9048\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": 0.0019047619047619048,
+    "numeric_target_label": "$u_2\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.4",
+    "source_problem": "Problem 3.4 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_4_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Three $30\\,\\mathrm{in}$ bars connect fixed nodes $1$ and $4$. Node $2$ carries $4000\\,\\mathrm{lb}$ to the right and node $3$ carries $10000\\,\\mathrm{lb}$ to the left. Use $E=30\\times10^6\\,\\mathrm{psi}$ and $A=4\\,\\mathrm{in^2}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $30$ | $4\\times10^{6}$ |\n| 2 | $2\\to3$ | $30$ | $4\\times10^{6}$ |\n| 3 | $3\\to4$ | $30$ | $4\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\u_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}8\\times10^{6}&-4\\times10^{6}\\\\-4\\times10^{6}&8\\times10^{6}\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}4000\\\\-10000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ |\n| --- | --- | --- |\n| 1 | $0$ | $666.6667$ |\n| 2 | $-1.6667\\times10^{-4}$ | $0$ |\n| 3 | $-1.3333\\times10^{-3}$ | $0$ |\n| 4 | $0$ | $5333.3333$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $-666.6667$ | $-166.6667$ |\n| 2 | $-4666.6667$ | $-1166.6667$ |\n| 3 | $5333.3333$ | $1333.3333$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 794): Chuyển vị và lực khớp với sai khác dưới $0.41\\%$ do đáp án in dùng giá trị xấp xỉ."
+    ],
+    "final_answer": "u_3=-1.3333\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": -0.0013333333333333333,
+    "numeric_target_label": "$u_3\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.5",
+    "source_problem": "Problem 3.5 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_5_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Two $30\\,\\mathrm{in}$ bars of area $A=5\\,\\mathrm{in^2}$ have moduli $E_1=30\\times10^6\\,\\mathrm{psi}$ and $E_2=15\\times10^6\\,\\mathrm{psi}$, respectively. Node $1$ is fixed and node $3$ carries $15000\\,\\mathrm{lb}$ to the right.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $30$ | $5\\times10^{6}$ |\n| 2 | $2\\to3$ | $30$ | $2.5\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\u_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}7.5\\times10^{6}&-2.5\\times10^{6}\\\\-2.5\\times10^{6}&2.5\\times10^{6}\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}0\\\\15000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ |\n| --- | --- | --- |\n| 1 | $0$ | $-15000.0000$ |\n| 2 | $3.0000\\times10^{-3}$ | $0$ |\n| 3 | $9.0000\\times10^{-3}$ | $0$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $15000.0000$ | $3000.0000$ |\n| 2 | $15000.0000$ | $3000.0000$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 794): Chuyển vị, phản lực và lực đầu phần tử khớp."
+    ],
+    "final_answer": "u_3=9.0000\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": 0.009,
+    "numeric_target_label": "$u_3\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.7",
+    "source_problem": "Problem 3.7 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_7_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Nodes $1$ and $4$ are fixed. Bars $1$–$2$ and $3$–$4$ each have $L=30\\,\\mathrm{in}$, $E=15\\times10^6\\,\\mathrm{psi}$ and $A=3\\,\\mathrm{in^2}$. A spring of stiffness $k=5000\\,\\mathrm{lb/in}$ connects nodes $2$ and $3$, and node $3$ carries $10000\\,\\mathrm{lb}$ to the right.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước",
+      "spring stiffness": "độ cứng lò xo"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$ Với lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\nVới lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $30$ | $1.5\\times10^{6}$ |\n| 2 | $2\\to3$ | — (lò xo) | $5000$ |\n| 3 | $3\\to4$ | $30$ | $1.5\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\u_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}1.505\\times10^{6}&-5000\\\\-5000&1.505\\times10^{6}\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}0\\\\10000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ |\n| --- | --- | --- |\n| 1 | $0$ | $-33.1126$ |\n| 2 | $2.2075\\times10^{-5}$ | $0$ |\n| 3 | $6.6446\\times10^{-3}$ | $0$ |\n| 4 | $0$ | $-9966.8874$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $33.1126$ | $11.0375$ |\n| 2 | $33.1126$ | — (lò xo) |\n| 3 | $-9966.8874$ | $-3322.2958$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 794): Các giá trị in gần nghiệm số, nhưng $R_{1x}=-33.15\\,\\mathrm{lb}$ và $R_{4x}=-9975\\,\\mathrm{lb}$ cộng lại không cân bằng tải $10000\\,\\mathrm{lb}$. Dùng phản lực từ hệ chưa làm tròn."
+    ],
+    "final_answer": "u_3=6.6446\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": 0.006644591611479028,
+    "numeric_target_label": "$u_3\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.8",
+    "source_problem": "Problem 3.8 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_8_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. The steel and aluminum segments each measure $1\\,\\mathrm{m}$. For steel, $E=200\\,\\mathrm{GPa}$ and $A=4\\times10^{-4}\\,\\mathrm{m^2}$; for aluminum, $E=70\\,\\mathrm{GPa}$ and $A=2\\times10^{-4}\\,\\mathrm{m^2}$. Node $1$ is fixed and node $3$ carries $20\\,\\mathrm{kN}$ to the left.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $1000$ | $80$ |\n| 2 | $2\\to3$ | $1000$ | $14$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\u_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}94&-14\\\\-14&14\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}0\\\\-20\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ |\n| --- | --- | --- |\n| 1 | $0$ | $20.0000$ |\n| 2 | $-0.2500$ | $0$ |\n| 3 | $-1.6786$ | $0$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $-20.0000$ | $-50.0000$ |\n| 2 | $-20.0000$ | $-100.0000$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 795): Sách in $u_3=-1.678\\,\\mathrm{mm}$; nghiệm là $-1.678571\\ldots\\,\\mathrm{mm}$. $u_2$ và phản lực khớp."
+    ],
+    "final_answer": "u_3=-1.6786\\,\\mathrm{mm}",
+    "expected_numeric_value": -1.6785714285714284,
+    "numeric_target_label": "$u_3\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.9",
+    "source_problem": "Problem 3.9 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_9_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Node $1$ is fixed, node $2$ carries $10\\,\\mathrm{kN}$ to the left, and the unknown rightward force $F_3$ causes $u_3=25\\,\\mathrm{mm}$. The two $2\\,\\mathrm{m}$ bars have $E=210\\,\\mathrm{GPa}$ and $A=4\\times10^{-4}\\,\\mathrm{m^2}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$ Xem $u_3$ là chuyển vị đặt trước, không gán $F_3$ vào vế tải đã biết.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $2000$ | $42$ |\n| 2 | $2\\to3$ | $2000$ | $42$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$.\nÁp đặt $u_3=25\\,\\mathrm{mm}$ trong $d_0$. Ẩn số duy nhất là $u_2$; chuyển $K_{23}u_3$ sang vế phải.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}84\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}1040\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ |\n| --- | --- | --- |\n| 1 | $0$ | $-520.0000$ |\n| 2 | $12.3810$ | $0$ |\n| 3 | $25.0000$ | $530.0000$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $520.0000$ | $1300.0000$ |\n| 2 | $530.0000$ | $1325.0000$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 795): Khớp chuyển vị, lực đầu thanh và phản lực. $R_{3x}$ chính là $F_3$ cần để duy trì chuyển vị đã cho."
+    ],
+    "final_answer": "F_3=530.0000\\,\\mathrm{kN}",
+    "expected_numeric_value": 530.0,
+    "numeric_target_label": "$F_3\\ (\\mathrm{kN})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.10",
+    "source_problem": "Problem 3.10 - Logan (Chapter 3: Trusses)",
+    "method_tag": "1D Bar Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_10_bar.png",
+    "problem_en": "Use the direct stiffness method to find the nodal displacements, axial forces and reactions. Nodes $1$ and $4$ are fixed. The two consecutive $2\\,\\mathrm{m}$ bars have $E=70\\,\\mathrm{GPa}$ and $A=2\\times10^{-4}\\,\\mathrm{m^2}$. A spring with $k=2000\\,\\mathrm{kN/m}$ connects nodes $3$ and $4$. Node $2$ carries $8\\,\\mathrm{kN}$ to the right.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "bar element": "phần tử thanh 1D",
+      "prescribed displacement": "chuyển vị đặt trước",
+      "spring stiffness": "độ cứng lò xo"
+    },
+    "hint": "$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$ Với lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải.\n$$k_e=\\frac{E_e A_e}{L_e},\\quad K_e=k_e\\begin{bmatrix}1&-1\\\\-1&1\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\nVới lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- |\n| 1 | $1\\to2$ | $2000$ | $7$ |\n| 2 | $2\\to3$ | $2000$ | $7$ |\n| 3 | $3\\to4$ | — (lò xo) | $2$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\u_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}14&-7\\\\-7&9\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}8\\\\0\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ |\n| --- | --- | --- |\n| 1 | $0$ | $-6.5455$ |\n| 2 | $0.9351$ | $0$ |\n| 3 | $0.7273$ | $0$ |\n| 4 | $0$ | $-1.4545$ |\n$$R=Kd-P,\\quad N_e=k_e(u_j-u_i),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $6.5455$ | $32.7273$ |\n| 2 | $-1.4545$ | $-7.2727$ |\n| 3 | $-1.4545$ | — (lò xo) |\nĐối chiếu Answers to Selected Problems (PDF tr. 795): Chuyển vị, phản lực và lực đầu phần tử khớp gần đúng (sai khác dưới $0.04\\%$)."
+    ],
+    "final_answer": "u_2=0.9351\\,\\mathrm{mm}",
+    "expected_numeric_value": 0.935064935064935,
+    "numeric_target_label": "$u_2\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.20",
+    "source_problem": "Problem 3.20 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_20_truss.png",
+    "problem_en": "Find the displacement of node $2$ and the stress in member $1$ by the stiffness method. The two members slope at $45^\\circ$ to the horizontal, each with horizontal projection $L=100\\,\\mathrm{in}$. Use $A=5\\,\\mathrm{in^2}$, $E=10^6\\,\\mathrm{psi}$ and the upward load of $10\\,\\mathrm{kip}$ shown at node $2$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $141.421$ | $0.707107$ | $0.707107$ | $35355.3$ |\n| 2 | $2\\to3$ | $141.421$ | $0.707107$ | $-0.707107$ | $35355.3$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $3$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_2\\\\v_2\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}35355.3&0\\\\0&35355.3\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}0\\\\10000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $0$ | $-5000.0000$ | $-5000.0000$ |\n| 2 | $0$ | $0.2828$ | $0$ | $0$ |\n| 3 | $0$ | $0$ | $5000.0000$ | $-5000.0000$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $7071.0678$ | $1414.2136$ |\n| 2 | $7071.0678$ | $1414.2136$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 796): Sách in $v_2=0.142\\,\\mathrm{in}$ và $\\sigma_1=\\sigma_2=707\\,\\mathrm{psi}$, gần với kết quả nếu tải là $5\\,\\mathrm{kip}$, không phải $10\\,\\mathrm{kip}$ như hình. Với tải trong hình, cân bằng cho $2N\\sin45^\\circ=10\\,000\\,\\mathrm{lb}$; dùng nghiệm trong bảng."
+    ],
+    "final_answer": "u_2=0\\,\\mathrm{in},\\quad v_2=0.2828\\,\\mathrm{in},\\quad \\sigma_1=1414.2136\\,\\mathrm{psi}",
+    "expected_numeric_value": 0.2828427124746191,
+    "numeric_target_label": "$v_2\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.22",
+    "source_problem": "Problem 3.22 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_22_truss.png",
+    "problem_en": "Find both displacement components at node $1$ and the stress in each member, then check equilibrium at node $1$. The three members reach fixed joints on the same wall, a horizontal distance $L=100\\,\\mathrm{in}$ away, at angles of $60^\\circ$ above, $0^\\circ$, and $30^\\circ$ below the leftward horizontal. Use $A=1\\,\\mathrm{in^2}$, $E=10\\times10^6\\,\\mathrm{psi}$ and rightward and upward loads of $1000\\,\\mathrm{lb}$ each.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $2\\to1$ | $200$ | $0.5$ | $-0.866025$ | $50000$ |\n| 2 | $3\\to1$ | $100$ | $1$ | $0$ | $100000$ |\n| 3 | $4\\to1$ | $115.47$ | $0.866025$ | $0.5$ | $86602.5$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $2$, $3$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_1\\\\v_1\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}177452&15849.4\\\\15849.4&59150.6\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}1000\\\\1000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $4.2265\\times10^{-3}$ | $0.0158$ | $0$ | $0$ |\n| 2 | $0$ | $0$ | $288.6751$ | $-500.0000$ |\n| 3 | $0$ | $0$ | $-422.6497$ | $0$ |\n| 4 | $0$ | $0$ | $-866.0254$ | $-500.0000$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $-577.3503$ | $-577.3503$ |\n| 2 | $422.6497$ | $422.6497$ |\n| 3 | $1000.0000$ | $1000.0000$ |\nKiểm tra cân bằng tại nút $1$: lực của thanh lên nút cộng tải ngoài bằng không.\n| Nguồn lực | $F_x\\ (\\mathrm{lb})$ | $F_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- |\n| 1 | $288.675$ | $-500$ |\n| 2 | $-422.65$ | $0$ |\n| 3 | $-866.025$ | $-500$ |\n| Tải ngoài | $1000$ | $1000$ |\n| Tổng | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 796): Chuyển vị và ứng suất khớp gần đúng, với sai khác tối đa khoảng $0.584\\%$. Nghiệm chưa làm tròn thỏa cân bằng tại nút $1$."
+    ],
+    "final_answer": "u_1=4.2265\\times10^{-3}\\,\\mathrm{in},\\quad v_1=0.0158\\,\\mathrm{in}",
+    "expected_numeric_value": 0.015773502691896254,
+    "numeric_target_label": "$v_1\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.27",
+    "source_problem": "Problem 3.27 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_27_truss.png",
+    "problem_en": "Find both displacement components at node $3$ and the three member forces, and verify equilibrium of node $3$. The lower members have horizontal and vertical projections of $30\\,\\mathrm{ft}$ and $40\\,\\mathrm{ft}$, respectively; the upper vertical member is $20\\,\\mathrm{ft}$ long. Use $A=3\\,\\mathrm{in^2}$, $E=30\\times10^6\\,\\mathrm{psi}$ and node-$3$ loads of $5\\,\\mathrm{kip}$ rightward and $10\\,\\mathrm{kip}$ downward.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to3$ | $600$ | $0.6$ | $0.8$ | $150000$ |\n| 2 | $2\\to3$ | $600$ | $-0.6$ | $0.8$ | $150000$ |\n| 3 | $3\\to4$ | $240$ | $0$ | $1$ | $375000$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $2$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_3\\\\v_3\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}108000&0\\\\0&567000\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}5000\\\\-10000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $0$ | $-1230.1587$ | $-1640.2116$ |\n| 2 | $0$ | $0$ | $-3769.8413$ | $5026.4550$ |\n| 3 | $0.0463$ | $-0.0176$ | $0$ | $0$ |\n| 4 | $0$ | $0$ | $0$ | $6613.7566$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $2050.2646$ | $683.4215$ |\n| 2 | $-6283.0688$ | $-2094.3563$ |\n| 3 | $6613.7566$ | $2204.5855$ |\nKiểm tra cân bằng tại nút $3$: lực của thanh lên nút cộng tải ngoài bằng không.\n| Nguồn lực | $F_x\\ (\\mathrm{lb})$ | $F_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- |\n| 1 | $-1230.16$ | $-1640.21$ |\n| 2 | $-3769.84$ | $5026.46$ |\n| 3 | $0$ | $6613.76$ |\n| Tải ngoài | $5000$ | $-10000$ |\n| Tổng | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 796): Chuyển vị và lực dọc khớp trong khoảng $0.24\\%$ sau khi đổi quy ước lực đầu thanh; dùng lực chưa làm tròn để kiểm tra cân bằng nút $3$."
+    ],
+    "final_answer": "u_3=0.0463\\,\\mathrm{in},\\quad v_3=-0.0176\\,\\mathrm{in}",
+    "expected_numeric_value": 0.046296296296296294,
+    "numeric_target_label": "$u_3\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.33a",
+    "source_problem": "Problem 3.33a - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_33a_truss.png",
+    "problem_en": "Find the nodal displacements and the stresses in both bars. From node $1$, a $5\\,\\mathrm{m}$ bar slopes $45^\\circ$ above the leftward horizontal and a $10\\,\\mathrm{m}$ bar runs horizontally left. A vertical spring of $2000\\,\\mathrm{kN/m}$ supports node $1$, where $50\\,\\mathrm{kN}$ acts downward. Both bars have $E=210\\,\\mathrm{GPa}$ and $A=5\\times10^{-4}\\,\\mathrm{m^2}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp",
+      "spring stiffness": "độ cứng lò xo"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$ Với lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\nVới lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $5000$ | $-0.707107$ | $0.707107$ | $21$ |\n| 2 | $1\\to3$ | $10000$ | $-1$ | $0$ | $10.5$ |\n| 3 | $1\\to4$ | — (lò xo) | $0$ | $-1$ | $2$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $2$, $3$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_1\\\\v_1\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}21&-10.5\\\\-10.5&12.5\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}0\\\\-50\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $v\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ | $R_y\\ (\\mathrm{kN})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $-3.4483$ | $-6.8966$ | $0$ | $0$ |\n| 2 | $0$ | $0$ | $-36.2069$ | $36.2069$ |\n| 3 | $0$ | $0$ | $36.2069$ | $0$ |\n| 4 | $0$ | $0$ | $0$ | $13.7931$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $51.2043$ | $102.4086$ |\n| 2 | $-36.2069$ | $-72.4138$ |\n| 3 | $-13.7931$ | — (lò xo) |\nĐối chiếu Answers to Selected Problems (PDF tr. 797): Khớp hai chuyển vị và hai ứng suất in. Lực lò xo được tính thêm, không quy thành ứng suất."
+    ],
+    "final_answer": "u_1=-3.4483\\,\\mathrm{mm},\\quad v_1=-6.8966\\,\\mathrm{mm}",
+    "expected_numeric_value": -6.896551724137931,
+    "numeric_target_label": "$v_1\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.33b",
+    "source_problem": "Problem 3.33b - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_33b_truss.png",
+    "problem_en": "Find the nodal displacements and the stresses in the symmetric two-bar truss. Each $5\\,\\mathrm{m}$ bar makes $60^\\circ$ with the horizontal and has $E=210\\,\\mathrm{GPa}$ and $A=5\\times10^{-4}\\,\\mathrm{m^2}$. Node $1$ carries $100\\,\\mathrm{kN}$ downward and is supported by a vertical spring with $k=4000\\,\\mathrm{N/m}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp",
+      "spring stiffness": "độ cứng lò xo"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$ Với lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\nDùng $\\mathrm{mm}$ cho chiều dài, $\\mathrm{mm^2}$ cho diện tích và $\\mathrm{kN}$ cho lực.\nVới lò xo, thay $E_e A_e/L_e$ bằng độ cứng $k$ cho trước.\n| Phần tử | Nút | $L_e\\ (\\mathrm{mm})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{kN/mm})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $5000$ | $-0.5$ | $0.866025$ | $21$ |\n| 2 | $1\\to3$ | $5000$ | $0.5$ | $0.866025$ | $21$ |\n| 3 | $1\\to4$ | — (lò xo) | $0$ | $-1$ | $0.004$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $2$, $3$, $4$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}u_1\\\\v_1\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}10.5&0\\\\0&31.504\\end{bmatrix}\\,\\mathrm{kN/mm},\\quad P_r=\\begin{bmatrix}0\\\\-100\\end{bmatrix}\\,\\mathrm{kN}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\n| Nút | $u\\ (\\mathrm{mm})$ | $v\\ (\\mathrm{mm})$ | $R_x\\ (\\mathrm{kN})$ | $R_y\\ (\\mathrm{kN})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $-3.1742$ | $0$ | $0$ |\n| 2 | $0$ | $0$ | $-28.8638$ | $49.9937$ |\n| 3 | $0$ | $0$ | $28.8638$ | $49.9937$ |\n| 4 | $0$ | $0$ | $0$ | $0.0127$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\nĐổi đơn vị ứng suất theo $1\\,\\mathrm{kN/mm^2}=1000\\,\\mathrm{MPa}$.\n| Phần tử | $N_e\\ (\\mathrm{kN})$ | $\\sigma_e\\ (\\mathrm{MPa})$ |\n| --- | --- | --- |\n| 1 | $57.7277$ | $115.4554$ |\n| 2 | $57.7277$ | $115.4554$ |\n| 3 | $-0.0127$ | — (lò xo) |\nĐối chiếu Answers to Selected Problems (PDF tr. 797): Phụ lục chỉ liệt kê phần (a). Kiểm chứng độc lập bằng đối xứng: $u_1=0$ và $v_1=-P/(2EA\\sin^2 60^\\circ/L+k)$ với $P=100\\,\\mathrm{kN}$, giữ đúng $k=4000\\,\\mathrm{N/m}$."
+    ],
+    "final_answer": "u_1=0\\,\\mathrm{mm},\\quad v_1=-3.1742\\,\\mathrm{mm}",
+    "expected_numeric_value": -3.1742001015744035,
+    "numeric_target_label": "$v_1\\ (\\mathrm{mm})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.49",
+    "source_problem": "Problem 3.49 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_49_truss.png",
+    "problem_en": "Compute the nodal displacements and bar stresses for the truss with inclined supports. Use $E=30\\times10^6\\,\\mathrm{psi}$, $A=2\\,\\mathrm{in^2}$ and $L=30\\,\\mathrm{in}$. Members $1$–$2$ and $1$–$3$ are horizontal and vertical, each of length $L$. Node $3$ is pinned, node $1$ rolls along a plane descending at $45^\\circ$ to the right, and node $2$ rolls vertically under a downward load of $2000\\,\\mathrm{lb}$.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp",
+      "inclined roller": "gối con lăn trên mặt nghiêng"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$ Chiếu chuyển vị con lăn lên tiếp tuyến và triệt tiêu thành phần pháp tuyến.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $30$ | $1$ | $0$ | $2\\times10^{6}$ |\n| 2 | $2\\to3$ | $42.4264$ | $-0.707107$ | $0.707107$ | $1.41421\\times10^{6}$ |\n| 3 | $1\\to3$ | $30$ | $0$ | $1$ | $2\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $3$.\nGối $1$: $(u_1,v_1)=q_1(1,-1)/\\sqrt2$. Gối $2$: $u_2=0$, $v_2$ tự do.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}q_1\\\\v_2\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}2\\times10^{6}&0\\\\0&707107\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}0\\\\-2000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\nTọa độ tiếp tuyến: $q_1=0\\,\\mathrm{in}$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $0$ | $0$ | $0$ |\n| 2 | $0$ | $-2.8284\\times10^{-3}$ | $2000.0000$ | $0$ |\n| 3 | $0$ | $0$ | $-2000.0000$ | $2000.0000$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $0$ | $0$ |\n| 2 | $2828.4271$ | $1414.2136$ |\n| 3 | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 798): Khớp chuyển vị, phản lực ngang tại nút $2$ và các ứng suất in."
+    ],
+    "final_answer": "u_2=0\\,\\mathrm{in},\\quad v_2=-2.8284\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": -0.002828427124746191,
+    "numeric_target_label": "$v_2\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.50",
+    "source_problem": "Problem 3.50 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_50_truss.png",
+    "problem_en": "Compute the nodal displacements and bar stresses for the truss with inclined supports. Use $E=30\\times10^6\\,\\mathrm{psi}$, $A=2\\,\\mathrm{in^2}$ and $L=30\\,\\mathrm{in}$. Node $3$ is pinned and lies $L$ above node $1$ and $L$ left of node $2$. Node $1$ rolls along a plane descending at $45^\\circ$ to the right. Node $2$ rolls vertically and carries $2000\\,\\mathrm{lb}$ downward.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp",
+      "inclined roller": "gối con lăn trên mặt nghiêng"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$ Chiếu chuyển vị con lăn lên tiếp tuyến và triệt tiêu thành phần pháp tuyến.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $42.4264$ | $0.707107$ | $0.707107$ | $1.41421\\times10^{6}$ |\n| 2 | $2\\to3$ | $30$ | $-1$ | $0$ | $2\\times10^{6}$ |\n| 3 | $1\\to3$ | $30$ | $0$ | $1$ | $2\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $3$.\nGối $1$: $(u_1,v_1)=q_1(1,-1)/\\sqrt2$. Gối $2$: $u_2=0$, $v_2$ tự do.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}q_1\\\\v_2\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}1\\times10^{6}&0\\\\0&707107\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}0\\\\-2000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\nTọa độ tiếp tuyến: $q_1=0\\,\\mathrm{in}$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $0$ | $2000.0000$ | $2000.0000$ |\n| 2 | $0$ | $-2.8284\\times10^{-3}$ | $-2000.0000$ | $0$ |\n| 3 | $0$ | $0$ | $0$ | $0$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $-2828.4271$ | $-1414.2136$ |\n| 2 | $0$ | $0$ |\n| 3 | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 798): Khớp chuyển vị đứng tại nút $2$ được in; ứng suất được tính thêm từ chuyển vị."
+    ],
+    "final_answer": "u_2=0\\,\\mathrm{in},\\quad v_2=-2.8284\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": -0.002828427124746191,
+    "numeric_target_label": "$v_2\\ (\\mathrm{in})$"
+  },
+  {
+    "id": "ch07-logan-prob-3.51",
+    "source_problem": "Problem 3.51 - Logan (Chapter 3: Trusses)",
+    "method_tag": "2D Plane Truss Element",
+    "exam_focus": true,
+    "figure_image": "/images/logan_fig_p3_51_truss.png",
+    "problem_en": "Compute the nodal displacements and bar stresses for the truss with inclined supports. Use $E=30\\times10^6\\,\\mathrm{psi}$, $A=2\\,\\mathrm{in^2}$ and $L=30\\,\\mathrm{in}$. The truss is equilateral, with pins at nodes $1$ and $3$. Node $2$ rolls along a plane rising at $45^\\circ$ to the right, and a $2000\\,\\mathrm{lb}$ load acts there along that plane, up and to the right.",
+    "glossary": {
+      "direct stiffness method": "phương pháp độ cứng trực tiếp",
+      "nodal displacement": "chuyển vị nút",
+      "axial force": "lực dọc trục",
+      "axial stress": "ứng suất dọc trục",
+      "support reaction": "phản lực gối tựa",
+      "tension / compression": "kéo / nén",
+      "plane truss": "dàn phẳng",
+      "direction cosine": "cosin chỉ phương",
+      "pin support": "gối khớp",
+      "inclined roller": "gối con lăn trên mặt nghiêng"
+    },
+    "hint": "Với thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục. $$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$ Chiếu chuyển vị con lăn lên tiếp tuyến và triệt tiêu thành phần pháp tuyến.",
+    "steps": [
+      "**Bước 1: Ma trận độ cứng phần tử**\nChọn trục $x$ sang phải, trục $y$ hướng lên.\nVới thứ tự $[u_i,v_i,u_j,v_j]^T$, dùng $c_e=\\cos\\theta_e$ và $s_e=\\sin\\theta_e$, lấy từ hướng $i\\to j$ trong hệ toàn cục.\n$$K_e=k_e b_e^{T}b_e,\\quad k_e=\\frac{E_e A_e}{L_e},\\quad b_e=\\begin{bmatrix}-c_e&-s_e&c_e&s_e\\end{bmatrix}$$\n| Phần tử | Nút | $L_e\\ (\\mathrm{in})$ | $c_e$ | $s_e$ | $k_e\\ (\\mathrm{lb/in})$ |\n| --- | --- | --- | --- | --- | --- |\n| 1 | $1\\to2$ | $30$ | $1$ | $0$ | $2\\times10^{6}$ |\n| 2 | $2\\to3$ | $30$ | $-0.5$ | $0.866025$ | $2\\times10^{6}$ |\n| 3 | $1\\to3$ | $30$ | $0.5$ | $0.866025$ | $2\\times10^{6}$ |",
+      "**Bước 2: Ghép nối và khử điều kiện biên**\nCộng từng $K_e$ vào các hàng/cột của hai nút tương ứng trong $K$.\nKhóa mọi thành phần chuyển vị tại nút $1$, $3$.\nGối $2$: $(u_2,v_2)=q_2(1,1)/\\sqrt2$. Pháp tuyến chọn là $(-1,1)/\\sqrt2$.\nCác cột của $T$ cho các hướng chuyển vị tự do; $d_0$ chứa các giá trị đặt trước.\n$$d=d_0+Tq,\\quad K_r=T^TKT,\\quad P_r=T^T(P-Kd_0),\\quad K_rq=P_r$$\n$$q=\\begin{bmatrix}q_2\\end{bmatrix}$$\nDạng số của hệ rút gọn (hệ số được hiển thị với tối đa 6 chữ số có nghĩa):\n$$K_r=\\begin{bmatrix}1.13397\\times10^{6}\\end{bmatrix}\\,\\mathrm{lb/in},\\quad P_r=\\begin{bmatrix}2000\\end{bmatrix}\\,\\mathrm{lb}$$",
+      "**Bước 3: Chuyển vị, ứng suất và phản lực**\nGiải trực tiếp $K_rq=P_r$ và thế ngược $d=d_0+Tq$.\nTọa độ tiếp tuyến: $q_2=1.7637\\times10^{-3}\\,\\mathrm{in}$.\n| Nút | $u\\ (\\mathrm{in})$ | $v\\ (\\mathrm{in})$ | $R_x\\ (\\mathrm{lb})$ | $R_y\\ (\\mathrm{lb})$ |\n| --- | --- | --- | --- | --- |\n| 1 | $0$ | $0$ | $-2494.2597$ | $0$ |\n| 2 | $1.2471\\times10^{-3}$ | $1.2471\\times10^{-3}$ | $623.5649$ | $-623.5649$ |\n| 3 | $0$ | $0$ | $456.4812$ | $-790.6486$ |\n$$R=Kd-P,\\quad N_e=k_e(b_e d_e),\\quad \\hat f_e=[-N_e,N_e]^T,\\quad \\sigma_e=N_e/A_e\\ \\text{(thanh)}$$\nDấu dương là kéo, dấu âm là nén. Cặp lực đầu phần tử dùng trục địa phương.\n| Phần tử | $N_e\\ (\\mathrm{lb})$ | $\\sigma_e\\ (\\mathrm{psi})$ |\n| --- | --- | --- |\n| 1 | $2494.2597$ | $1247.1298$ |\n| 2 | $-912.9624$ | $-456.4812$ |\n| 3 | $0$ | $0$ |\nĐối chiếu Answers to Selected Problems (PDF tr. 798): $q_2$ làm tròn đến $0.001\\,\\mathrm{in}$ cho $0.002\\,\\mathrm{in}$ như sách. Độ lớn thành phần lực tiếp tuyến tại nút $2$ là $2000\\,\\mathrm{lb}$, nhưng với chiều tiếp tuyến lên phải ta được $+2000\\,\\mathrm{lb}$. Chiếu $R_2$ lên pháp tuyến $(-1,1)/\\sqrt{2}$ cho $-881.8540\\,\\mathrm{lb}$, không phải $-2828\\,\\mathrm{lb}$. Chiếu $R_1$ lên tiếp tuyến $(1,-1)/\\sqrt{2}$ cho $-1763.7079\\,\\mathrm{lb}$, không đạt độ lớn $2800\\,\\mathrm{lb}$ trong sách."
+    ],
+    "final_answer": "q_2=1.7637\\times10^{-3}\\,\\mathrm{in}",
+    "expected_numeric_value": 0.0017637079407904239,
+    "numeric_target_label": "$q_2\\ (\\mathrm{in})$"
+  }
+]

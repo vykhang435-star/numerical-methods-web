@@ -1,0 +1,516 @@
+182
+C H A P T E R 4
+Numerical Differentiation and Integration
+In practice, we cannot compute an optimal h to use in approximating the derivative, since
+we have no knowledge of the third derivative of the function. But we must remain aware
+that reducing the step size will not always improve the approximation.
+□
+We have considered only the round-off error problems that are presented by the three-
+point formula Eq. (4.5), but similar difﬁculties occur with all the differentiation formulas.
+The reason can be traced to the need to divide by a power of h. As we found in Section 1.2
+(see, in particular, Example 3), division by small numbers tends to exaggerate round-off
+error, and this operation should be avoided if possible. In the case of numerical differenti-
+ation, we cannot avoid the problem entirely, although the higher-order methods reduce the
+difﬁculty.
+Keep in mind that difference
+method approximations might be
+unstable.
+As approximation methods, numerical differentiation is unstable, since the small values
+of h needed to reduce truncation error also cause the round-off error to grow. This is the ﬁrst
+class of unstable methods we have encountered, and these techniques would be avoided if it
+were possible. However, in addition to being used for computational purposes, the formulas
+are needed for approximating the solutions of ordinary and partial-differential equations.
+E X E R C I S E S E T 4.1
+1.
+Use the forward-difference formulas and backward-difference formulas to determine each missing
+entry in the following tables.
+a.
+x
+f (x)
+f ′(x)
+0.5
+0.4794
+0.6
+0.5646
+0.7
+0.6442
+b.
+x
+f (x)
+f ′(x)
+0.0
+0.00000
+0.2
+0.74140
+0.4
+1.3718
+2.
+Use the forward-difference formulas and backward-difference formulas to determine each missing
+entry in the following tables.
+a.
+x
+f (x)
+f ′(x)
+−0.3
+1.9507
+−0.2
+2.0421
+−0.1
+2.0601
+b.
+x
+f (x)
+f ′(x)
+1.0
+1.0000
+1.2
+1.2625
+1.4
+1.6595
+3.
+The data in Exercise 1 were taken from the following functions. Compute the actual errors in Exer-
+cise 1, and ﬁnd error bounds using the error formulas.
+a.
+f (x) = sin x
+b.
+f (x) = ex −2x2 + 3x −1
+4.
+The data in Exercise 2 were taken from the following functions. Compute the actual errors in Exer-
+cise 2, and ﬁnd error bounds using the error formulas.
+a.
+f (x) = 2 cos 2x −x
+b.
+f (x) = x2 ln x + 1
+5.
+Use the most accurate three-point formula to determine each missing entry in the following tables.
+a.
+x
+f (x)
+f ′(x)
+1.1
+9.025013
+1.2
+11.02318
+1.3
+13.46374
+1.4
+16.44465
+b.
+x
+f (x)
+f ′(x)
+8.1
+16.94410
+8.3
+17.56492
+8.5
+18.19056
+8.7
+18.82091
+c.
+x
+f (x)
+f ′(x)
+2.9
+−4.827866
+3.0
+−4.240058
+3.1
+−3.496909
+3.2
+−2.596792
+d.
+x
+f (x)
+f ′(x)
+2.0
+3.6887983
+2.1
+3.6905701
+2.2
+3.6688192
+2.3
+3.6245909
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+4.1
+Numerical Differentiation
+183
+6.
+Use the most accurate three-point formula to determine each missing entry in the following tables.
+a.
+x
+f (x)
+f ′(x)
+−0.3
+−0.27652
+−0.2
+−0.25074
+−0.1
+−0.16134
+0
+0
+b.
+x
+f (x)
+f ′(x)
+7.4
+−68.3193
+7.6
+−71.6982
+7.8
+−75.1576
+8.0
+−78.6974
+c.
+x
+f (x)
+f ′(x)
+1.1
+1.52918
+1.2
+1.64024
+1.3
+1.70470
+1.4
+1.71277
+d.
+x
+f (x)
+f ′(x)
+−2.7
+0.054797
+−2.5
+0.11342
+−2.3
+0.65536
+−2.1
+0.98472
+7.
+The data in Exercise 5 were taken from the following functions. Compute the actual errors in Exer-
+cise 5, and ﬁnd error bounds using the error formulas.
+a.
+f (x) = e2x
+b.
+f (x) = x ln x
+c.
+f (x) = x cos x −x2 sin x
+d.
+f (x) = 2(ln x)2 + 3 sin x
+8.
+The data in Exercise 6 were taken from the following functions. Compute the actual errors in Exer-
+cise 6, and ﬁnd error bounds using the error formulas.
+a.
+f (x) = e2x −cos 2x
+b.
+f (x) = ln(x + 2) −(x + 1)2
+c.
+f (x) = x sin x + x2 cos x
+d.
+f (x) = (cos 3x)2 −e2x
+9.
+Use the formulas given in this section to determine, as accurately as possible, approximations for each
+missing entry in the following tables.
+a.
+x
+f (x)
+f ′(x)
+2.1
+−1.709847
+2.2
+−1.373823
+2.3
+−1.119214
+2.4
+−0.9160143
+2.5
+−0.7470223
+2.6
+−0.6015966
+b.
+x
+f (x)
+f ′(x)
+−3.0
+9.367879
+−2.8
+8.233241
+−2.6
+7.180350
+−2.4
+6.209329
+−2.2
+5.320305
+−2.0
+4.513417
+10.
+Use the formulas given in this section to determine, as accurately as possible, approximations for each
+missing entry in the following tables.
+a.
+x
+f (x)
+f ′(x)
+1.05
+−1.709847
+1.10
+−1.373823
+1.15
+−1.119214
+1.20
+−0.9160143
+1.25
+−0.7470223
+1.30
+−0.6015966
+b.
+x
+f (x)
+f ′(x)
+−3.0
+16.08554
+−2.8
+12.64465
+−2.6
+9.863738
+−2.4
+7.623176
+−2.2
+5.825013
+−2.0
+4.389056
+11.
+The data in Exercise 9 were taken from the following functions. Compute the actual errors in Exer-
+cise 9, and ﬁnd error bounds using the error formulas and Maple.
+a.
+f (x) = tan x
+b.
+f (x) = ex/3 + x2
+12.
+The data in Exercise 10 were taken from the following functions. Compute the actual errors in Exer-
+cise 10, and ﬁnd error bounds using the error formulas and Maple.
+a.
+f (x) = tan 2x
+b.
+f (x) = e−x −1 + x
+13.
+Use the following data and the knowledge that the ﬁrst ﬁve derivatives of f are bounded on [1, 5] by
+2, 3, 6, 12 and 23, respectively, to approximate f ′(3) as accurately as possible. Find a bound for the
+error.
+x
+1
+2
+3
+4
+5
+f (x)
+2.4142
+2.6734
+2.8974
+3.0976
+3.2804
+14.
+Repeat Exercise 13, assuming instead that the third derivative of f is bounded on [1, 5] by 4.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+184
+C H A P T E R 4
+Numerical Differentiation and Integration
+15.
+Repeat Exercise 1 using four-digit rounding arithmetic, and compare the errors to those in
+Exercise 3.
+16.
+Repeat Exercise 5 using four-digit chopping arithmetic, and compare the errors to those in
+Exercise 7.
+17.
+Repeat Exercise 9 using four-digit rounding arithmetic, and compare the errors to those in
+Exercise 11.
+18.
+Consider the following table of data:
+x
+0.2
+0.4
+0.6
+0.8
+1.0
+f (x)
+0.9798652
+0.9177710
+0.808038
+0.6386093
+0.3843735
+a.
+Use all the appropriate formulas given in this section to approximate f ′(0.4) and f ′′(0.4).
+b.
+Use all the appropriate formulas given in this section to approximate f ′(0.6) and f ′′(0.6).
+19.
+Let f (x) = cos πx. Use Eq. (4.9) and the values of f (x) at x = 0.25, 0.5, and 0.75 to approximate
+f ′′(0.5). Compare this result to the exact value and to the approximation found in Exercise 15 of
+Section 3.5. Explain why this method is particularly accurate for this problem, and ﬁnd a bound for
+the error.
+20.
+Let f (x) = 3xex −cos x. Use the following data and Eq. (4.9) to approximate f ′′(1.3) with h = 0.1
+and with h = 0.01.
+x
+1.20
+1.29
+1.30
+1.31
+1.40
+f (x)
+11.59006
+13.78176
+14.04276
+14.30741
+16.86187
+Compare your results to f ′′(1.3).
+21.
+Consider the following table of data:
+x
+0.2
+0.4
+0.6
+0.8
+1.0
+f (x)
+0.9798652
+0.9177710
+0.8080348
+0.6386093
+0.3843735
+a.
+Use Eq. (4.7) to approximate f ′(0.2).
+b.
+Use Eq. (4.7) to approximate f ′(1.0).
+c.
+Use Eq. (4.6) to approximate f ′(0.6).
+22.
+Derive an O(h4) ﬁve-point formula to approximate f ′(x0) that uses f (x0 −h), f (x0), f (x0 + h),
+f (x0 + 2h), and f (x0 + 3h). [Hint: Consider the expression Af (x0 −h) + Bf (x0 + h) + Cf (x0 +
+2h) + Df (x0 + 3h). Expand in fourth Taylor polynomials, and choose A, B, C, and D appropriately.]
+23.
+Use the formula derived in Exercise 22 and the data of Exercise 21 to approximate f ′(0.4) and f ′(0.8).
+24.
+a.
+Analyze the round-off errors, as in Example 4, for the formula
+f ′(x0) = f (x0 + h) −f (x0)
+h
+−h
+2f ′′(ξ0).
+b.
+Find an optimal h > 0 for the function given in Example 2.
+25.
+In Exercise 10 of Section 3.4 data were given describing a car traveling on a straight road. That
+problem asked to predict the position and speed of the car when t = 10 s. Use the following times and
+positions to predict the speed at each time listed.
+Time
+0
+3
+5
+8
+10
+13
+Distance
+0
+225
+383
+623
+742
+993
+26.
+In a circuit with impressed voltage E(t) and inductance L, Kirchhoff’s ﬁrst law gives the relationship
+E(t) = L di
+dt + Ri,
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+4.2
+Richardson’s Extrapolation
+185
+where R is the resistance in the circuit and i is the current. Suppose we measure the current for several
+values of t and obtain:
+t
+1.00
+1.01
+1.02
+1.03
+1.0
+i
+3.10
+3.12
+3.14
+3.18
+3.24
+where t is measured in seconds, i is in amperes, the inductance L is a constant 0.98 henries, and the
+resistance is 0.142 ohms. Approximate the voltage E(t) when t = 1.00, 1.01, 1.02, 1.03, and 1.04.
+27.
+All calculus students know that the derivative of a function f at x can be deﬁned as
+f ′(x) = lim
+h→0
+f (x + h) −f (x)
+h
+.
+Choose your favorite function f , nonzero number x, and computer or calculator. Generate approxi-
+mations f ′
+n(x) to f ′(x) by
+f ′
+n(x) = f (x + 10−n) −f (x)
+10−n
+,
+for n = 1, 2, . . . , 20, and describe what happens.
+28.
+Derive a method for approximating f ′′′(x0) whose error term is of order h2 by expanding the function
+f in a fourth Taylor polynomial about x0 and evaluating at x0 ± h and x0 ± 2h.
+29.
+Consider the function
+e(h) = ε
+h + h2
+6 M,
+where M is a bound for the third derivative of a function. Show that e(h) has a minimum at
+3√3ε/M.
+4.2
+Richardson’s Extrapolation
+Richardson’s extrapolation is used to generate high-accuracy results while using low-
+order formulas. Although the name attached to the method refers to a paper written by
+L. F. Richardson and J. A. Gaunt [RG] in 1927, the idea behind the technique is much older.
+An interesting article regarding the history and application of extrapolation can be found
+in [Joy].
+Lewis Fry Richardson
+(1881–1953) was the ﬁrst person
+to systematically apply
+mathematics to weather
+prediction while working in
+England for the Meteorological
+Ofﬁce. As a conscientious
+objector during World War I, he
+wrote extensively about the
+economic futility of warfare,
+using systems of differential
+equations to model rational
+interactions between countries.
+The extrapolation technique that
+bears his name was the
+rediscovery of a technique with
+roots that are at least as old as
+Christiaan Hugyens
+(1629–1695), and possibly
+Archimedes (287–212 b.c.e.).
+Extrapolation can be applied whenever it is known that an approximation technique
+has an error term with a predictable form, one that depends on a parameter, usually the step
+size h. Suppose that for each number h̸ = 0 we have a formula N1(h) that approximates an
+unknown constant M, and that the truncation error involved with the approximation has the
+form
+M −N1(h) = K1h + K2h2 + K3h3 + · · · ,
+for some collection of (unknown) constants K1, K2, K3, . . . .
+The truncation error is O(h), so unless there was a large variation in magnitude among
+the constants K1, K2, K3, . . . ,
+M −N1(0.1) ≈0.1K1,
+M −N1(0.01) ≈0.01K1,
+and, in general, M −N1(h) ≈K1h .
+The object of extrapolation is to ﬁnd an easy way to combine these rather inaccu-
+rate O(h) approximations in an appropriate way to produce formulas with a higher-order
+truncation error.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+

@@ -1,0 +1,401 @@
+5.2
+Euler’s Method
+273
+is not used to calculate the approximation to the solution yi at a mesh point ti. We use instead
+an equation of the form
+u0 = α + δ0,
+ui+1 = ui + hf (ti, ui) + δi+1,
+for each i = 0, 1, . . . , N −1,
+(5.11)
+where δi denotes the round-off error associated with ui. Using methods similar to those in
+the proof of Theorem 5.9, we can produce an error bound for the ﬁnite-digit approximations
+to yi given by Euler’s method.
+Theorem 5.10
+Let y(t) denote the unique solution to the initial-value problem
+y′ = f (t, y),
+a ≤t ≤b,
+y(a) = α
+(5.12)
+and u0, u1, . . . , uN be the approximations obtained using (5.11). If |δi| < δ for each
+i = 0, 1, . . . , N and the hypotheses of Theorem 5.9 hold for (5.12), then
+| y(ti) −ui| ≤1
+L
+hM
+2 + δ
+h
+
+[eL(ti−a) −1] + |δ0|eL(ti−a),
+(5.13)
+for each i = 0, 1, . . . , N.
+The error bound (5.13) is no longer linear in h. In fact, since
+lim
+h→0
+hM
+2 + δ
+h
+
+= ∞,
+the error would be expected to become large for sufﬁciently small values of h. Calculus can
+be used to determine a lower bound for the step size h. Letting E(h) = (hM/2) + (δ/h)
+implies that E′(h) = (M/2) −(δ/h2).
+If
+h <
+
+2δ/M, then
+E′(h) < 0 and E(h) is decreasing.
+If
+h >
+
+2δ/M, then
+E′(h) > 0 and E(h) is increasing.
+The minimal value of E(h) occurs when
+h =
+
+2δ
+M .
+(5.14)
+Decreasing h beyond this value tends to increase the total error in the approximation.
+Normally, however, the value of δ is sufﬁciently small that this lower bound for h does not
+affect the operation of Euler’s method.
+E X E R C I S E S E T 5.2
+1.
+Use Euler’s method to approximate the solutions for each of the following initial-value problems.
+a.
+y′ = te3t −2y,
+0 ≤t ≤1,
+y(0) = 0, with h = 0.5
+b.
+y′ = 1 + (t −y)2,
+2 ≤t ≤3,
+y(2) = 1, with h = 0.5
+c.
+y′ = 1 + y/t,
+1 ≤t ≤2,
+y(1) = 2, with h = 0.25
+d.
+y′ = cos 2t + sin 3t,
+0 ≤t ≤1,
+y(0) = 1, with h = 0.25
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+274
+C H A P T E R 5
+Initial-Value Problems for Ordinary Differential Equations
+2.
+Use Euler’s method to approximate the solutions for each of the following initial-value problems.
+a.
+y′ = et−y,
+0 ≤t ≤1,
+y(0) = 1, with h = 0.5
+b.
+y′ = 1 + t
+1 + y,
+1 ≤t ≤2,
+y(1) = 2, with h = 0.5
+c.
+y′ = −y + ty1/2,
+2 ≤t ≤3,
+y(2) = 2, with h = 0.25
+d.
+y′ = t−2(sin 2t −2ty),
+1 ≤t ≤2,
+y(1) = 2, with h = 0.25
+3.
+The actual solutions to the initial-value problems in Exercise 1 are given here. Compare the actual
+error at each step to the error bound.
+a.
+y(t) = 1
+5te3t −1
+25e3t + 1
+25e−2t
+b.
+y(t) = t +
+1
+1 −t
+c.
+y(t) = t ln t + 2t
+d.
+y(t) = 1
+2 sin 2t −1
+3 cos 3t + 4
+3
+4.
+The actual solutions to the initial-value problems in Exercise 2 are given here. Compute the actual
+error and compare this to the error bound if Theorem 5.9 can be applied.
+a.
+y(t) = ln(et + e −1)
+b.
+y(t) =
+
+t2 + 2t + 6 −1
+c.
+y(t) =
+
+t −2 +
+√
+2ee−t/22
+d.
+y(t) = 4 + cos 2 −cos 2t
+2t2
+5.
+Use Euler’s method to approximate the solutions for each of the following initial-value problems.
+a.
+y′ = y/t −(y/t)2 ,
+1 ≤t ≤2,
+y(1) = 1, with h = 0.1
+b.
+y′ = 1 + y/t + (y/t)2 ,
+1 ≤t ≤3,
+y(1) = 0, with h = 0.2
+c.
+y′ = −(y + 1)(y + 3),
+0 ≤t ≤2,
+y(0) = −2, with h = 0.2
+d.
+y′ = −5y + 5t2 + 2t,
+0 ≤t ≤1,
+y(0) = 1
+3, with h = 0.1
+6.
+Use Euler’s method to approximate the solutions for each of the following initial-value problems.
+a.
+y′ = 2 −2ty
+t2 + 1 ,
+0 ≤t ≤1,
+y(0) = 1, with h = 0.1
+b.
+y′ =
+y2
+1 + t ,
+1 ≤t ≤2,
+y(1) = −(ln 2)−1, with h = 0.1
+c.
+y′ = (y2 + y)/t,
+1 ≤t ≤3,
+y(1) = −2, with h = 0.2
+d.
+y′ = −ty + 4ty−1,
+0 ≤t ≤1,
+y(0) = 1, with h = 0.1
+7.
+The actual solutions to the initial-value problems in Exercise 5 are given here. Compute the actual
+error in the approximations of Exercise 5.
+a.
+y(t) =
+t
+1 + ln t
+b.
+y(t) = t tan(ln t)
+c.
+y(t) = −3 +
+2
+1 + e−2t
+d.
+y(t) = t2 + 1
+3e−5t
+8.
+The actual solutions to the initial-value problems in Exercise 6 are given here. Compute the actual
+error in the approximations of Exercise 6.
+a.
+y(t) = 2t + 1
+t2 + 1
+b.
+y(t) =
+−1
+ln(t + 1)
+c.
+y(t) =
+2t
+1 −2t
+d.
+y(t) =
+
+4 −3e−t2
+9.
+Given the initial-value problem
+y′ = 2
+t y + t2et,
+1 ≤t ≤2,
+y(1) = 0,
+with exact solution y(t) = t2(et −e) :
+a.
+Use Euler’s method with h = 0.1 to approximate the solution, and compare it with the actual
+values of y.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+5.2
+Euler’s Method
+275
+b.
+Use the answers generated in part (a) and linear interpolation to approximate the following values
+of y, and compare them to the actual values.
+i.
+y(1.04)
+ii.
+y(1.55)
+iii.
+y(1.97)
+c.
+Compute the value of h necessary for | y(ti) −wi| ≤0.1, using Eq. (5.10).
+10.
+Given the initial-value problem
+y′ = 1
+t2 −y
+t −y2,
+1 ≤t ≤2,
+y(1) = −1,
+with exact solution y(t) = −1/t:
+a.
+Use Euler’s method with h = 0.05 to approximate the solution, and compare it with the actual
+values of y.
+b.
+Use the answers generated in part (a) and linear interpolation to approximate the following values
+of y, and compare them to the actual values.
+i.
+y(1.052)
+ii.
+y(1.555)
+iii.
+y(1.978)
+c.
+Compute the value of h necessary for | y(ti) −wi| ≤0.05 using Eq. (5.10).
+11.
+Given the initial-value problem
+y′ = −y + t + 1,
+0 ≤t ≤5,
+y(0) = 1,
+with exact solution y(t) = e−t + t:
+a.
+Approximate y(5) using Euler’s method with h = 0.2, h = 0.1, and h = 0.05.
+b.
+Determine the optimal value of h to use in computing y(5), assuming δ = 10−6 and that Eq. (5.14)
+is valid.
+12.
+Consider the initial-value problem
+y′ = −10y,
+0 ≤t ≤2,
+y(0) = 1,
+which has solution y(t) = e−10t. What happens when Euler’s method is applied to this problem with
+h = 0.1? Does this behavior violate Theorem 5.9?
+13.
+Use the results of Exercise 5 and linear interpolation to approximate the following values of y(t).
+Compare the approximations obtained to the actual values obtained using the functions given in
+Exercise 7.
+a.
+y(1.25) and y(1.93)
+b.
+y(2.1) and y(2.75)
+c.
+y(1.3) and y(1.93)
+d.
+y(0.54) and y(0.94)
+14.
+Use the results of Exercise 6 and linear interpolation to approximate the following values of y(t).
+Compare the approximations obtained to the actual values obtained using the functions given in
+Exercise 8.
+a.
+y(0.25) and y(0.93)
+b.
+y(1.25) and y(1.93)
+c.
+y(2.10) and y(2.75)
+d.
+y(0.54) and y(0.94)
+15.
+Let E(h) = hM
+2
++ δ
+h.
+a.
+For the initial-value problem
+y′ = −y + 1,
+0 ≤t ≤1,
+y(0) = 0,
+compute the value of h to minimize E(h). Assume δ = 5 × 10−(n+1) if you will be using n-digit
+arithmetic in part (c).
+b.
+For the optimal h computed in part (a), use Eq. (5.13) to compute the minimal error obtainable.
+c.
+Compare the actual error obtained using h = 0.1 and h = 0.01 to the minimal error in part (b).
+Can you explain the results?
+16.
+In a circuit with impressed voltage E having resistance R, inductance L, and capacitance C in parallel,
+the current i satisﬁes the differential equation
+di
+dt = C d2E
+dt2 + 1
+R
+dE
+dt + 1
+L E.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+276
+C H A P T E R 5
+Initial-Value Problems for Ordinary Differential Equations
+Suppose C = 0.3 farads, R = 1.4 ohms, L = 1.7 henries, and the voltage is given by
+E(t) = e−0.06πt sin(2t −π).
+If i(0) = 0, ﬁnd the current i for the values t = 0.1 j, where j = 0, 1, . . . , 100.
+17.
+In a book entitled Looking at History Through Mathematics, Rashevsky [Ra], pp. 103–110, considers
+a model for a problem involving the production of nonconformists in society. Suppose that a society
+has a population of x(t) individuals at time t, in years, and that all nonconformists who mate with
+other nonconformists have offspring who are also nonconformists, while a ﬁxed proportion r of all
+other offspring are also nonconformist. If the birth and death rates for all individuals are assumed to
+be the constants b and d, respectively, and if conformists and nonconformists mate at random, the
+problem can be expressed by the differential equations
+dx(t)
+dt
+= (b −d)x(t)
+and
+dxn(t)
+dt
+= (b −d)xn(t) + rb(x(t) −xn(t)),
+where xn(t) denotes the number of nonconformists in the population at time t.
+a.
+Suppose the variable p(t) = xn(t)/x(t) is introduced to represent the proportion of noncon-
+formists in the society at time t. Show that these equations can be combined and simpliﬁed to
+the single differential equation
+dp(t)
+dt
+= rb(1 −p(t)).
+b.
+Assuming that p(0) = 0.01, b = 0.02, d = 0.015, and r = 0.1, approximate the solution p(t)
+from t = 0 to t = 50 when the step size is h = 1 year.
+c.
+Solve the differential equation for p(t) exactly, and compare your result in part (b) when t = 50
+with the exact value at that time.
+5.3
+Higher-Order Taylor Methods
+Since the object of a numerical techniques is to determine accurate approximations with
+minimal effort, we need a means for comparing the efﬁciency of various approximation
+methods. The ﬁrst device we consider is called the local truncation error of the method.
+The local truncation error at a speciﬁed step measures the amount by which the exact
+solution to the differential equation fails to satisfy the difference equation being used for
+the approximation at that step. This might seem like an unlikely way to compare the error
+of various methods. We really want to know how well the approximations generated by the
+methods satisfy the differential equation, not the other way around. However, we don’t know
+the exact solution so we cannot generally determine this, and the local truncation will serve
+quite well to determine not only the local error of a method but the actual approximation
+error.
+Consider the initial value problem
+y′ = f (t, y),
+a ≤t ≤b,
+y(a) = α.
+Deﬁnition 5.11
+The difference method
+w0 = α
+wi+1 = wi + hφ(ti, wi),
+for each i = 0, 1, . . . , N −1,
+has local truncation error
+τi+1(h) = yi+1 −(yi + hφ(ti, yi))
+h
+= yi+1 −yi
+h
+−φ(ti, yi),
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+

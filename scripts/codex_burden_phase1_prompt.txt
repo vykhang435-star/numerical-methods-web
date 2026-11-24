@@ -1,0 +1,35 @@
+Bạn là Codex CLI hỗ trợ dự án Numerical Methods Web Platform. Hãy thực hiện trích xuất và giải số học chính xác các bài tập từ file PDF `D:/pps/numerical_analysis_9th.pdf` (Quy tắc lệch trang: pdf_page = book_page + 18) theo chuẩn AGENTS.md:
+
+### PHẦN 1: Topic 1 - Error Analysis & Rounding (ĐCMH Ch.1) -> Cập nhật vào `data/ch01_errors.json`
+- Nguồn: Section 1.2 Round-off Errors and Computer Arithmetic (Trang sách 28–31, PDF trang 46–49, đáp án trang PDF 793).
+- Danh sách bài mục tiêu (`Exercise Set 1.2`):
+  * Bài 1: Cho các số thực x, tìm xấp xỉ bằng phương pháp làm tròn (rounding) và chặt cụt (chopping) k chữ số.
+  * Bài 2: Tính sai số tuyệt đối và tương đối.
+  * Bài 3, 4: Phép tính số học dấu phẩy động 3 chữ số và 4 chữ số (chopping & rounding).
+  * Bài 5: Tính giá trị đa thức theo dạng thông thường vs dạng lồng Horner (Nested arithmetic) bằng số học 3 chữ số làm tròn.
+  * Bài 6, 7, 8: Lặp lại bài 5 với số học 4 chữ số làm tròn, 3 chữ số chặt cụt, 4 chữ số chặt cụt.
+  * Bài 13: Đánh giá hàm f(0.1) và triệt tiêu sai số làm tròn khi trừ 2 số gần bằng nhau.
+  * Bài 17, 18, 21: Tính xấp xỉ chuỗi lũy thừa và giải hệ phương trình tuyến tính nhỏ chịu ảnh hưởng của sai số làm tròn.
+
+### PHẦN 2: Topic 5 - Lagrange Interpolation (ĐCMH Ch.4) -> Cập nhật vào `data/ch04_interpolation.json`
+- Nguồn: Section 3.1 Interpolation and the Lagrange Polynomial (Trang sách 114–116, PDF trang 132–134, đáp án trang PDF 800).
+- Danh sách bài mục tiêu (`Exercise Set 3.1`):
+  * Bài 1(a-d), 2(a-d): Đa thức nội suy Lagrange bậc 1 (L1 qua 2 điểm) và bậc 2 (L2 qua 3 điểm).
+  * Bài 3(a-d), 4(a-d): Xấp xỉ giá trị hàm số f(x) tại điểm cho trước bằng đa thức nội suy Lagrange và xác định chặn sai số (error bound).
+  * Bài 5(a-d), 6(a-d): Lập bảng nội suy Lagrange và so sánh sai số thực tế với sai số lý thuyết.
+
+### YÊU CẦU KỸ THUẬT:
+1. Viết script `scripts/build_burden_phase1.py` dùng `pymupdf` để trích xuất đề bài gốc tiếng Anh, dùng `numpy` hoặc hàm chuẩn Python để tính toán chính xác nghiệm số học.
+2. Đối chiếu đáp án chuẩn trong phần Answers to Selected Exercises (trang PDF 793 và 800).
+3. Mỗi bài có đủ:
+   - `id`: vd `"ch01-burden-sec1.2-p1"`, `"ch04-burden-sec3.1-p1"`
+   - `source_problem`: vd `"Exercise 1.2 - Problem 1 (Burden & Faires 9th)"`
+   - `method_tag`: `"Round-off Error"`, `"Floating-Point Arithmetic"`, `"Horner's Method"`, `"Lagrange Interpolation"`
+   - `exam_focus`: true nếu là dạng trọng tâm thi
+   - `problem_en`: đề bài gốc bọc KaTeX
+   - `glossary`: tra từ điển thuật ngữ Anh-Việt
+   - `hint`: gợi ý công thức và tiêu chuẩn làm tròn
+   - `steps`: 3 bước (Bước 1: Công thức, Bước 2: Bảng tính toán kiểm chứng, Bước 3: Kết luận & Sai số)
+   - `final_answer`: đáp số cuối cùng
+   - `expected_numeric_value`: giá trị số để học sinh tự điền đáp số kiểm tra
+4. Chạy script để cập nhật `data/ch01_errors.json` và `data/ch04_interpolation.json`. Đảm bảo `scripts/validate_json.py` kiểm tra thành công!

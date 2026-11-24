@@ -1,0 +1,42 @@
+Bạn là Codex CLI hỗ trợ dự án Numerical Methods Web Platform. Hãy thực hiện 2 nhiệm vụ sau theo quy chuẩn AGENTS.md:
+
+### Nhiệm vụ 1: Viết script `scripts/crop_logan_ch3_batch.py`
+Sử dụng `pymupdf` (`fitz`) để trích xuất chuẩn xác các hình vẽ 1D bar và 2D truss từ file PDF `D:/pps/a-first-course-in-the-fem-5e-logan.pdf` ở độ phân giải 300 DPI, lưu vào thư mục `public/images/`:
+
+1. **Phần 1D Bar (Trang PDF 152 & 153, idx 151 & 152)**:
+   - `logan_fig_p3_2_bar.png`: Figure P3–2 (Trang 152, y từ 40 đến 110)
+   - `logan_fig_p3_3_bar.png`: Figure P3–3 (Trang 152, y từ 115 đến 185)
+   - `logan_fig_p3_4_bar.png`: Figure P3–4 (Trang 152, y từ 190 đến 258)
+   - `logan_fig_p3_5_bar.png`: Figure P3–5 (Trang 152, y từ 262 đến 325)
+   - `logan_fig_p3_7_bar.png`: Figure P3–7 (Trang 152, y từ 450 đến 532)
+   - `logan_fig_p3_8_bar.png`: Figure P3–8 (Trang 152, y từ 535 đến 605)
+   - `logan_fig_p3_9_bar.png`: Figure P3–9 (Trang 153, y từ 40 đến 110)
+   - `logan_fig_p3_10_bar.png`: Figure P3–10 (Trang 153, y từ 115 đến 188)
+
+2. **Phần 2D Truss (Trang PDF 157, 158, 160, 165)**:
+   - `logan_fig_p3_20_truss.png`: Figure P3–20 (Trang 157, nửa trái x: 40-265, y từ 100 đến 250)
+   - `logan_fig_p3_22_truss.png`: Figure P3–22 (Trang 157, nửa phải x: 220-485, y từ 370 đến 492)
+   - `logan_fig_p3_27_truss.png`: Figure P3–27 (Trang 158, nửa phải x: 250-485, y từ 430 đến 520)
+   - `logan_fig_p3_33a_truss.png`: Figure P3–33(a) (Trang 160, nửa trái x: 40-265, y từ 50 đến 215)
+   - `logan_fig_p3_33b_truss.png`: Figure P3–33(b) (Trang 160, nửa phải x: 265-485, y từ 50 đến 215)
+   - `logan_fig_p3_49_truss.png`: Figure P3–49 (Trang 165, x từ 180 đến 360, y từ 240 đến 340)
+   - `logan_fig_p3_50_truss.png`: Figure P3–50 (Trang 165, nửa trái x: 40-265, y từ 350 đến 525)
+   - `logan_fig_p3_51_truss.png`: Figure P3–51 (Trang 165, nửa phải x: 265-485, y từ 350 đến 525)
+
+(Lưu ý: P3–23, P3–29, P3–30 đã có sẵn trong `public/images/`, giữ nguyên). Chạy script để xuất đầy đủ các ảnh.
+
+### Nhiệm vụ 2: Viết script `scripts/append_logan_ch3_to_db.py`
+Tổng hợp đầy đủ các bài tập 1D bar và 2D truss vào `data/ch07_fem.json`:
+1. **Phần 1D Bar**: Problems 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 3.9, 3.10
+   - `method_tag`: `"1D Bar Element"`
+2. **Phần 2D Truss**: Problems 3.20, 3.22, 3.27, 3.33a, 3.33b, 3.49, 3.50, 3.51 (cùng với 3.23, 3.24, 3.29, 3.30 đã có)
+   - `method_tag`: `"2D Plane Truss Element"`
+
+Yêu cầu cho từng bài:
+- Đề bài tiếng Anh `problem_en` bọc KaTeX `$ ... $`.
+- Bảng thuật ngữ chuyên ngành `glossary`.
+- Gợi ý `hint` (công thức độ cứng thanh 1D $k = \\frac{EA}{L}$ hoặc ma trận độ cứng dàn 2D xoay theo góc $\\theta$).
+- Lời giải 3 bước `steps` (Bước 1: Ma trận phần tử, Bước 2: Ghép nối & Khử điều kiện biên, Bước 3: Nghiệm chuyển vị và ứng suất/phản lực).
+- Đối chiếu chính xác đáp án từ mục Answers to Selected Problems trong sách (trang PDF 794–798).
+- Escape chuẩn LaTeX (`\\\\frac`, `\\\\theta`, `\\\\times`) để `validate_json.py` kiểm tra thành công.
+- Chạy script cập nhật `data/ch07_fem.json` và in tổng số bài.

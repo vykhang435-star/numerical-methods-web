@@ -1,0 +1,38 @@
+Bạn là Codex CLI hỗ trợ dự án Numerical Methods Web Platform. Hãy thực hiện 2 nhiệm vụ sau theo quy chuẩn AGENTS.md:
+
+### Nhiệm vụ 1: Viết script `scripts/crop_logan_ch4_batch.py`
+Sử dụng `pymupdf` (`fitz`) để trích xuất 19 hình vẽ dầm từ file PDF `D:/pps/a-first-course-in-the-fem-5e-logan.pdf` ở độ phân giải 300 DPI, lưu vào thư mục `public/images/` với tên file `logan_fig_p4_<num>_beam.png`:
+Danh sách 19 hình cần crop:
+1. `logan_fig_p4_9_beam.png`: Figure P4–9 (Trang PDF 224, idx 223, y từ 380 đến 490)
+2. `logan_fig_p4_10_beam.png`: Figure P4–10 (Trang PDF 224, idx 223, y từ 500 đến 605)
+3. `logan_fig_p4_11_beam.png`: Figure P4–11 (Trang PDF 225, idx 224, y từ 40 đến 145)
+4. `logan_fig_p4_12_beam.png`: Figure P4–12 (Trang PDF 225, idx 224, y từ 215 đến 310)
+5. `logan_fig_p4_13_beam.png`: Figure P4–13 (Trang PDF 225, idx 224, nửa trái x: 40-265, y từ 390 đến 485)
+6. `logan_fig_p4_14_beam.png`: Figure P4–14 (Trang PDF 225, idx 224, nửa phải x: 265-485, y từ 390 đến 485)
+7. `logan_fig_p4_15_beam.png`: Figure P4–15 (Trang PDF 226, idx 225, nửa trái x: 40-265, y từ 40 đến 155)
+8. `logan_fig_p4_16_beam.png`: Figure P4–16 (Trang PDF 226, idx 225, nửa phải x: 265-485, y từ 40 đến 155)
+9. `logan_fig_p4_18_beam.png`: Figure P4–18 (Trang PDF 226, idx 225, nửa phải x: 265-485, y từ 360 đến 430)
+10. `logan_fig_p4_19_beam.png`: Figure P4–19 (Trang PDF 226, idx 225, y từ 490 đến 610)
+11. `logan_fig_p4_20_beam.png`: Figure P4–20 (Trang PDF 227, idx 226, y từ 50 đến 185)
+12. `logan_fig_p4_21_beam.png`: Figure P4–21 (Trang PDF 227, idx 226, y từ 190 đến 285)
+13. `logan_fig_p4_22_beam.png`: Figure P4–22 (Trang PDF 227, idx 226, y từ 290 đến 395)
+14. `logan_fig_p4_23_beam.png`: Figure P4–23 (Trang PDF 227, idx 226, y từ 400 đến 515)
+15. `logan_fig_p4_26_beam.png`: Figure P4–26 (Trang PDF 228, idx 227, nửa phải x: 250-485, y từ 80 đến 200)
+16. `logan_fig_p4_27_beam.png`: Figure P4–27 (Trang PDF 228, idx 227, y từ 210 đến 330)
+17. `logan_fig_p4_37_beam.png`: Figure P4–37 (Trang PDF 230, idx 229, nửa trái x: 40-265, y từ 260 đến 355)
+18. `logan_fig_p4_38_beam.png`: Figure P4–38 (Trang PDF 230, idx 229, nửa phải x: 265-485, y từ 260 đến 355)
+19. `logan_fig_p4_39_beam.png`: Figure P4–39 (Trang PDF 230, idx 229, nửa trái x: 40-275, y từ 465 đến 565)
+
+Chạy script để xuất đầy đủ 19 ảnh PNG vào `public/images/`.
+
+### Nhiệm vụ 2: Viết script `scripts/append_logan_ch4_to_db.py`
+Tổng hợp đầy đủ 19 bài tập dầm (Problems 4.9, 4.10, 4.11, 4.12, 4.13, 4.14, 4.15, 4.16, 4.18, 4.19, 4.20, 4.21, 4.22, 4.23, 4.26, 4.27, 4.37, 4.38, 4.39) vào `data/ch07_fem.json`.
+Yêu cầu:
+- Mỗi bài có `method_tag`: `"Beam Element"`.
+- Đề bài tiếng Anh `problem_en` bọc KaTeX `$ ... $` chính xác.
+- Bảng thuật ngữ chuyên ngành `glossary` (beam deflection, slope, shear force, bending moment, fixed-end moment...).
+- Gợi ý `hint` (công thức độ cứng dầm $k = \frac{EI}{L^3}\dots$ và véc-tơ lực nút tương đương).
+- Lời giải 3 bước `steps` (Bước 1: Ma trận độ cứng & Tải tương đương, Bước 2: Ghép nối & Khử điều kiện biên, Bước 3: Nghiệm chuyển vị/góc xoay và phản lực).
+- Đối chiếu chính xác đáp án từ mục Answers to Selected Problems trong sách (trang PDF 798-801).
+- Escape đầy đủ dấu gạch chéo ngược LaTeX (`\\\\frac`, `\\\\theta`, `\\\\times`) để `validate_json.py` kiểm tra thành công.
+- Chạy script để cập nhật `data/ch07_fem.json` và in tổng số bài trong `ch07_fem.json`.

@@ -1,0 +1,366 @@
+[
+  {
+    "id": "ch01-prob-3.1",
+    "source_problem": "Problem 3.1 - Chapra & Canale / Slide E01K",
+    "method_tag": "Taylor Series & Truncation Error",
+    "exam_focus": true,
+    "expected_numeric_value": 0.6042,
+    "problem_en": "Use zero- through third-order Taylor series expansions to approximate $f(x) = e^{-x}$ at $x_{i+1} = 0.5$ using base point $x_i = 0$. Compute the true percent relative error $\\varepsilon_t$ for each approximation (given true value $e^{-0.5} \\approx 0.606531$).",
+    "glossary": {
+      "Taylor series expansion": "khai triển chuỗi Taylor",
+      "base point": "điểm cơ sở",
+      "true percent relative error": "sai số tương đối phần trăm thực sự",
+      "truncation error": "sai số cắt cụt"
+    },
+    "hint": "Công thức chuỗi Taylor cho $e^{-x}$ tại $x_0=0$: $f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\frac{f'''(0)}{3!}x^3 + \\dots = 1 - x + \\frac{x^2}{2} - \\frac{x^3}{6} + \\dots$",
+    "steps": [
+      "**Bước 1: Tính các đạo hàm tại điểm cơ sở $x_0 = 0$**\n- $f(0) = e^0 = 1$\n- $f'(0) = -e^0 = -1$\n- $f''(0) = e^0 = 1$\n- $f'''(0) = -e^0 = -1$\n- Bước nhảy: $h = x_{i+1} - x_i = 0.5 - 0 = 0.5$",
+      "**Bước 2: Bảng giá trị xấp xỉ theo từng bậc của chuỗi Taylor**\n\n| Bậc $n$ | Biểu thức $f_{n}(0.5)$ | Giá trị xấp xỉ | Sai số thật $\\varepsilon_t$ (%) |\n| :---: | :--- | :---: | :---: |\n| Bậc 0 | $f(0) = 1$ | 1.000000 | 64.8721\\% |\n| Bậc 1 | $1 - 0.5$ | 0.500000 | 17.5640\\% |\n| Bậc 2 | $1 - 0.5 + \\frac{0.5^2}{2}$ | 0.625000 | 3.0450\\% |\n| Bậc 3 | $1 - 0.5 + 0.125 - \\frac{0.5^3}{6}$ | 0.604167 | 0.3897\\% |",
+      "**Bước 3: Đánh giá sai số cắt cụt**\nKhi tăng bậc khai triển từ 0 lên 3, sai số tương đối giảm mạnh từ $64.87\\%$ xuống chỉ còn $0.3897\\%$. Chuỗi Taylor bậc 3 cho giá trị xấp xỉ rất sát với nghiệm thực."
+    ],
+    "final_answer": "f_3(0.5) \\approx 0.6042 \\quad (\\varepsilon_t = 0.3897\\%)"
+  },
+  {
+    "id": "ch01-prob-1.2b",
+    "source_problem": "Example 1.2b - Slide E01K (Dr. Nguyễn Sỹ Ngọc)",
+    "method_tag": "Error Propagation in Spring System",
+    "exam_focus": true,
+    "expected_numeric_value": 0.0467,
+    "problem_en": "The force of a spring is calculated by $F = k \\cdot x$, where spring stiffness $k = (200 \\pm 5)\\text{ N/m}$ and displacement $x = (0.15 \\pm 0.002)\\text{ m}$. (a) Calculate the nominal force $F$. (b) Using differential error propagation, find the maximum relative error $\\frac{\\Delta F}{F}$ and express the final result with uncertainty.",
+    "glossary": {
+      "spring stiffness": "độ cứng lò xo",
+      "displacement": "độ giãn / chuyển vị",
+      "error propagation": "sự lan truyền sai số",
+      "nominal force": "lực danh nghĩa"
+    },
+    "hint": "Lực danh nghĩa: $F = kx$. Công thức lan truyền sai số tương đối: $\\frac{\\Delta F}{F} = \\frac{\\Delta k}{k} + \\frac{\\Delta x}{x}$.",
+    "steps": [
+      "**Bước 1: Tính lực danh nghĩa**\n$$F = k \\times x = 200 \\times 0.15 = 30.0\\text{ N}$$",
+      "**Bước 2: Tính sai số tương đối theo công thức vi phân toàn phần**\n$$\\frac{\\Delta F}{F} = \\frac{\\Delta k}{k} + \\frac{\\Delta x}{x} = \\frac{5}{200} + \\frac{0.002}{0.15} = 0.025 + 0.013333 = 0.038333 \\; (3.8333\\%)$$",
+      "**Bước 3: Tính sai số tuyệt đối của lực $F$**\n$$\\Delta F = F \\times \\frac{\\Delta F}{F} = 30.0 \\times 0.038333 = 1.15\\text{ N}$$\nKết quả đo được biểu diễn:\n$$F = (30.0 \\pm 1.2)\\text{ N}$$"
+    ],
+    "final_answer": "F = (30.0 \\pm 1.2)\\text{ N} \\quad (\\frac{\\Delta F}{F} = 3.83\\%)"
+  },
+  {
+    "id": "ch01-burden-sec1.2-p1",
+    "source_problem": "Exercise 1.2 - Problem 1 (Burden & Faires 9th)",
+    "method_tag": "Round-off Error",
+    "exam_focus": true,
+    "problem_en": "Compute the absolute error and relative error in approximations of $p$ by $p^*$.\n\na. $p=\\pi,\\ p^*=22/7$\nb. $p=\\pi,\\ p^*=3.1416$\nc. $p=e,\\ p^*=2.718$\nd. $p=\\sqrt{2},\\ p^*=1.414$\ne. $p=e^{10},\\ p^*=22000$\nf. $p=10^\\pi,\\ p^*=1400$\ng. $p=8!,\\ p^*=39900$\nh. $p=9!,\\ p^*=\\sqrt{18\\pi}(9/e)^9$",
+    "glossary": {
+      "absolute error": "sai số tuyệt đối",
+      "relative error": "sai số tương đối",
+      "cancellation": "triệt tiêu chữ số có nghĩa"
+    },
+    "hint": "$E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+    "steps": [
+      "**Bước 1: Công thức**\n\n$E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | $p$ | $p^*$ | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| a | $3.14159$ | $3.14286$ | $0.00126449$ | $0.000402499$ |\n| b | $3.14159$ | $3.1416$ | $0.00000734641$ | $0.00000233843$ |\n| c | $2.71828$ | $2.718$ | $0.000281828$ | $0.000103679$ |\n| d | $1.41421$ | $1.414$ | $0.000213562$ | $0.000151011$ |\n| e | $22026.5$ | $22000$ | $26.4658$ | $0.00120155$ |\n| f | $1385.46$ | $1400$ | $14.5443$ | $0.0104978$ |\n| g | $40320$ | $39900$ | $420$ | $0.0104167$ |\n| h | $362880$ | $359537$ | $3343.13$ | $0.00921276$ |",
+      "**Bước 3: Kết luận & sai số**\n\nSo sánh sai số tương đối để biết sai lệch so với độ lớn của giá trị đúng."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ E=0.00126449,\\quad\\varepsilon_t=0.000402499\\\\[3pt]\\text{b)}\\ E=0.00000734641,\\quad\\varepsilon_t=0.00000233843\\\\[3pt]\\text{c)}\\ E=0.000281828,\\quad\\varepsilon_t=0.000103679\\\\[3pt]\\text{d)}\\ E=0.000213562,\\quad\\varepsilon_t=0.000151011\\\\[3pt]\\text{e)}\\ E=26.4658,\\quad\\varepsilon_t=0.00120155\\\\[3pt]\\text{f)}\\ E=14.5443,\\quad\\varepsilon_t=0.0104978\\\\[3pt]\\text{g)}\\ E=420,\\quad\\varepsilon_t=0.0104167\\\\[3pt]\\text{h)}\\ E=3343.13,\\quad\\varepsilon_t=0.00921276\\end{gathered}",
+    "expected_numeric_value": 0.0012644892673496187,
+    "numeric_target_label": "sai số tuyệt đối $E$ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p2",
+    "source_problem": "Exercise 1.2 - Problem 2 (Burden & Faires 9th)",
+    "method_tag": "Round-off Error",
+    "exam_focus": true,
+    "problem_en": "Find the largest interval in which $p^*$must lie to approximate $p$ with relative error at most $10^{-4}$ for each value of $p$.\n\na. $\\pi$\nb. $e$\nc. $\\sqrt{2}$\nd. $\\sqrt[3]{7}$",
+    "glossary": {
+      "absolute error": "sai số tuyệt đối",
+      "relative error": "sai số tương đối",
+      "cancellation": "triệt tiêu chữ số có nghĩa"
+    },
+    "hint": "Giải bất phương trình sai số tương đối.",
+    "steps": [
+      "**Bước 1: Công thức**\n\n$|p-p^*|/|p|\\le\\delta$ tương đương $p^*\\in[p-\\delta|p|,\\ p+\\delta|p|]$.",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | $p$ | $\\delta|p|$ | Cận dưới | Cận trên |\n| --- | --- | --- | --- | --- |\n| a | $\\pi$ | $0.000314159$ | $3.14128$ | $3.14191$ |\n| b | $e$ | $0.000271828$ | $2.71801$ | $2.71855$ |\n| c | $\\sqrt{2}$ | $0.000141421$ | $1.41407$ | $1.41435$ |\n| d | $\\sqrt[3]{7}$ | $0.000191293$ | $1.91274$ | $1.91312$ |",
+      "**Bước 3: Kết luận & sai số**\n\nCả hai đầu mút đều được nhận vì đề dùng “at most”."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ [3.141278,\\,3.141907]\\\\[3pt]\\text{b)}\\ [2.718010,\\,2.718554]\\\\[3pt]\\text{c)}\\ [1.414072,\\,1.414355]\\\\[3pt]\\text{d)}\\ [1.912740,\\,1.913122]\\end{gathered}",
+    "expected_numeric_value": 3.141278494324434,
+    "numeric_target_label": "cận dưới ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p3",
+    "source_problem": "Exercise 1.2 - Problem 3 (Burden & Faires 9th)",
+    "method_tag": "Round-off Error",
+    "exam_focus": true,
+    "problem_en": "Suppose $p^*$must approximate $p$ with relative error at most $10^{-3}$. Find the largest interval in which $p^*$must lie for each value of $p$.\n\na. $150$\nb. $900$\nc. $1500$\nd. $90$",
+    "glossary": {
+      "absolute error": "sai số tuyệt đối",
+      "relative error": "sai số tương đối",
+      "cancellation": "triệt tiêu chữ số có nghĩa"
+    },
+    "hint": "Giải bất phương trình sai số tương đối.",
+    "steps": [
+      "**Bước 1: Công thức**\n\n$|p-p^*|/|p|\\le\\delta$ tương đương $p^*\\in[p-\\delta|p|,\\ p+\\delta|p|]$.",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | $p$ | $\\delta|p|$ | Cận dưới | Cận trên |\n| --- | --- | --- | --- | --- |\n| a | $150$ | $0.150$ | $149.850$ | $150.150$ |\n| b | $900$ | $0.900$ | $899.100$ | $900.900$ |\n| c | $1500$ | $1.500$ | $1498.50$ | $1501.50$ |\n| d | $90$ | $0.090$ | $89.910$ | $90.090$ |",
+      "**Bước 3: Kết luận & sai số**\n\nCả hai đầu mút đều được nhận vì đề dùng “at most”. Sách in khoảng mở cho bài này; hai đầu mút vẫn thỏa bất đẳng thức."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ [149.850000,\\,150.150000]\\\\[3pt]\\text{b)}\\ [899.100000,\\,900.900000]\\\\[3pt]\\text{c)}\\ [1498.500000,\\,1501.500000]\\\\[3pt]\\text{d)}\\ [89.910000,\\,90.090000]\\end{gathered}",
+    "expected_numeric_value": 149.85,
+    "numeric_target_label": "cận dưới ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p4",
+    "source_problem": "Exercise 1.2 - Problem 4 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "Perform the following computations (i) exactly, (ii) using three-digit chopping arithmetic, and (iii) using three-digit rounding arithmetic. (iv) Compute the relative errors in parts (ii) and (iii).\n\na. $\\frac45+\\frac13$\nb. $\\frac45\\cdot\\frac13$\nc. $\\left(\\frac13-\\frac3{11}\\right)+\\frac3{20}$\nd. $\\left(\\frac13+\\frac3{11}\\right)-\\frac3{20}$",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. ",
+    "steps": [
+      "**Bước 1: Công thức**\n\nTính với phân số trước; sau đó mô phỏng riêng hai chế độ 3 chữ số. Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | Đúng | Chặt cụt | $\\varepsilon_t$ | Làm tròn | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- | --- |\n| a | $\\frac{17}{15}$ | $1.13$ | $0.00294118$ | $1.13$ | $0.00294118$ |\n| b | $\\frac{4}{15}$ | $0.266$ | $0.00250000$ | $0.266$ | $0.00250000$ |\n| c | $\\frac{139}{660}$ | $0.211$ | $0.00187050$ | $0.210$ | $0.00287770$ |\n| d | $\\frac{301}{660}$ | $0.455$ | $0.00232558$ | $0.456$ | $0.000132890$ |\n\n| Ý | Phép tính chặt cụt | Phép tính làm tròn |\n| --- | --- | --- |\n| a | $(4.00)/(5.00)=0.800$; $(1.00)/(3.00)=0.333$; $(0.800)+(0.333)=1.13$ | $(4.00)/(5.00)=0.800$; $(1.00)/(3.00)=0.333$; $(0.800)+(0.333)=1.13$ |\n| b | $(4.00)/(5.00)=0.800$; $(1.00)/(3.00)=0.333$; $(0.800)\\cdot(0.333)=0.266$ | $(4.00)/(5.00)=0.800$; $(1.00)/(3.00)=0.333$; $(0.800)\\cdot(0.333)=0.266$ |\n| c | $(1.00)/(3.00)=0.333$; $(3.00)/(11.0)=0.272$; $(0.333)-(0.272)=0.0610$; $(3.00)/(20.0)=0.150$; $(0.0610)+(0.150)=0.211$ | $(1.00)/(3.00)=0.333$; $(3.00)/(11.0)=0.273$; $(0.333)-(0.273)=0.0600$; $(3.00)/(20.0)=0.150$; $(0.0600)+(0.150)=0.210$ |\n| d | $(1.00)/(3.00)=0.333$; $(3.00)/(11.0)=0.272$; $(0.333)+(0.272)=0.605$; $(3.00)/(20.0)=0.150$; $(0.605)-(0.150)=0.455$ | $(1.00)/(3.00)=0.333$; $(3.00)/(11.0)=0.273$; $(0.333)+(0.273)=0.606$; $(3.00)/(20.0)=0.150$; $(0.606)-(0.150)=0.456$ |",
+      "**Bước 3: Kết luận & sai số**\n\nChỉ làm tròn ở cuối không tương đương với làm tròn sau mỗi phép."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ \\bigl(\\frac{17}{15},\\,1.13,\\,1.13\\bigr)\\\\[3pt]\\text{b)}\\ \\bigl(\\frac{4}{15},\\,0.266,\\,0.266\\bigr)\\\\[3pt]\\text{c)}\\ \\bigl(\\frac{139}{660},\\,0.211,\\,0.210\\bigr)\\\\[3pt]\\text{d)}\\ \\bigl(\\frac{301}{660},\\,0.455,\\,0.456\\bigr)\\end{gathered}",
+    "expected_numeric_value": 1.13,
+    "numeric_target_label": "kết quả làm tròn 3 chữ số ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p5",
+    "source_problem": "Exercise 1.2 - Problem 5 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "Use three-digit rounding arithmetic to perform the following calculations. Compute the absolute error and relative error with the exact value determined to at least five digits.\n\na. $133+0.921$\nb. $133-0.499$\nc. $(121-0.327)-119$\nd. $(121-119)-0.327$\ne. $\\frac{\\frac{13}{14}-\\frac67}{2e-5.4}$\nf. $-10\\pi+6e-\\frac3{62}$\ng. $\\left(\\frac29\\right)\\cdot\\left(\\frac97\\right)$\nh. $\\frac{\\pi-\\frac{22}{7}}{\\frac1{17}}$",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. ",
+    "steps": [
+      "**Bước 1: Công thức**\n\nDùng 3 chữ số có nghĩa ở mọi phép toán. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | Đúng (hiển thị 6 chữ số) | Xấp xỉ | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| a | $133.921$ | $134$ | $0.079$ | $0.000589900$ |\n| b | $132.501$ | $133$ | $0.499$ | $0.00376601$ |\n| c | $1.673$ | $2.00$ | $0.327$ | $0.195457$ |\n| d | $1.673$ | $1.67$ | $0.003$ | $0.00179319$ |\n| e | $1.95354$ | $1.80$ | $0.153540$ | $0.0785958$ |\n| f | $-15.1546$ | $-15.1$ | $0.0546227$ | $0.00360436$ |\n| g | $0.285714$ | $0.286$ | $0.000285714$ | $0.00100000$ |\n| h | $-0.0214963$ | $0$ | $0.0214963$ | $1$ |\n\n| Ý | Chuỗi phép tính |\n| --- | --- |\n| a | $(133)+(0.921)=134$ |\n| b | $(133)-(0.499)=133$ |\n| c | $(121)-(0.327)=121$; $(121)-(119)=2.00$ |\n| d | $(121)-(119)=2.00$; $(2.00)-(0.327)=1.67$ |\n| e | $(13.0)/(14.0)=0.929$; $(6.00)/(7.00)=0.857$; $(0.929)-(0.857)=0.0720$; $(2.00)\\cdot(2.72)=5.44$; $(5.44)-(5.40)=0.0400$; $(0.0720)/(0.0400)=1.80$ |\n| f | $(-10.0)\\cdot(3.14)=-31.4$; $(6.00)\\cdot(2.72)=16.3$; $(-31.4)+(16.3)=-15.1$; $(3.00)/(62.0)=0.0484$; $(-15.1)-(0.0484)=-15.1$ |\n| g | $(2.00)/(9.00)=0.222$; $(9.00)/(7.00)=1.29$; $(0.222)\\cdot(1.29)=0.286$ |\n| h | $(22.0)/(7.00)=3.14$; $(3.14)-(3.14)=0$; $(1.00)/(17.0)=0.0588$; $(0)/(0.0588)=0$ |",
+      "**Bước 3: Kết luận & sai số**\n\nHai biểu thức (c), (d) bằng nhau trong số học chính xác, nhưng việc nhóm phép tính có thể làm chúng khác nhau trong số học hữu hạn; (h) dễ mất chữ số khi trừ."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ 134\\\\[3pt]\\text{b)}\\ 133\\\\[3pt]\\text{c)}\\ 2.00\\\\[3pt]\\text{d)}\\ 1.67\\\\[3pt]\\text{e)}\\ 1.80\\\\[3pt]\\text{f)}\\ -15.1\\\\[3pt]\\text{g)}\\ 0.286\\\\[3pt]\\text{h)}\\ 0\\end{gathered}",
+    "expected_numeric_value": 134.0,
+    "numeric_target_label": "giá trị xấp xỉ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p6",
+    "source_problem": "Exercise 1.2 - Problem 6 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "Repeat Exercise 5 using four-digit rounding arithmetic.\n\na. $133+0.921$\nb. $133-0.499$\nc. $(121-0.327)-119$\nd. $(121-119)-0.327$\ne. $\\frac{\\frac{13}{14}-\\frac67}{2e-5.4}$\nf. $-10\\pi+6e-\\frac3{62}$\ng. $\\left(\\frac29\\right)\\cdot\\left(\\frac97\\right)$\nh. $\\frac{\\pi-\\frac{22}{7}}{\\frac1{17}}$",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. ",
+    "steps": [
+      "**Bước 1: Công thức**\n\nDùng 4 chữ số có nghĩa ở mọi phép toán. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | Đúng (hiển thị 6 chữ số) | Xấp xỉ | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| a | $133.921$ | $133.9$ | $0.021$ | $0.000156809$ |\n| b | $132.501$ | $132.5$ | $0.001$ | $0.00000754711$ |\n| c | $1.673$ | $1.700$ | $0.027$ | $0.0161387$ |\n| d | $1.673$ | $1.673$ | $0$ | $0$ |\n| e | $1.95354$ | $1.986$ | $0.0324599$ | $0.0166159$ |\n| f | $-15.1546$ | $-15.16$ | $0.00537734$ | $0.000354832$ |\n| g | $0.285714$ | $0.2857$ | $0.0000142857$ | $0.0000500000$ |\n| h | $-0.0214963$ | $-0.01700$ | $0.00449632$ | $0.209167$ |\n\n| Ý | Chuỗi phép tính |\n| --- | --- |\n| a | $(133.0)+(0.9210)=133.9$ |\n| b | $(133.0)-(0.4990)=132.5$ |\n| c | $(121.0)-(0.3270)=120.7$; $(120.7)-(119.0)=1.700$ |\n| d | $(121.0)-(119.0)=2.000$; $(2.000)-(0.3270)=1.673$ |\n| e | $(13.00)/(14.00)=0.9286$; $(6.000)/(7.000)=0.8571$; $(0.9286)-(0.8571)=0.07150$; $(2.000)\\cdot(2.718)=5.436$; $(5.436)-(5.400)=0.03600$; $(0.07150)/(0.03600)=1.986$ |\n| f | $(-10.00)\\cdot(3.142)=-31.42$; $(6.000)\\cdot(2.718)=16.31$; $(-31.42)+(16.31)=-15.11$; $(3.000)/(62.00)=0.04839$; $(-15.11)-(0.04839)=-15.16$ |\n| g | $(2.000)/(9.000)=0.2222$; $(9.000)/(7.000)=1.286$; $(0.2222)\\cdot(1.286)=0.2857$ |\n| h | $(22.00)/(7.000)=3.143$; $(3.142)-(3.143)=-0.001000$; $(1.000)/(17.00)=0.05882$; $(-0.001000)/(0.05882)=-0.01700$ |",
+      "**Bước 3: Kết luận & sai số**\n\nHai biểu thức (c), (d) bằng nhau trong số học chính xác, nhưng việc nhóm phép tính có thể làm chúng khác nhau trong số học hữu hạn; (h) dễ mất chữ số khi trừ."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ 133.9\\\\[3pt]\\text{b)}\\ 132.5\\\\[3pt]\\text{c)}\\ 1.700\\\\[3pt]\\text{d)}\\ 1.673\\\\[3pt]\\text{e)}\\ 1.986\\\\[3pt]\\text{f)}\\ -15.16\\\\[3pt]\\text{g)}\\ 0.2857\\\\[3pt]\\text{h)}\\ -0.01700\\end{gathered}",
+    "expected_numeric_value": 133.9,
+    "numeric_target_label": "giá trị xấp xỉ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p7",
+    "source_problem": "Exercise 1.2 - Problem 7 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "Repeat Exercise 5 using three-digit chopping arithmetic.\n\na. $133+0.921$\nb. $133-0.499$\nc. $(121-0.327)-119$\nd. $(121-119)-0.327$\ne. $\\frac{\\frac{13}{14}-\\frac67}{2e-5.4}$\nf. $-10\\pi+6e-\\frac3{62}$\ng. $\\left(\\frac29\\right)\\cdot\\left(\\frac97\\right)$\nh. $\\frac{\\pi-\\frac{22}{7}}{\\frac1{17}}$",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. ",
+    "steps": [
+      "**Bước 1: Công thức**\n\nDùng 3 chữ số có nghĩa ở mọi phép toán. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | Đúng (hiển thị 6 chữ số) | Xấp xỉ | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| a | $133.921$ | $133$ | $0.921$ | $0.00687719$ |\n| b | $132.501$ | $132$ | $0.501$ | $0.00378110$ |\n| c | $1.673$ | $1.00$ | $0.673$ | $0.402271$ |\n| d | $1.673$ | $1.67$ | $0.003$ | $0.00179319$ |\n| e | $1.95354$ | $3.55$ | $1.59646$ | $0.817214$ |\n| f | $-15.1546$ | $-15.2$ | $0.0453773$ | $0.00299429$ |\n| g | $0.285714$ | $0.284$ | $0.00171429$ | $0.00600000$ |\n| h | $-0.0214963$ | $0$ | $0.0214963$ | $1$ |\n\n| Ý | Chuỗi phép tính |\n| --- | --- |\n| a | $(133)+(0.921)=133$ |\n| b | $(133)-(0.499)=132$ |\n| c | $(121)-(0.327)=120$; $(120)-(119)=1.00$ |\n| d | $(121)-(119)=2.00$; $(2.00)-(0.327)=1.67$ |\n| e | $(13.0)/(14.0)=0.928$; $(6.00)/(7.00)=0.857$; $(0.928)-(0.857)=0.0710$; $(2.00)\\cdot(2.71)=5.42$; $(5.42)-(5.40)=0.0200$; $(0.0710)/(0.0200)=3.55$ |\n| f | $(-10.0)\\cdot(3.14)=-31.4$; $(6.00)\\cdot(2.71)=16.2$; $(-31.4)+(16.2)=-15.2$; $(3.00)/(62.0)=0.0483$; $(-15.2)-(0.0483)=-15.2$ |\n| g | $(2.00)/(9.00)=0.222$; $(9.00)/(7.00)=1.28$; $(0.222)\\cdot(1.28)=0.284$ |\n| h | $(22.0)/(7.00)=3.14$; $(3.14)-(3.14)=0$; $(1.00)/(17.0)=0.0588$; $(0)/(0.0588)=0$ |",
+      "**Bước 3: Kết luận & sai số**\n\nHai biểu thức (c), (d) bằng nhau trong số học chính xác, nhưng việc nhóm phép tính có thể làm chúng khác nhau trong số học hữu hạn; (h) dễ mất chữ số khi trừ."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ 133\\\\[3pt]\\text{b)}\\ 132\\\\[3pt]\\text{c)}\\ 1.00\\\\[3pt]\\text{d)}\\ 1.67\\\\[3pt]\\text{e)}\\ 3.55\\\\[3pt]\\text{f)}\\ -15.2\\\\[3pt]\\text{g)}\\ 0.284\\\\[3pt]\\text{h)}\\ 0\\end{gathered}",
+    "expected_numeric_value": 133.0,
+    "numeric_target_label": "giá trị xấp xỉ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p8",
+    "source_problem": "Exercise 1.2 - Problem 8 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "Repeat Exercise 5 using four-digit chopping arithmetic.\n\na. $133+0.921$\nb. $133-0.499$\nc. $(121-0.327)-119$\nd. $(121-119)-0.327$\ne. $\\frac{\\frac{13}{14}-\\frac67}{2e-5.4}$\nf. $-10\\pi+6e-\\frac3{62}$\ng. $\\left(\\frac29\\right)\\cdot\\left(\\frac97\\right)$\nh. $\\frac{\\pi-\\frac{22}{7}}{\\frac1{17}}$",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. ",
+    "steps": [
+      "**Bước 1: Công thức**\n\nDùng 4 chữ số có nghĩa ở mọi phép toán. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | Đúng (hiển thị 6 chữ số) | Xấp xỉ | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| a | $133.921$ | $133.9$ | $0.021$ | $0.000156809$ |\n| b | $132.501$ | $132.5$ | $0.001$ | $0.00000754711$ |\n| c | $1.673$ | $1.600$ | $0.073$ | $0.0436342$ |\n| d | $1.673$ | $1.673$ | $0$ | $0$ |\n| e | $1.95354$ | $1.983$ | $0.0294599$ | $0.0150802$ |\n| f | $-15.1546$ | $-15.15$ | $0.00462266$ | $0.000305033$ |\n| g | $0.285714$ | $0.2855$ | $0.000214286$ | $0.000750000$ |\n| h | $-0.0214963$ | $-0.01700$ | $0.00449632$ | $0.209167$ |\n\n| Ý | Chuỗi phép tính |\n| --- | --- |\n| a | $(133.0)+(0.9210)=133.9$ |\n| b | $(133.0)-(0.4990)=132.5$ |\n| c | $(121.0)-(0.3270)=120.6$; $(120.6)-(119.0)=1.600$ |\n| d | $(121.0)-(119.0)=2.000$; $(2.000)-(0.3270)=1.673$ |\n| e | $(13.00)/(14.00)=0.9285$; $(6.000)/(7.000)=0.8571$; $(0.9285)-(0.8571)=0.07140$; $(2.000)\\cdot(2.718)=5.436$; $(5.436)-(5.400)=0.03600$; $(0.07140)/(0.03600)=1.983$ |\n| f | $(-10.00)\\cdot(3.141)=-31.41$; $(6.000)\\cdot(2.718)=16.30$; $(-31.41)+(16.30)=-15.11$; $(3.000)/(62.00)=0.04838$; $(-15.11)-(0.04838)=-15.15$ |\n| g | $(2.000)/(9.000)=0.2222$; $(9.000)/(7.000)=1.285$; $(0.2222)\\cdot(1.285)=0.2855$ |\n| h | $(22.00)/(7.000)=3.142$; $(3.141)-(3.142)=-0.001000$; $(1.000)/(17.00)=0.05882$; $(-0.001000)/(0.05882)=-0.01700$ |",
+      "**Bước 3: Kết luận & sai số**\n\nHai biểu thức (c), (d) bằng nhau trong số học chính xác, nhưng việc nhóm phép tính có thể làm chúng khác nhau trong số học hữu hạn; (h) dễ mất chữ số khi trừ."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ 133.9\\\\[3pt]\\text{b)}\\ 132.5\\\\[3pt]\\text{c)}\\ 1.600\\\\[3pt]\\text{d)}\\ 1.673\\\\[3pt]\\text{e)}\\ 1.983\\\\[3pt]\\text{f)}\\ -15.15\\\\[3pt]\\text{g)}\\ 0.2855\\\\[3pt]\\text{h)}\\ -0.01700\\end{gathered}",
+    "expected_numeric_value": 133.9,
+    "numeric_target_label": "giá trị xấp xỉ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p11",
+    "source_problem": "Exercise 1.2 - Problem 11 (Burden & Faires 9th)",
+    "method_tag": "Round-off Error",
+    "exam_focus": true,
+    "problem_en": "Let $f(x)=\\frac{x\\cos x-\\sin x}{x-\\sin x}$.\n\na. Find $\\lim_{x\\to0}f(x)$.\nb. Use four-digit rounding arithmetic to evaluate $f(0.1)$.\nc. Replace each trigonometric function with its third Maclaurin polynomial, and repeat part (b).\nd. The actual value is $f(0.1)=-1.99899998$. Find the relative error for the values obtained in parts (b) and (c).",
+    "glossary": {
+      "absolute error": "sai số tuyệt đối",
+      "relative error": "sai số tương đối",
+      "cancellation": "triệt tiêu chữ số có nghĩa"
+    },
+    "hint": "Khai triển trước, rút gọn rồi mới thay số.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. $\\sin x\\approx x-x^3/6$, $\\cos x\\approx1-x^2/2$. Thế và rút gọn trên giấy trước khi làm tròn: $\\frac{-x^3/3}{x^3/6}=-2$. Khi $x\\to0$, phần dư là bậc cao hơn $x^3$, nên giới hạn cũng bằng $-2$.\n\n$E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Cách | $\\cos x$ | $\\sin x$ | Tử | Mẫu | $f^*$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- | --- | --- |\n| Trực tiếp | $0.9950$ | $0.09983$ | $-0.0003300$ | $0.0001700$ | $-1.941$ | $0.0290145$ |\n| Maclaurin, đã rút gọn | — | — | $-x^3/3$ | $x^3/6$ | $-2$ | $0.000500262$ |",
+      "**Bước 3: Kết luận & sai số**\n\nCách trực tiếp mất chữ số qua cả hai phép trừ; cách Maclaurin rút gọn tránh hai phép trừ đó. Giá trị tham chiếu $f(0.1)\\approx -1.99899998$."
+    ],
+    "final_answer": "\\lim_{x\\to0}f(x)=-2,\\quad f_b^*=-1.941,\\quad f_c^*=-2",
+    "expected_numeric_value": -1.941,
+    "numeric_target_label": "giá trị trực tiếp ở câu (b)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p13",
+    "source_problem": "Exercise 1.2 - Problem 13 (Burden & Faires 9th)",
+    "method_tag": "Round-off Error",
+    "exam_focus": true,
+    "problem_en": "Use four-digit rounding arithmetic and the formulas (1.1), (1.2), and (1.3) to find the most accurate approximations to the roots of the following quadratic equations. Compute the absolute errors and relative errors.\n\na. $\\frac13x^2-\\frac{123}{4}x+\\frac16=0$\nb. $\\frac13x^2+\\frac{123}{4}x-\\frac16=0$\nc. $1.002x^2-11.01x+0.01265=0$\nd. $1.002x^2+11.01x+0.01265=0$",
+    "glossary": {
+      "absolute error": "sai số tuyệt đối",
+      "relative error": "sai số tương đối",
+      "cancellation": "triệt tiêu chữ số có nghĩa"
+    },
+    "hint": "Khi tử số $-b\\pm\\sqrt{D}$ bị triệt tiêu, dùng công thức hữu tỉ hóa.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. Với $s=\\sqrt{b^2-4ac}$, công thức (1.1) cho $x_{1,2}=(-b\\pm s)/(2a)$. Hữu tỉ hóa cho $x_1=-2c/(b+s)$ (1.2), $x_2=-2c/(b-s)$ (1.3). Nếu $b<0$, dùng (1.1) cho $x_1$ và (1.3) cho $x_2$; nếu $b>0$, dùng (1.2) cho $x_1$ và (1.1) cho $x_2$. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | $j$ | (1.1) | (1.2)/(1.3) | Chọn | Nghiệm đúng | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| a | $1$ | $92.26$ | $\\text{—}$ | $92.26$ | $92.2446$ | $0.0154204$ | $0.000167168$ |\n| a | $2$ | $0$ | $0.005421$ | $0.005421$ | $0.00542037$ | $6.27312\\times 10^{-7}$ | $0.000115732$ |\n| b | $1$ | $0$ | $0.005421$ | $0.005421$ | $0.00541974$ | $0.00000126421$ | $0.000233261$ |\n| b | $2$ | $-92.26$ | $\\text{—}$ | $-92.26$ | $-92.2554$ | $0.00458026$ | $0.0000496476$ |\n| c | $1$ | $10.98$ | $2.530$ | $10.98$ | $10.9869$ | $0.00687488$ | $0.000625735$ |\n| c | $2$ | $0.004990$ | $0.001149$ | $0.001149$ | $0.00114908$ | $7.56599\\times 10^{-8}$ | $0.0000658442$ |\n| d | $1$ | $-0.004990$ | $-0.001149$ | $-0.001149$ | $-0.00114908$ | $7.56599\\times 10^{-8}$ | $0.0000658442$ |\n| d | $2$ | $-10.98$ | $-2.530$ | $-10.98$ | $-10.9869$ | $0.00687488$ | $0.000625735$ |\n\nDấu — biểu thị phép chia cho 0 sau làm tròn.\n\n| Ý | Chuỗi phép tính |\n| --- | --- |\n| a | $(1.000)/(3.000)=0.3333$; $(-123.0)/(4.000)=-30.75$; $(1.000)/(6.000)=0.1667$; $(-30.75)\\cdot(-30.75)=945.6$; $(4)\\cdot(0.3333)=1.333$; $(1.333)\\cdot(0.1667)=0.2222$; $(945.6)-(0.2222)=945.4$; $\\sqrt{945.4}=30.75$; $(2)\\cdot(0.3333)=0.6666$; $(-2)\\cdot(0.1667)=-0.3334$; $(30.75)+(30.75)=61.50$; $(61.50)/(0.6666)=92.26$; $(30.75)-(30.75)=0$; $(0)/(0.6666)=0$; $(-30.75)+(30.75)=0$; $(-30.75)-(30.75)=-61.50$; $(-0.3334)/(-61.50)=0.005421$ |\n| b | $(1.000)/(3.000)=0.3333$; $(123.0)/(4.000)=30.75$; $(-1.000)/(6.000)=-0.1667$; $(30.75)\\cdot(30.75)=945.6$; $(4)\\cdot(0.3333)=1.333$; $(1.333)\\cdot(-0.1667)=-0.2222$; $(945.6)-(-0.2222)=945.8$; $\\sqrt{945.8}=30.75$; $(2)\\cdot(0.3333)=0.6666$; $(-2)\\cdot(-0.1667)=0.3334$; $(-30.75)+(30.75)=0$; $(0)/(0.6666)=0$; $(-30.75)-(30.75)=-61.50$; $(-61.50)/(0.6666)=-92.26$; $(30.75)+(30.75)=61.50$; $(0.3334)/(61.50)=0.005421$; $(30.75)-(30.75)=0$ |\n| c | $(-11.01)\\cdot(-11.01)=121.2$; $(4)\\cdot(1.002)=4.008$; $(4.008)\\cdot(0.01265)=0.05070$; $(121.2)-(0.05070)=121.1$; $\\sqrt{121.1}=11.00$; $(2)\\cdot(1.002)=2.004$; $(-2)\\cdot(0.01265)=-0.02530$; $(11.01)+(11.00)=22.01$; $(22.01)/(2.004)=10.98$; $(11.01)-(11.00)=0.01000$; $(0.01000)/(2.004)=0.004990$; $(-11.01)+(11.00)=-0.01000$; $(-0.02530)/(-0.01000)=2.530$; $(-11.01)-(11.00)=-22.01$; $(-0.02530)/(-22.01)=0.001149$ |\n| d | $(11.01)\\cdot(11.01)=121.2$; $(4)\\cdot(1.002)=4.008$; $(4.008)\\cdot(0.01265)=0.05070$; $(121.2)-(0.05070)=121.1$; $\\sqrt{121.1}=11.00$; $(2)\\cdot(1.002)=2.004$; $(-2)\\cdot(0.01265)=-0.02530$; $(-11.01)+(11.00)=-0.01000$; $(-0.01000)/(2.004)=-0.004990$; $(-11.01)-(11.00)=-22.01$; $(-22.01)/(2.004)=-10.98$; $(11.01)+(11.00)=22.01$; $(-0.02530)/(22.01)=-0.001149$; $(11.01)-(11.00)=0.01000$; $(-0.02530)/(0.01000)=-2.530$ |",
+      "**Bước 3: Kết luận & sai số**\n\nChọn công thức theo dấu của hệ số để tránh trừ hai số gần bằng nhau."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ (x_1,x_2)\\approx(92.26,\\,0.005421)\\\\[3pt]\\text{b)}\\ (x_1,x_2)\\approx(0.005421,\\,-92.26)\\\\[3pt]\\text{c)}\\ (x_1,x_2)\\approx(10.98,\\,0.001149)\\\\[3pt]\\text{d)}\\ (x_1,x_2)\\approx(-0.001149,\\,-10.98)\\end{gathered}",
+    "expected_numeric_value": 0.005421,
+    "numeric_target_label": "nghiệm nhỏ $x_2$ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p17",
+    "source_problem": "Exercise 1.2 - Problem 17 (Burden & Faires 9th)",
+    "method_tag": "Round-off Error",
+    "exam_focus": true,
+    "problem_en": "Suppose two points $(x_0,y_0)$ and $(x_1,y_1)$ are on a straight line with $y_1\\ne y_0$. Two formulas are available to find the $x$-intercept of the line:\n\n$$x=\\frac{x_0y_1-x_1y_0}{y_1-y_0},\\qquad x=x_0-\\frac{(x_1-x_0)y_0}{y_1-y_0}.$$\n\na. Show that both formulas are algebraically correct.\nb. Use the data $(x_0,y_0)=(1.31,3.24)$ and $(x_1,y_1)=(1.93,4.76)$ and three-digit rounding arithmetic to compute the $x$-intercept both ways. Which method is better and why?",
+    "glossary": {
+      "absolute error": "sai số tuyệt đối",
+      "relative error": "sai số tương đối",
+      "cancellation": "triệt tiêu chữ số có nghĩa"
+    },
+    "hint": "Đặt tung độ bằng 0 trong phương trình đường thẳng.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐặt $0-y_0=(y_1-y_0)(x-x_0)/(x_1-x_0)$, rồi giải theo $x$. Quy đồng dạng thứ hai để được dạng thứ nhất. Dạng tham số $x=x_0+t(x_1-x_0),\\ y=y_0+t(y_1-y_0)$ cũng xử lý được $x_1=x_0$. Đưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Dạng | Phép tính | $x^*$ | $E$ | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| 1 | $(1.31)\\cdot(4.76)=6.24$; $(1.93)\\cdot(3.24)=6.25$; $(6.24)-(6.25)=-0.0100$; $(4.76)-(3.24)=1.52$; $(-0.0100)/(1.52)=-0.00658$ | $-0.00658$ | $0.00499895$ | $0.431727$ |\n| 2 | $(1.93)-(1.31)=0.620$; $(0.620)\\cdot(3.24)=2.01$; $(4.76)-(3.24)=1.52$; $(2.01)/(1.52)=1.32$; $(1.31)-(1.32)=-0.0100$ | $-0.0100$ | $0.00157895$ | $0.136364$ |",
+      "**Bước 3: Kết luận & sai số**\n\nGiá trị đúng $x\\approx -0.0115789$. Dạng 2 tốt hơn trên bộ dữ liệu này: không tạo tử số bằng hiệu của hai tích gần bằng nhau."
+    ],
+    "final_answer": "x_{(1)}=-0.00658,\\qquad x_{(2)}=-0.0100",
+    "expected_numeric_value": -0.01,
+    "numeric_target_label": "giao điểm tính theo công thức thứ hai."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p18",
+    "source_problem": "Exercise 1.2 - Problem 18 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "The Taylor polynomial of degree $n$ for $f(x)=e^x$ is $\\sum_{i=0}^n x^i/i!$. Use the Taylor polynomial of degree nine and three-digit chopping arithmetic to find an approximation to $e^{-5}$ by each of the following methods.\n\na. $e^{-5}\\approx\\sum_{i=0}^9(-5)^i/i!=\\sum_{i=0}^9(-1)^i5^i/i!$.\nb. $e^{-5}=1/e^5\\approx1/\\sum_{i=0}^9 5^i/i!$.\nc. An approximate value of $e^{-5}$ correct to three digits is $6.74\\times10^{-3}$. Which formula, (a) or (b), gives the most accuracy, and why?",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Cộng theo thứ tự từ bậc 0 đến bậc 9.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. Tạo $p_i=\\operatorname{fl}_3(5p_{i-1})$ và $q_i=\\operatorname{fl}_3(iq_{i-1})$ từ $p_0=q_0=1$. Dùng $\\operatorname{fl}_3(p_i/q_i)$ cho hai tổng lũy kế, sau đó nghịch đảo tổng dương. $\\varepsilon_a=|v_i-v_{i-1}|/|v_i|$; — nếu chưa có bước trước hoặc mẫu bằng 0. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| $i$ | $t_i$ | $S_i^-$ | $1/S_i^+$ | $\\varepsilon_{a,A}$ | $\\varepsilon_{a,B}$ | $\\varepsilon_{t,A}$ | $\\varepsilon_{t,B}$ |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | $1.00$ | $1.00$ | $1.00$ | $\\text{—}$ | $\\text{—}$ | $147.413$ | $147.413$ |\n| 1 | $5.00$ | $-4.00$ | $0.166$ | $1.25$ | $5.02410$ | $594.653$ | $23.6366$ |\n| 2 | $12.5$ | $8.50$ | $0.0540$ | $1.47059$ | $2.07407$ | $1260.51$ | $7.01431$ |\n| 3 | $20.8$ | $-12.3$ | $0.0254$ | $1.69106$ | $1.12598$ | $1826.48$ | $2.76969$ |\n| 4 | $26.0$ | $13.7$ | $0.0153$ | $1.89781$ | $0.660131$ | $2032.26$ | $1.27072$ |\n| 5 | $26.0$ | $-12.3$ | $0.0109$ | $2.11382$ | $0.403670$ | $1826.48$ | $0.617703$ |\n| 6 | $21.6$ | $9.30$ | $0.00892$ | $2.32258$ | $0.221973$ | $1379.24$ | $0.323845$ |\n| 7 | $15.4$ | $-6.10$ | $0.00787$ | $2.52459$ | $0.133418$ | $906.320$ | $0.168012$ |\n| 8 | $9.67$ | $3.57$ | $0.00735$ | $2.70868$ | $0.0707483$ | $528.835$ | $0.0908367$ |\n| 9 | $5.38$ | $-1.81$ | $0.00709$ | $2.97238$ | $0.0366714$ | $269.628$ | $0.0522493$ |",
+      "**Bước 3: Kết luận & sai số**\n\nGiá trị đúng là $0.00673795$. Dạng (b) tránh cộng các số hạng trái dấu; dạng (a) còn chịu sai số cắt chuỗi lớn tại bậc 9. Các cách tạo số hạng khác có thể cho kết quả khác dưới số học chặt cụt."
+    ],
+    "final_answer": "A=-1.81,\\qquad B=0.00709",
+    "expected_numeric_value": 0.00709,
+    "numeric_target_label": "xấp xỉ $e^{-5}$ bằng nghịch đảo ở câu (b)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p19",
+    "source_problem": "Exercise 1.2 - Problem 19 (Burden & Faires 9th)",
+    "method_tag": "Floating-Point Arithmetic",
+    "exam_focus": true,
+    "problem_en": "The two-by-two linear system $ax+by=e$, $cx+dy=f$, where $a,b,c,d,e,f$ are given, can be solved for $x$ and $y$ as follows:\n\n$$m=c/a\\ (a\\ne0),\\qquad d_1=d-mb,\\qquad f_1=f-me,\\qquad y=f_1/d_1,\\qquad x=(e-by)/a.$$\n\nSolve the following linear systems using four-digit rounding arithmetic.\n\na. $\\begin{cases}1.130x-6.990y=14.20\\\\1.013x-6.099y=14.22\\end{cases}$\nb. $\\begin{cases}8.110x+12.20y=-0.1370\\\\-18.11x+112.2y=-0.1376\\end{cases}$",
+    "glossary": {
+      "significant digit": "chữ số có nghĩa",
+      "rounding": "làm tròn",
+      "chopping": "chặt cụt",
+      "floating-point arithmetic": "số học dấu phẩy động"
+    },
+    "hint": "Khử $x$ khỏi phương trình thứ hai rồi thế ngược; làm tròn cả các tích trung gian.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. Lấy phương trình thứ hai trừ $m=c/a$ lần phương trình thứ nhất, thu được $d_1y=f_1$. Thế $y$ vào phương trình đầu để lấy $x$. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Ý | $m$ | $d_1$ | $f_1$ | $x^*$ | $y^*$ | $x$ đúng | $y$ đúng | $\\varepsilon_{t,x}$ | $\\varepsilon_{t,y}$ |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| a | $0.8965$ | $0.1680$ | $1.490$ | $67.42$ | $8.869$ | $67.6825$ | $8.91005$ | $0.00387899$ | $0.00460748$ |\n| b | $-2.233$ | $139.4$ | $-0.4435$ | $-0.01211$ | $-0.003181$ | $-0.0121079$ | $-0.00318070$ | $0.000169816$ | $0.0000934121$ |\n\n| Ý | Phép tính |\n| --- | --- |\n| a | $(1.013)/(1.130)=0.8965$; $(0.8965)\\cdot(-6.990)=-6.267$; $(-6.099)-(-6.267)=0.1680$; $(0.8965)\\cdot(14.20)=12.73$; $(14.22)-(12.73)=1.490$; $(1.490)/(0.1680)=8.869$; $(-6.990)\\cdot(8.869)=-61.99$; $(14.20)-(-61.99)=76.19$; $(76.19)/(1.130)=67.42$ |\n| b | $(-18.11)/(8.110)=-2.233$; $(-2.233)\\cdot(12.20)=-27.24$; $(112.2)-(-27.24)=139.4$; $(-2.233)\\cdot(-0.1370)=0.3059$; $(-0.1376)-(0.3059)=-0.4435$; $(-0.4435)/(139.4)=-0.003181$; $(12.20)\\cdot(-0.003181)=-0.03881$; $(-0.1370)-(-0.03881)=-0.09819$; $(-0.09819)/(8.110)=-0.01211$ |",
+      "**Bước 3: Kết luận & sai số**\n\nỞ (a), việc tính hệ số $d_1$ bằng hiệu hai số gần nhau khuếch đại sai số. Đáp số in ở PDF 794 không khớp với các hệ in ở PDF 48; bảng dùng đúng hệ số đề bài và công thức khử được chỉ định."
+    ],
+    "final_answer": "\\begin{gathered}\\text{a)}\\ (x,y)\\approx(67.42,\\,8.869)\\\\[3pt]\\text{b)}\\ (x,y)\\approx(-0.01211,\\,-0.003181)\\end{gathered}",
+    "expected_numeric_value": 67.42,
+    "numeric_target_label": "nghiệm $x$ ở câu (a)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-p21",
+    "source_problem": "Exercise 1.2 - Problem 21 (Burden & Faires 9th)",
+    "method_tag": "Horner's Method",
+    "exam_focus": true,
+    "problem_en": "a. Show that the polynomial nesting technique described in Example 6 can also be applied to the evaluation of\n\n$$f(x)=1.01e^{4x}-4.62e^{3x}-3.11e^{2x}+12.2e^x-1.99.$$\n\nb. Use three-digit rounding arithmetic, the assumption that $e^{1.53}=4.62$, and the fact that $e^{nx}=(e^x)^n$ to evaluate $f(1.53)$ as given in part (a).\nc. Redo the calculation in part (b) by first nesting the calculations.\nd. Compare the approximations in parts (b) and (c) to the true three-digit result $f(1.53)=-7.61$.",
+    "glossary": {
+      "nested arithmetic": "số học dạng lồng",
+      "expanded form": "dạng khai triển",
+      "round-off error": "sai số làm tròn"
+    },
+    "hint": "Nhân và cộng từ hệ số bậc cao nhất xuống.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. Đặt $z=e^x$: $f(x)=(((1.01z-4.62)z-3.11)z+12.2)z-1.99$. Dạng khai triển tính lũy thừa bằng nhân liên tiếp và cộng từ trái qua phải. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Chế độ | Khai triển | $\\varepsilon_t$ | Horner | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| 3 làm tròn | $-6.79$ | $0.107503$ | $-7.07$ | $0.0706993$ |\n\n| Chế độ và dạng | Chuỗi phép tính |\n| --- | --- |\n| 3 làm tròn — khai triển | $(4.62)\\cdot(4.62)=21.3$; $(21.3)\\cdot(4.62)=98.4$; $(98.4)\\cdot(4.62)=455$; $(1.01)\\cdot(455)=460$; $(-4.62)\\cdot(98.4)=-455$; $(-3.11)\\cdot(21.3)=-66.2$; $(12.2)\\cdot(4.62)=56.4$; $(460)-(455)=5.00$; $(5.00)-(66.2)=-61.2$; $(-61.2)+(56.4)=-4.80$; $(-4.80)-(1.99)=-6.79$ |\n| 3 làm tròn — Horner | $(1.01)\\cdot(4.62)=4.67$; $(4.67)-(4.62)=0.0500$; $(0.0500)\\cdot(4.62)=0.231$; $(0.231)-(3.11)=-2.88$; $(-2.88)\\cdot(4.62)=-13.3$; $(-13.3)+(12.2)=-1.10$; $(-1.10)\\cdot(4.62)=-5.08$; $(-5.08)-(1.99)=-7.07$ |",
+      "**Bước 3: Kết luận & sai số**\n\nGiá trị tham chiếu chưa làm tròn: $-7.60787$. Dạng lồng giảm số phép nhân; mức cải thiện phụ thuộc vào dữ liệu và độ chính xác. Nếu coi $e^{1.53}=4.62$ là chính xác, đa thức cho $-7.45125$; sai số vì thay $e^{1.53}$ bằng $4.62$ tồn tại ngay cả khi chưa làm tròn phép tính."
+    ],
+    "final_answer": "\\begin{gathered}\\text{3 làm tròn:}\\ (-6.79,\\,-7.07)\\end{gathered}",
+    "expected_numeric_value": -7.07,
+    "numeric_target_label": "giá trị dạng lồng ở câu (c)."
+  },
+  {
+    "id": "ch01-burden-sec1.2-ex6",
+    "source_problem": "Section 1.2 - Example 6 (practice extension) (Burden & Faires 9th)",
+    "method_tag": "Horner's Method",
+    "exam_focus": true,
+    "problem_en": "Evaluate $f(x)=x^3-6.1x^2+3.2x+1.5$ at $x=4.71$ using three-digit arithmetic.\n\nPractice extension: compare the expanded and nested forms using both rounding and chopping with three and four significant digits.",
+    "glossary": {
+      "nested arithmetic": "số học dạng lồng",
+      "expanded form": "dạng khai triển",
+      "round-off error": "sai số làm tròn"
+    },
+    "hint": "Nhân và cộng từ hệ số bậc cao nhất xuống.",
+    "steps": [
+      "**Bước 1: Công thức**\n\nĐưa toán hạng về $k$ chữ số có nghĩa; áp dụng $\\operatorname{fl}_k$ sau từng phép toán. Làm tròn lấy chữ số kế tiếp từ 5 trở lên; chặt cụt bỏ các chữ số dư về phía 0. $f(x)=((x-6.1)x+3.2)x+1.5$. Dạng khai triển tính lũy thừa bằng nhân liên tiếp và cộng từ trái qua phải. $E=|v-v^*|$ và $\\varepsilon_t=E/|v|$ (sai số tương đối dạng tỉ số, không nhân $100$).",
+      "**Bước 2: Bảng tính toán kiểm chứng**\n\n| Chế độ | Khai triển | $\\varepsilon_t$ | Horner | $\\varepsilon_t$ |\n| --- | --- | --- | --- | --- |\n| 3 làm tròn | $-13.4$ | $0.0605654$ | $-14.3$ | $0.00253093$ |\n| 4 làm tròn | $-14.23$ | $0.00237656$ | $-14.26$ | $0.000273347$ |\n| 3 chặt cụt | $-13.5$ | $0.0535547$ | $-14.2$ | $0.00447977$ |\n| 4 chặt cụt | $-14.23$ | $0.00237656$ | $-14.25$ | $0.000974418$ |\n\n| Chế độ và dạng | Chuỗi phép tính |\n| --- | --- |\n| 3 làm tròn — khai triển | $(4.71)\\cdot(4.71)=22.2$; $(22.2)\\cdot(4.71)=105$; $(-6.10)\\cdot(22.2)=-135$; $(3.20)\\cdot(4.71)=15.1$; $(105)-(135)=-30.0$; $(-30.0)+(15.1)=-14.9$; $(-14.9)+(1.50)=-13.4$ |\n| 3 làm tròn — Horner | $(1.00)\\cdot(4.71)=4.71$; $(4.71)-(6.10)=-1.39$; $(-1.39)\\cdot(4.71)=-6.55$; $(-6.55)+(3.20)=-3.35$; $(-3.35)\\cdot(4.71)=-15.8$; $(-15.8)+(1.50)=-14.3$ |\n| 4 làm tròn — khai triển | $(4.710)\\cdot(4.710)=22.18$; $(22.18)\\cdot(4.710)=104.5$; $(-6.100)\\cdot(22.18)=-135.3$; $(3.200)\\cdot(4.710)=15.07$; $(104.5)-(135.3)=-30.80$; $(-30.80)+(15.07)=-15.73$; $(-15.73)+(1.500)=-14.23$ |\n| 4 làm tròn — Horner | $(1.000)\\cdot(4.710)=4.710$; $(4.710)-(6.100)=-1.390$; $(-1.390)\\cdot(4.710)=-6.547$; $(-6.547)+(3.200)=-3.347$; $(-3.347)\\cdot(4.710)=-15.76$; $(-15.76)+(1.500)=-14.26$ |\n| 3 chặt cụt — khai triển | $(4.71)\\cdot(4.71)=22.1$; $(22.1)\\cdot(4.71)=104$; $(-6.10)\\cdot(22.1)=-134$; $(3.20)\\cdot(4.71)=15.0$; $(104)-(134)=-30.0$; $(-30.0)+(15.0)=-15.0$; $(-15.0)+(1.50)=-13.5$ |\n| 3 chặt cụt — Horner | $(1.00)\\cdot(4.71)=4.71$; $(4.71)-(6.10)=-1.39$; $(-1.39)\\cdot(4.71)=-6.54$; $(-6.54)+(3.20)=-3.34$; $(-3.34)\\cdot(4.71)=-15.7$; $(-15.7)+(1.50)=-14.2$ |\n| 4 chặt cụt — khai triển | $(4.710)\\cdot(4.710)=22.18$; $(22.18)\\cdot(4.710)=104.4$; $(-6.100)\\cdot(22.18)=-135.2$; $(3.200)\\cdot(4.710)=15.07$; $(104.4)-(135.2)=-30.80$; $(-30.80)+(15.07)=-15.73$; $(-15.73)+(1.500)=-14.23$ |\n| 4 chặt cụt — Horner | $(1.000)\\cdot(4.710)=4.710$; $(4.710)-(6.100)=-1.390$; $(-1.390)\\cdot(4.710)=-6.546$; $(-6.546)+(3.200)=-3.346$; $(-3.346)\\cdot(4.710)=-15.75$; $(-15.75)+(1.500)=-14.25$ |",
+      "**Bước 3: Kết luận & sai số**\n\nGiá trị tham chiếu chưa làm tròn: $-14.2639$. Dạng lồng giảm số phép nhân; mức cải thiện phụ thuộc vào dữ liệu và độ chính xác."
+    ],
+    "final_answer": "\\begin{gathered}\\text{3 làm tròn:}\\ (-13.4,\\,-14.3)\\\\[3pt]\\text{4 làm tròn:}\\ (-14.23,\\,-14.26)\\\\[3pt]\\text{3 chặt cụt:}\\ (-13.5,\\,-14.2)\\\\[3pt]\\text{4 chặt cụt:}\\ (-14.23,\\,-14.25)\\end{gathered}",
+    "expected_numeric_value": -14.3,
+    "numeric_target_label": "giá trị Horner làm tròn 3 chữ số."
+  }
+]

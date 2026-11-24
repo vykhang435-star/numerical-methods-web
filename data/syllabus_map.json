@@ -1,0 +1,197 @@
+{
+  "course_id": "ME2091",
+  "course_name_vi": "Phương pháp số",
+  "course_name_en": "Numerical Analysis",
+  "department": "Khoa Cơ khí - Bộ môn Thiết kế máy (ĐH Bách Khoa ĐHQG-HCM)",
+  "instructor": "TS. Nguyễn Sỹ Ngọc (Dr. Sy-Ngoc Nguyen)",
+  "reference_books": [
+    "Steven C. Chapra, Raymond P. Canale - Numerical Methods for Engineers, McGraw-Hill",
+    "Richard L. Burden, J. Douglas Faires - Numerical Analysis, 9th Edition, Brooks/Cole",
+    "T.R. Chandrupatla, A.D. Belegundu - Introduction to Finite Elements in Engineering, Prentice Hall"
+  ],
+  "lecture_folder": "PPS_KLG_EN (Hệ thống slide tiếng Anh chính thức của Bộ môn)",
+  "chapters": [
+    {
+      "chapter_id": "ch01_errors",
+      "title_vi": "Chương 1: Sai số & Quy tắc làm tròn số",
+      "title_en": "Approximations and Round-Off Errors",
+      "lecture_ref": "Slide E01K_Errors.pdf (Dr. Nguyễn Sỹ Ngọc)",
+      "chapra_ref": "Chapter 3 & 4 (p. 71-125)",
+      "burden_ref": "Chapter 1 (p. 19-64)",
+      "learning_outcomes": [
+        "L.O.1.1 - Nắm được các khái niệm cơ bản về sai số tuyệt đối, sai số tương đối, chữ số có nghĩa và quy tắc làm tròn",
+        "Hiểu được sự lan truyền sai số và ước lượng sai số cắt cụt (Truncation error) qua chuỗi Taylor"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Ước lượng sai số tuyệt đối & tương đối",
+          "description": "Xác định sai số tương đối thật sự $\\varepsilon_t$ và sai số xấp xỉ $\\varepsilon_a$ giữa giá trị giải tích và giá trị gần đúng.",
+          "stopping_condition": "Độ chính xác $\\varepsilon_s < 0.05\\%$ hoặc làm tròn 4 chữ số thập phân.",
+          "methods": ["True relative error", "Approximate relative error", "Taylor series approximation"]
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch02_roots",
+      "title_vi": "Chương 2: Giải phương trình phi tuyến một biến",
+      "title_en": "Roots of Nonlinear Equations",
+      "lecture_ref": "Chapra & Canale Part Two: Chapters 5 & 6",
+      "chapra_ref": "Part Two: Chapters 5 & 6 (p. 132-192)",
+      "burden_ref": "Chapter 2 (p. 65-122)",
+      "learning_outcomes": [
+        "L.O.1 - Áp dụng các phương pháp số để tìm nghiệm gần đúng của phương trình phi tuyến $f(x) = 0$",
+        "Hiểu và so sánh tốc độ hội tụ giữa phương pháp đóng (Bracketing: Bisection, False Position) và phương pháp mở (Open: Newton-Raphson, Secant, Fixed-Point)"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Phương pháp Chia đôi (Bisection Method)",
+          "description": "Chia đôi khoảng cách ly nghiệm $[a, b]$, kiểm tra $f(a)f(x_r) < 0$.",
+          "stopping_condition": "Sau 3–5 bước lặp hoặc $\\varepsilon_a < 0.5\\%$.",
+          "methods": ["Bisection"]
+        },
+        {
+          "pattern_name": "Phương pháp Vị trí sai (False-Position / Regula Falsi)",
+          "description": "Nội suy tuyến tính tìm giao điểm dây cung với trục hoành.",
+          "stopping_condition": "Sau 3–4 bước lặp hoặc $|x_{i+1} - x_i| < \\varepsilon$.",
+          "methods": ["False-Position"]
+        },
+        {
+          "pattern_name": "Phương pháp Newton-Raphson (Tiếp tuyến)",
+          "description": "Công thức lặp $x_{i+1} = x_i - \\frac{f(x_i)}{f'(x_i)}$, tốc độ hội tụ bậc 2.",
+          "stopping_condition": "Thường yêu cầu 3–4 bước lặp, kiểm soát điều kiện dừng $\\varepsilon_a < 0.01\\%$.",
+          "methods": ["Newton-Raphson"]
+        },
+        {
+          "pattern_name": "Phương pháp Cát tuyến (Secant Method)",
+          "description": "Xấp xỉ đạo hàm bằng sai phân với 2 giá trị ban đầu $x_0, x_1$.",
+          "stopping_condition": "3–4 bước lặp, bảng tính gồm cột $x_i, f(x_i), \\varepsilon_a$.",
+          "methods": ["Secant"]
+        },
+        {
+          "pattern_name": "Phương pháp Lặp đơn (Simple Fixed-Point Iteration)",
+          "description": "Biến đổi $f(x)=0 \\iff x = g(x)$ với điều kiện hội tụ $|g'(x)| < 1$.",
+          "stopping_condition": "3–5 bước lặp kiểm tra sự hội tụ.",
+          "methods": ["Fixed-Point Iteration"]
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch03_linear_systems",
+      "title_vi": "Chương 3: Hệ phương trình đại số tuyến tính",
+      "title_en": "Linear Algebraic Equations",
+      "lecture_ref": "Slide E02_Linear Algebra.pdf (Dr. Nguyễn Sỹ Ngọc)",
+      "chapra_ref": "Part Three: Chapters 9, 10, 11 (p. 246-333)",
+      "burden_ref": "Chapters 6 & 7 (p. 375-514)",
+      "learning_outcomes": [
+        "L.O.1.2 - Nắm được đại số ma trận, tính định thức, ma trận nghịch đảo và giải hệ phương trình đại số tuyến tính $Ax = b$",
+        "Làm chủ các phương pháp giải trực tiếp (Gauss Elimination, LU Decomposition: Doolittle, Crout) và phương pháp lặp (Jacobi, Gauss-Seidel)"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Khử Gauss & Phân rã LU (LU Decomposition)",
+          "description": "Khử thuận có chọn phần tử trội (Partial Pivoting), phân rã $A = LU$ và thế tiến/thế lùi giải hệ.",
+          "stopping_condition": "Giải chính xác nghiệm của hệ $3 \\times 3$ hoặc $4 \\times 4$.",
+          "methods": ["Gauss Elimination", "Doolittle LU", "Crout LU"]
+        },
+        {
+          "pattern_name": "Phương pháp lặp Gauss-Seidel",
+          "description": "Cập nhật nghiệm ngay lập tức trong cùng bước lặp, kiểm tra ma trận chéo trội.",
+          "stopping_condition": "3–4 vòng lặp, kiểm tra sai số tương đối chuẩn vô hạn $\\varepsilon_a < 1\\%$.",
+          "methods": ["Gauss-Seidel", "Jacobi"]
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch04_interpolation",
+      "title_vi": "Chương 4: Nội suy và Hồi quy bình phương cực tiểu",
+      "title_en": "Interpolation and Curve Fitting",
+      "lecture_ref": "Slide E03.pdf (Lagrange Interpolation) & Chapra Ch 17-18",
+      "chapra_ref": "Part Five: Chapters 17 & 18 (p. 473-535)",
+      "burden_ref": "Chapters 3 & 8 (p. 123-190, 515-578)",
+      "learning_outcomes": [
+        "L.O.1.1, L.O.1.3 - Xây dựng đa thức nội suy qua các mốc thực nghiệm",
+        "Nắm vững đa thức nội suy Lagrange, đa thức nội suy Newton sai phân chia và hồi quy tuyến tính bình phương bé nhất"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Nội suy Lagrange bậc 2 và bậc 3 (Trọng tâm Đề thi HK231, HK241)",
+          "description": "Cho 3-4 điểm $(x_i, y_i)$, lập đa thức $P(x) = \\sum L_i(x)y_i$, tính giá trị tại điểm mới $x^*$ hoặc lấy đạo hàm.",
+          "stopping_condition": "Rút gọn đa thức bậc 3 và tính giá trị chính xác làm tròn 4 chữ số thập phân.",
+          "methods": ["Lagrange Interpolation"]
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch05_calculus",
+      "title_vi": "Chương 5: Tính gần đúng đạo hàm và tích phân",
+      "title_en": "Numerical Differentiation and Integration",
+      "lecture_ref": "Slide E03.pdf (Differentiation & Integration - Dr. Nguyễn Sỹ Ngọc)",
+      "chapra_ref": "Part Six: Chapters 21, 22, 23 (p. 617-689)",
+      "burden_ref": "Chapter 4 (p. 191-276)",
+      "learning_outcomes": [
+        "L.O.1.3 - Nắm được các phương pháp tính gần đúng đạo hàm bằng sai phân hữu hạn (tiến, lùi, hướng tâm) và tích phân số",
+        "Hiểu và áp dụng các công thức cầu phương Newton-Cotes (Hình thang, Simpson 1/3, Simpson 3/8) và Gauss Quadrature"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Sai phân hướng tâm tính đạo hàm cấp 1 & cấp 2 (Đề thi HK231)",
+          "description": "Áp dụng công thức sai phân hướng tâm bậc cao $O(h^2)$ hoặc $O(h^4)$ tính $f'(x_0)$ và $f''(x_0)$ với bước $h$, so sánh sai số giải tích.",
+          "stopping_condition": "Tính giá trị gần đúng, giá trị giải tích và sai số tương đối $\\varepsilon_t\\%$.",
+          "methods": ["Central Finite Difference", "Richardson Extrapolation"]
+        },
+        {
+          "pattern_name": "Tích phân số Newton-Cotes & Simpson 1/3 (Đề thi HK231)",
+          "description": "Tính tích phân $\\int_a^b f(x)dx$ bằng công thức hình thang tổng quát hoặc công thức Simpson $1/3$ kết hợp trọng số $w_i$.",
+          "stopping_condition": "Làm tròn 4 chữ số thập phân.",
+          "methods": ["Trapezoidal Rule", "Simpson 1/3 Rule", "Newton-Cotes Formula"]
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch06_ode",
+      "title_vi": "Chương 6: Giải phương trình vi phân thường (ODE)",
+      "title_en": "Ordinary Differential Equations (ODEs)",
+      "lecture_ref": "Slide E04KLG_Differential Equations.pdf (Dr. Nguyễn Sỹ Ngọc)",
+      "chapra_ref": "Part Seven: Chapter 25 (p. 726-770)",
+      "burden_ref": "Chapter 5 (p. 277-374)",
+      "learning_outcomes": [
+        "L.O.1.4 - Nắm được các phương pháp giải bài toán giá trị ban đầu (IVP) của phương trình vi phân thường",
+        "Áp dụng phương pháp Euler, Euler cải tiến (Heun) và Runge-Kutta bậc 4 (RK4)"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Runge-Kutta bậc 4 (RK4 - Trọng tâm Đề thi HK241)",
+          "description": "Giải bài toán $\\frac{dy}{dx} = f(x, y), y(x_0)=y_0$ với bước $h$. Tính 4 hệ số dốc $k_1, k_2, k_3, k_4$ tại mỗi bước lặp.",
+          "stopping_condition": "Thực hiện 2–3 bước lặp đến giá trị $x$ mục tiêu (ví dụ: $x=1.0$ với $h=0.5$).",
+          "methods": ["Runge-Kutta 4th Order (RK4)", "Euler Method", "Heun Method"]
+        }
+      ]
+    },
+    {
+      "chapter_id": "ch07_fem",
+      "title_vi": "Chương 7: Phương pháp phần tử hữu hạn (FEM Cơ sở)",
+      "title_en": "Finite Element Method (1D Bar, Truss & Beam)",
+      "lecture_ref": "Slide E06KLG, E07KLG, E08KLG (1D Bar), E09 (2D Truss), E10 (Beam) - Dr. Nguyễn Sỹ Ngọc",
+      "chapra_ref": "Chapter 31 (p. 907-931)",
+      "burden_ref": "Chapter 12 (p. 764-777)",
+      "learning_outcomes": [
+        "L.O.2.1, L.O.4.1 - Nắm được các bước chính trong FEM: hàm dạng (Shape functions), ma trận độ cứng, tải nút tương đương",
+        "L.O.4.3, L.O.4.4 - Thiết lập ma trận độ cứng kết cấu $[K]$ và vector tải $\\{F\\}$, giải chuyển vị nút và ứng suất cho hệ thanh 2 nút (Truss) và dầm (Beam)"
+      ],
+      "exam_patterns": [
+        {
+          "pattern_name": "Phần tử thanh phẳng 2 nút có tải nhiệt độ / lò xo (Đề thi HK231, HK241)",
+          "description": "Ma trận độ cứng phần tử thanh $[k] = \\frac{EA}{L}\\begin{bmatrix} c^2 & cs & -c^2 & -cs \\\\ cs & s^2 & -cs & -s^2 \\\\ -c^2 & -cs & c^2 & cs \\\\ -cs & -s^2 & cs & s^2 \\end{bmatrix}$, ghép nối ma trận toàn cục $[K]$, xử lý điều kiện biên và lực nhiệt $\\{F_{th}\\}$.",
+          "stopping_condition": "Xác định ma trận độ cứng toàn cục, chuyển vị tại các nút tự do và phản lực liên kết.",
+          "methods": ["Direct Stiffness Method", "Planar Truss Element", "Thermal Load Vector"]
+        },
+        {
+          "pattern_name": "Phần tử dầm 1D chịu tải phân bố và tải tập trung (Đề thi HK231, HK241)",
+          "description": "Ma trận độ cứng dầm Euler-Bernoulli, tải nút tương đương do tải phân bố đều $q$ và tải tập trung $F$ tại nhịp dầm, liên kết ngàm hoặc gối đàn hồi (lò xo $k$).",
+          "stopping_condition": "Tính chuyển vị thẳng đứng $v$ và góc xoay $\\theta$ tại các nút trọng điểm.",
+          "methods": ["Beam Element Formulation", "Equivalent Nodal Loads"]
+        }
+      ]
+    }
+  ]
+}

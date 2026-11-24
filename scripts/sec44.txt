@@ -1,0 +1,438 @@
+210
+C H A P T E R 4
+Numerical Differentiation and Integration
+a bound independent of h (and n). This means that, even though we may need to divide
+an interval into more parts to ensure accuracy, the increased computation that is required
+does not increase the round-off error. This result implies that the procedure is stable as h
+approaches zero. Recall that this was not true of the numerical differentiation procedures
+considered at the beginning of this chapter.
+E X E R C I S E S E T 4.4
+1.
+Use the Composite Trapezoidal rule with the indicated values of n to approximate the following
+integrals.
+a.
+ 2
+1
+x ln x dx,
+n = 4
+b.
+ 2
+−2
+x3ex dx,
+n = 4
+c.
+ 2
+0
+2
+x2 + 4 dx,
+n = 6
+d.
+ π
+0
+x2 cos x dx,
+n = 6
+e.
+ 2
+0
+e2x sin 3x dx,
+n = 8
+f.
+ 3
+1
+x
+x2 + 4 dx,
+n = 8
+g.
+ 5
+3
+1
+√
+x2 −4
+dx,
+n = 8
+h.
+ 3π/8
+0
+tan x dx,
+n = 8
+2.
+Use the Composite Trapezoidal rule with the indicated values of n to approximate the following
+integrals.
+a.
+ 0.5
+−0.5
+cos2 x dx,
+n = 4
+b.
+ 0.5
+−0.5
+x ln(x + 1) dx,
+n = 6
+c.
+ 1.75
+.75
+(sin2 x −2x sin x + 1) dx,
+n = 8
+d.
+ e+2
+e
+1
+x ln x dx,
+n = 8
+3.
+Use the Composite Simpson’s rule to approximate the integrals in Exercise 1.
+4.
+Use the Composite Simpson’s rule to approximate the integrals in Exercise 2.
+5.
+Use the Composite Midpoint rule with n + 2 subintervals to approximate the integrals in Exercise 1.
+6.
+Use the Composite Midpoint rule with n + 2 subintervals to approximate the integrals in Exercise 2.
+7.
+Approximate
+ 2
+0 x2 ln(x2 + 1) dx using h = 0.25. Use
+a.
+Composite Trapezoidal rule.
+b.
+Composite Simpson’s rule.
+c.
+Composite Midpoint rule.
+8.
+Approximate
+ 2
+0 x2e−x2 dx using h = 0.25. Use
+a.
+Composite Trapezoidal rule.
+b.
+Composite Simpson’s rule.
+c.
+Composite Midpoint rule.
+9.
+Suppose that f (0) = 1, f (0.5) = 2.5, f (1) = 2, and f (0.25) = f (0.75) = α. Find α if the
+Composite Trapezoidal rule with n = 4 gives the value 1.75 for
+ 1
+0 f (x) dx.
+10.
+The Midpoint rule for approximating
+ 1
+−1 f (x) dx gives the value 12, the Composite Midpoint rule
+with n = 2 gives 5, and Composite Simpson’s rule gives 6. Use the fact that f (−1) = f (1) and
+f (−0.5) = f (0.5) −1 to determine f (−1), f (−0.5), f (0), f (0.5), and f (1).
+11.
+Determine the values of n and h required to approximate
+ 2
+0
+e2x sin 3x dx
+to within 10−4. Use
+a.
+Composite Trapezoidal rule.
+b.
+Composite Simpson’s rule.
+c.
+Composite Midpoint rule.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+4.4
+Composite Numerical Integration
+211
+12.
+Repeat Exercise 11 for the integral
+ π
+0 x2 cos x dx.
+13.
+Determine the values of n and h required to approximate
+ 2
+0
+1
+x + 4 dx
+to within 10−5 and compute the approximation. Use
+a.
+Composite Trapezoidal rule.
+b.
+Composite Simpson’s rule.
+c.
+Composite Midpoint rule.
+14.
+Repeat Exercise 13 for the integral
+ 2
+1 x ln x dx.
+15.
+Let f be deﬁned by
+f (x) =
+⎧
+⎪⎨
+⎪⎩
+x3 + 1,
+0 ≤x ≤0.1,
+1.001 + 0.03(x −0.1) + 0.3(x −0.1)2 + 2(x −0.1)3,
+0.1 ≤x ≤0.2,
+1.009 + 0.15(x −0.2) + 0.9(x −0.2)2 + 2(x −0.2)3,
+0.2 ≤x ≤0.3.
+a.
+Investigate the continuity of the derivatives of f .
+b.
+Use the Composite Trapezoidal rule with n = 6 to approximate
+ 0.3
+0
+f (x) dx, and estimate the
+error using the error bound.
+c.
+Use the Composite Simpson’s rule with n = 6 to approximate
+ 0.3
+0
+f (x) dx. Are the results more
+accurate than in part (b)?
+16.
+Show that the error E(f ) for Composite Simpson’s rule can be approximated by
+−h4
+180[f ′′′(b) −f ′′′(a)].
+[Hint: n/2
+j=1 f (4)(ξj)(2h) is a Riemann Sum for
+ b
+a f (4)(x) dx.]
+17.
+a.
+Derive an estimate for E(f ) in the Composite Trapezoidal rule using the method in Exercise 16.
+b.
+Repeat part (a) for the Composite Midpoint rule.
+18.
+Use the error estimates of Exercises 16 and 17 to estimate the errors in Exercise 12.
+19.
+Use the error estimates of Exercises 16 and 17 to estimate the errors in Exercise 14.
+20.
+In multivariable calculus and in statistics courses it is shown that
+ ∞
+−∞
+1
+σ
+√
+2π
+e−(1/2)(x/σ)2 dx = 1,
+for any positive σ. The function
+f (x) =
+1
+σ
+√
+2π
+e−(1/2)(x/σ)2
+is the normal density function with mean μ = 0 and standard deviation σ. The probability that a
+randomly chosen value described by this distribution lies in [a, b] is given by
+ b
+a f (x) dx. Approximate
+to within 10−5 the probability that a randomly chosen value described by this distribution will lie in
+a.
+[−σ, σ]
+b.
+[−2σ, 2σ]
+c.
+[−3σ, 3σ]
+21.
+Determine to within 10−6 the length of the graph of the ellipse with equation 4x2 + 9y2 = 36.
+22.
+A car laps a race track in 84 seconds. The speed of the car at each 6-second interval is determined
+by using a radar gun and is given from the beginning of the lap, in feet/second, by the entries in the
+following table.
+Time
+0
+6
+12
+18
+24
+30
+36
+42
+48
+54
+60
+66
+72
+78
+84
+Speed
+124
+134
+148
+156
+147
+133
+121
+109
+99
+85
+78
+89
+104
+116
+123
+How long is the track?
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+212
+C H A P T E R 4
+Numerical Differentiation and Integration
+23.
+A particle of mass m moving through a ﬂuid is subjected to a viscous resistance R, which is a function
+of the velocity v. The relationship between the resistance R, velocity v, and time t is given by the
+equation
+t =
+ v(t)
+v(t0)
+m
+R(u) du.
+Suppose that R(v) = −v√v for a particular ﬂuid, where R is in newtons and v is in meters/second. If
+m = 10 kg and v(0) = 10 m/s, approximate the time required for the particle to slow to v = 5 m/s.
+24.
+To simulate the thermal characteristics of disk brakes (see the following ﬁgure), D. A. Secrist and
+R. W. Hornbeck [SH] needed to approximate numerically the “area averaged lining temperature,” T,
+of the brake pad from the equation
+T =
+ r0
+re
+T(r)rθp dr
+ r0
+re
+rθp dr
+,
+where re represents the radius at which the pad-disk contact begins, r0 represents the outside radius
+of the pad-disk contact, θp represents the angle subtended by the sector brake pads, and T(r) is the
+temperature at each point of the pad, obtained numerically from analyzing the heat equation (see
+Section 12.2). Suppose re = 0.308 ft, r0 = 0.478 ft, θp = 0.7051 radians, and the temperatures given
+in the following table have been calculated at the various points on the disk. Approximate T.
+r (ft)
+T(r) (◦F)
+r (ft)
+T(r) (◦F)
+r (ft)
+T(r) (◦F)
+0.308
+640
+0.376
+1034
+0.444
+1204
+0.325
+794
+0.393
+1064
+0.461
+1222
+0.342
+885
+0.410
+1114
+0.478
+1239
+0.359
+943
+0.427
+1152
+Brake disk
+Brake
+pad
+ro
+re
+θp
+25.
+Find an approximation to within 10−4 of the value of the integral considered in the application opening
+this chapter:
+ 48
+0
+
+1 + (cos x)2 dx.
+26.
+The equation
+ x
+0
+1
+√
+2π
+e−t2/2 dt = 0.45
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+4.5
+Romberg Integration
+213
+can be solved for x by using Newton’s method with
+f (x) =
+ x
+0
+1
+√
+2π
+e−t2/2 dt −0.45
+and
+f ′(x) =
+1
+√
+2π
+e−x2/2.
+To evaluate f at the approximation pk, we need a quadrature formula to approximate
+ pk
+0
+1
+√
+2π
+e−t2/2 dt.
+a.
+Find a solution to f (x) = 0 accurate to within 10−5 using Newton’s method with p0 = 0.5 and
+the Composite Simpson’s rule.
+b.
+Repeat (a) using the Composite Trapezoidal rule in place of the Composite Simpson’s rule.
+4.5
+Romberg Integration
+In this section we will illustrate how Richardson extrapolation applied to results from the
+Composite Trapezoidal rule can be used to obtain high accuracy approximations with little
+computational cost.
+In Section 4.4 we found that the Composite Trapezoidal rule has a truncation error of
+order O(h2). Speciﬁcally, we showed that for h = (b −a)/n and xj = a + jh we have
+ b
+a
+f (x) dx = h
+2
+⎡
+⎣f (a) + 2
+n−1
+
+j=1
+f (xj) + f (b)
+⎤
+⎦−(b −a)f ′′(μ)
+12
+h2.
+for some number μ in (a, b).
+By an alternative method it can be shown (see [RR], pp. 136–140), that if f ∈C∞[a, b],
+the Composite Trapezoidal rule can also be written with an error term in the form
+ b
+a
+f (x) dx = h
+2
+⎡
+⎣f (a) + 2
+n−1
+
+j=1
+f (xj) + f (b)
+⎤
+⎦+ K1h2 + K2h4 + K3h6 + · · · ,
+(4.33)
+where each Ki is a constant that depends only on f (2i−1)(a) and f (2i−1)(b).
+Recall from Section 4.2 that Richardson extrapolation can be performed on any
+approximation procedure whose truncation error is of the form
+m−1
+
+j=1
+Kjhαj + O(hαm),
+for a collection of constants Kj and when α1 < α2 < α3 < · · · < αm. In that section we
+gave demonstrations to illustrate how effective this techniques is when the approximation
+procedure has a truncation error with only even powers of h, that is, when the truncation
+error has the form.
+m−1
+
+j=1
+Kjh2 j + O(h2m).
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+

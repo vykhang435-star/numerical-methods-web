@@ -1,0 +1,292 @@
+[
+  {
+    "id": "ch03-prob-9.3",
+    "source_problem": "Problem 9.3 - Chapra / Slide E02 (Dr. Nguyễn Sỹ Ngọc)",
+    "method_tag": "Gauss Elimination with Pivoting",
+    "exam_focus": true,
+    "expected_numeric_value": 1.9333,
+    "problem_en": "Use Gauss elimination with partial pivoting to solve the following linear system: $$\\begin{cases} x_1 + 2x_2 - x_3 = 2 \\\\ 5x_1 + 2x_2 + 2x_3 = 7 \\\\ -3x_1 + 5x_2 - x_3 = -7 \\end{cases}$$ Find $x_1, x_2, x_3$.",
+    "glossary": {
+      "Gauss elimination": "phương pháp khử Gauss",
+      "partial pivoting": "chọn phần tử trội theo cột",
+      "forward elimination": "quá trình khử thuận",
+      "back substitution": "quá trình thế lùi"
+    },
+    "hint": "Bước 1: Đổi dòng 1 và dòng 2 vì $|5| > |1| > |-3|$. Khử thuận đưa ma trận về tam giác trên, sau đó thế lùi để tìm nghiệm.",
+    "steps": [
+      "**Bước 1: Ma trận bổ sung và chọn phần tử trội (Pivoting)**\n$$[A|b] = \\begin{bmatrix} 1 & 2 & -1 & | & 2 \\\\ 5 & 2 & 2 & | & 7 \\\\ -3 & 5 & -1 & | & -7 \\end{bmatrix}$$\nĐổi $R_1 \\leftrightarrow R_2$:\n$$\\begin{bmatrix} 5 & 2 & 2 & | & 7 \\\\ 1 & 2 & -1 & | & 2 \\\\ -3 & 5 & -1 & | & -7 \\end{bmatrix}$$",
+      "**Bước 2: Khử thuận và thế lùi**\n- Khử cột 1:\n  + $R_2 \\leftarrow R_2 - (1/5)R_1 = [0, 1.6, -1.4 | 0.6]$\n  + $R_3 \\leftarrow R_3 - (-3/5)R_1 = [0, 6.2, 0.2 | -2.8]$\n- Chọn phần tử trội cột 2 ($|6.2| > |1.6|$), đổi $R_2 \\leftrightarrow R_3$:\n  + Hệ tam giác trên: $\\begin{bmatrix} 5 & 2 & 2 & | & 7 \\\\ 0 & 6.2 & 0.2 & | & -2.8 \\\\ 0 & 0 & -1.4516 & | & 1.3226 \\end{bmatrix}$\n- Thế lùi:\n  + $x_3 = \\frac{1.3226}{-1.4516} = -0.9111$\n  + $x_2 = \\frac{-2.8 - 0.2(-0.9111)}{6.2} = -0.4222$\n  + $x_1 = \\frac{7 - 2(-0.4222) - 2(-0.9111)}{5} = 1.9333$",
+      "**Bước 3: Kết luận nghiệm của hệ**\nNghiệm chính xác của hệ phương trình là:\n$$\\{x_1, x_2, x_3\\} = \\{1.9333, -0.4222, -0.9111\\}$$"
+    ],
+    "final_answer": "x_1 = 1.9333, \\; x_2 = -0.4222, \\; x_3 = -0.9111"
+  },
+  {
+    "id": "ch03-prob-11.2",
+    "source_problem": "Problem 11.2 - Chapra & Canale",
+    "method_tag": "Gauss-Seidel Iteration",
+    "exam_focus": true,
+    "expected_numeric_value": 0.5234,
+    "problem_en": "Use the Gauss-Seidel method to solve the diagonally dominant system starting from $\\{0, 0, 0\\}$: $$\\begin{cases} 10x_1 + 2x_2 - x_3 = 27 \\\\ -3x_1 - 6x_2 + 2x_3 = -61.5 \\\\ x_1 + x_2 + 5x_3 = -21.5 \\end{cases}$$ Compute the solution after three iterations.",
+    "glossary": {
+      "Gauss-Seidel method": "phương pháp lặp Gauss-Seidel",
+      "diagonally dominant": "ma trận chéo trội"
+    },
+    "hint": "Rút $x_1$ từ PT1, $x_2$ từ PT2, $x_3$ từ PT3. Khi tính $x_{i}^{(k+1)}$, dùng ngay các giá trị mới vừa tính được.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức lặp Gauss-Seidel**\n$$\\begin{cases} x_1^{(k+1)} = \\frac{27 - 2x_2^{(k)} + x_3^{(k)}}{10} \\\\[6pt] x_2^{(k+1)} = \\frac{-61.5 + 3x_1^{(k+1)} - 2x_3^{(k)}}{-6} \\\\[6pt] x_3^{(k+1)} = \\frac{-21.5 - x_1^{(k+1)} - x_2^{(k+1)}}{5} \\end{cases}$$",
+      "**Bước 2: Bảng giá trị lặp qua 3 vòng**\n\n| Vòng $k$ | $x_1$ | $\\varepsilon_a(x_1)$ (%) | $x_2$ | $\\varepsilon_a(x_2)$ (%) | $x_3$ | $\\varepsilon_a(x_3)$ (%) |\n| :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| 0 | 0.0000 | --- | 0.0000 | --- | 0.0000 | --- |\n| 1 | 2.7000 | 100.00\\% | 8.9000 | 100.00\\% | -6.6200 | 100.00\\% |\n| 2 | 0.2580 | 946.51\\% | 7.9157 | 12.44\\% | -5.9347 | 11.55\\% |\n| 3 | 0.5234 | 50.71\\% | 8.0101 | 1.18\\% | -6.0067 | 1.20\\% |",
+      "**Bước 3: Kết luận**\nSau 3 vòng lặp, nghiệm đạt: $x_1 \\approx 0.5234, x_2 \\approx 8.0101, x_3 \\approx -6.0067$."
+    ],
+    "final_answer": "x_1 \\approx 0.5234, \\; x_2 \\approx 8.0101, \\; x_3 \\approx -6.0067"
+  },
+  {
+    "id": "ch03-burden-sec6.1-p5a",
+    "source_problem": "Exercise 6.1 - Problem 5(a) (Burden & Faires 9th)",
+    "method_tag": "Gaussian Elimination",
+    "exam_focus": true,
+    "problem_en": "Use the Gaussian Elimination Algorithm to solve the following linear system, and determine whether row interchanges are necessary:\n$$\\begin{aligned} x_1 - x_2 + 3x_3 &= 2 \\\\ 3x_1 - 3x_2 + x_3 &= -1 \\\\ x_1 + x_2 &= 3 \\end{aligned}$$",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Lập ma trận bổ sung $[A|b]$. Thực hiện khử Gauss theo từng cột. Nếu phần tử chốt $a_{kk} = 0$, bắt buộc phải đổi hàng.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nHệ phương trình tuyến tính ban đầu: $[A|b] = \\begin{bmatrix} 1 & -1 & 3 & 2 \\\\ 3 & -3 & 1 & -1 \\\\ 1 & 1 & 0 & 3 \\end{bmatrix}$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- Khử cột 1: $m_{21} = 3, m_{31} = 1$.\n  + $R_2 \\leftarrow R_2 - 3R_1 = [0, 0, -8 | -7]$\n  + $R_3 \\leftarrow R_3 - R_1 = [0, 2, -3 | 1]$\n- Tại bước 2, phần tử chốt $a_{22} = 0$. Bắt buộc **hoán vị hàng $R_2 \\leftrightarrow R_3$**.\n- Ma trận tam giác trên thu được:\n  $$\\begin{bmatrix} 1 & -1 & 3 & 2 \\\\ 0 & 2 & -3 & 1 \\\\ 0 & 0 & -8 & -7 \\end{bmatrix}$$\n- Phép thế ngược:\n  + $x_3 = \\frac{-7}{-8} = 0.8750 = \\frac{7}{8}$\n  + $x_2 = \\frac{1 + 3(0.8750)}{2} = 1.8125 = \\frac{29}{16}$\n  + $x_1 = 2 + x_2 - 3x_3 = 2 + 1.8125 - 2.6250 = 1.1875 = \\frac{19}{16}$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nNghiệm giải tích: $x_1 = \\frac{19}{16} = 1.1875$, $x_2 = \\frac{29}{16} = 1.8125$, $x_3 = \\frac{7}{8} = 0.8750$. Bắt buộc hoán vị hàng $R_2 \\leftrightarrow R_3$."
+    ],
+    "final_answer": "x_1 = 1.1875, \\; x_2 = 1.8125, \\; x_3 = 0.8750",
+    "expected_numeric_value": 1.1875
+  },
+  {
+    "id": "ch03-burden-sec6.1-p5b",
+    "source_problem": "Exercise 6.1 - Problem 5(b) (Burden & Faires 9th)",
+    "method_tag": "Gaussian Elimination",
+    "exam_focus": true,
+    "problem_en": "Use the Gaussian Elimination Algorithm to solve the following linear system, and determine whether row interchanges are necessary:\n$$\\begin{aligned} 2x_1 - 1.5x_2 + 3x_3 &= 1 \\\\ -x_1 + 2x_3 &= 3 \\\\ 4x_1 - 4.5x_2 + 5x_3 &= 1 \\end{aligned}$$",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Khử Gauss theo thứ tự. Kiểm tra các phần tử chốt trên đường chéo chính.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận bổ sung $[A|b] = \\begin{bmatrix} 2 & -1.5 & 3 & 1 \\\\ -1 & 0 & 2 & 3 \\\\ 4 & -4.5 & 5 & 1 \\end{bmatrix}$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- Khử cột 1: $m_{21} = -0.5, m_{31} = 2.0$.\n  + $R_2 \\leftarrow R_2 - (-0.5)R_1 = [0, -0.75, 3.5 | 3.5]$\n  + $R_3 \\leftarrow R_3 - 2R_1 = [0, -1.5, -1 | -1]$\n- Khử cột 2: chốt $a_{22} = -0.75 \\neq 0$ (không cần đổi hàng), $m_{32} = \\frac{-1.5}{-0.75} = 2.0$.\n  + $R_3 \\leftarrow R_3 - 2R_2 = [0, 0, -8 | -8]$\n- Phép thế ngược:\n  + $x_3 = \\frac{-8}{-8} = 1.0000$\n  + $x_2 = \\frac{3.5 - 3.5(1)}{-0.75} = 0.0000$\n  + $x_1 = \\frac{1 + 1.5(0) - 3(1)}{2} = -1.0000$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nKhông cần hoán vị hàng. Nghiệm nguyên đẹp: $x_1 = -1$, $x_2 = 0$, $x_3 = 1$."
+    ],
+    "final_answer": "x_1 = -1.0000, \\; x_2 = 0.0000, \\; x_3 = 1.0000",
+    "expected_numeric_value": -1.0
+  },
+  {
+    "id": "ch03-burden-sec6.1-p6a",
+    "source_problem": "Exercise 6.1 - Problem 6(a) (Burden & Faires 9th)",
+    "method_tag": "Gaussian Elimination",
+    "exam_focus": true,
+    "problem_en": "Use Gaussian elimination to solve the system:\n$$\\begin{aligned} x_2 - 2x_3 &= 4 \\\\ x_1 - x_2 + x_3 &= 6 \\\\ x_1 - x_3 &= 2 \\end{aligned}$$",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Phần tử chốt đầu tiên $a_{11} = 0$, phải hoán vị hàng 1 với hàng 2 ngay bước đầu tiên.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận bổ sung $[A|b] = \\begin{bmatrix} 0 & 1 & -2 & 4 \\\\ 1 & -1 & 1 & 6 \\\\ 1 & 0 & -1 & 2 \\end{bmatrix}$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- $a_{11} = 0 \\implies$ Hoán vị $R_1 \\leftrightarrow R_2$:\n  $$\\begin{bmatrix} 1 & -1 & 1 & 6 \\\\ 0 & 1 & -2 & 4 \\\\ 1 & 0 & -1 & 2 \\end{bmatrix}$$\n- Khử cột 1: $R_3 \\leftarrow R_3 - R_1 = [0, 1, -2 | -4]$\n- Khử cột 2: $R_3 \\leftarrow R_3 - R_2 = [0, 0, 0 | -8]$\n- Phương trình cuối cùng cho kết quả $0x_3 = -8$ (mâu thuẫn vô lý).",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nHệ phương trình vô nghiệm (inconsistent / no solution)."
+    ],
+    "final_answer": "\\text{Vô nghiệm (No solution)}",
+    "expected_numeric_value": 0.0
+  },
+  {
+    "id": "ch03-burden-sec6.3-p1",
+    "source_problem": "Exercise 6.3 - Problem 1 (Burden & Faires 9th)",
+    "method_tag": "Matrix Inversion",
+    "exam_focus": true,
+    "problem_en": "Find the inverse of the matrix $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ using Gaussian elimination on $[A | I]$.",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Ghép ma trận đơn vị $I_2$ vào bên phải: $[A | I_2]$. Biến đổi Gauss-Jordan đưa vế trái về ma trận đơn vị, vế phải sẽ là $A^{-1}$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận ban đầu: $[A | I] = \\begin{bmatrix} 1 & 2 & 1 & 0 \\\\ 3 & 4 & 0 & 1 \\end{bmatrix}$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- $R_2 \\leftarrow R_2 - 3R_1 = [0, -2, -3, 1]$\n- $R_2 \\leftarrow -\\frac{1}{2}R_2 = [0, 1, 1.5, -0.5]$\n- $R_1 \\leftarrow R_1 - 2R_2 = [1, 0, -2, 1]$\n- Thu được $A^{-1} = \\begin{bmatrix} -2 & 1 \\\\ 1.5 & -0.5 \\end{bmatrix}$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nMa trận nghịch đảo tồn tại vì $\\det(A) = 1(4) - 2(3) = -2 \\neq 0$."
+    ],
+    "final_answer": "A^{-1} = \\begin{bmatrix} -2 & 1 \\\\ 1.5 & -0.5 \\end{bmatrix}",
+    "expected_numeric_value": -1.9999999999999996
+  },
+  {
+    "id": "ch03-burden-sec6.3-p3",
+    "source_problem": "Exercise 6.3 - Problem 3 (Burden & Faires 9th)",
+    "method_tag": "Matrix Inversion",
+    "exam_focus": true,
+    "problem_en": "Find the inverse of the matrix $A = \\begin{bmatrix} 1 & 2 & -1 \\\\ 2 & 1 & 0 \\\\ -1 & 1 & 2 \\end{bmatrix}$ if it exists.",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Thiết lập ma trận mở rộng $[A | I_3]$. Dùng phép khử Gauss-Jordan để đưa nửa trái về $I_3$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận mở rộng $[A | I_3]$ kích thước $3 \\times 6$.",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\nKhử thuận và khử nghịch trên 3 hàng:\n- Nghịch đảo thu được: $$A^{-1} = \\begin{bmatrix} -0.2222 & 0.5556 & -0.1111 \\\\ 0.4444 & -0.1111 & 0.2222 \\\\ -0.3333 & 0.3333 & 0.3333 \\end{bmatrix}$$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nĐịnh thức $\\det(A) = -9 \\neq 0 \\implies$ ma trận khả nghịch."
+    ],
+    "final_answer": "A^{-1} = \\begin{bmatrix} -0.2222 & 0.5556 & -0.1111 \\\\ 0.4444 & -0.1111 & 0.2222 \\\\ -0.3333 & 0.3333 & 0.3333 \\end{bmatrix}",
+    "expected_numeric_value": -0.22222222222222224
+  },
+  {
+    "id": "ch03-burden-sec6.4-p1",
+    "source_problem": "Exercise 6.4 - Problem 1 (Burden & Faires 9th)",
+    "method_tag": "Determinant",
+    "exam_focus": true,
+    "problem_en": "Find the determinant of the matrix $A = \\begin{bmatrix} 2 & 0 & 1 \\\\ 1 & 2 & 1 \\\\ 0 & 3 & 1 \\end{bmatrix}$ using row operations to reduce it to triangular form.",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Dùng các phép biến đổi sơ cấp theo hàng để đưa ma trận về dạng tam giác trên $U$. Khi đó $\\det(A) = (-1)^k \\prod u_{ii}$ với $k$ là số lần đổi hàng.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận cấp 3: $A = \\begin{bmatrix} 2 & 0 & 1 \\\\ 1 & 2 & 1 \\\\ 0 & 3 & 1 \\end{bmatrix}$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- Biến đổi $R_2 \\leftarrow R_2 - 0.5R_1 = [0, 2, 0.5]$\n- Biến đổi $R_3 \\leftarrow R_3 - 1.5R_2 = [0, 0, 1 - 1.5(0.5)] = [0, 0, 0.25]$\n- Ma trận tam giác trên:\n  $$U = \\begin{bmatrix} 2 & 0 & 1 \\\\ 0 & 2 & 0.5 \\\\ 0 & 0 & 0.25 \\end{bmatrix}$$\n- Định thức: $\\det(A) = 2 \\times 2 \\times 0.25 = 1.0000$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nĐịnh thức tính bằng tích các phần tử đường chéo của ma trận tam giác trên: $\\det(A) = 1$."
+    ],
+    "final_answer": "\\det(A) = 1.0000",
+    "expected_numeric_value": 0.9999999999999991
+  },
+  {
+    "id": "ch03-burden-sec6.6-p7",
+    "source_problem": "Exercise 6.6 - Problem 7 (Burden & Faires 9th)",
+    "method_tag": "Cholesky Factorization",
+    "exam_focus": true,
+    "problem_en": "Find the Cholesky factorization $A = LL^t$ for the symmetric positive definite tridiagonal matrix:\n$$A = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 2 \\end{bmatrix}$$",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Công thức Cholesky: $l_{11} = \\sqrt{a_{11}}$, $l_{j1} = a_{j1}/l_{11}$. Với $i > 1$: $l_{ii} = \\sqrt{a_{ii} - \\sum_{k=1}^{i-1} l_{ik}^2}$, $l_{ji} = \\frac{1}{l_{ii}}\\left(a_{ji} - \\sum_{k=1}^{i-1} l_{ik} l_{jk}\\right)$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận đối xứng xác định dương $A = \\begin{bmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 2 \\end{bmatrix}$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- Cột 1:\n  + $l_{11} = \\sqrt{2} \\approx 1.4142$\n  + $l_{21} = -1/\\sqrt{2} \\approx -0.7071$\n  + $l_{31} = 0$\n- Cột 2:\n  + $l_{22} = \\sqrt{2 - (-1/\\sqrt{2})^2} = \\sqrt{2 - 0.5} = \\sqrt{1.5} \\approx 1.2247$\n  + $l_{32} = (-1 - 0)/\\sqrt{1.5} = -\\sqrt{2/3} \\approx -0.8165$\n- Cột 3:\n  + $l_{33} = \\sqrt{2 - (-0.8165)^2} = \\sqrt{2 - 2/3} = \\sqrt{4/3} = \\frac{2}{\\sqrt{3}} \\approx 1.1547$\n- Ma trận tam giác dưới $L$:\n  $$L = \\begin{bmatrix} 1.4142 & 0 & 0 \\\\ -0.7071 & 1.2247 & 0 \\\\ 0 & -0.8165 & 1.1547 \\end{bmatrix}$$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nKiểm chứng lại: $L L^t = A$. Các phần tử đường chéo $l_{ii} > 0$."
+    ],
+    "final_answer": "L = \\begin{bmatrix} 1.4142 & 0 & 0 \\\\ -0.7071 & 1.2247 & 0 \\\\ 0 & -0.8165 & 1.1547 \\end{bmatrix}",
+    "expected_numeric_value": 1.4142135623730951
+  },
+  {
+    "id": "ch03-burden-sec6.6-p9",
+    "source_problem": "Exercise 6.6 - Problem 9 (Burden & Faires 9th)",
+    "method_tag": "Cholesky Factorization",
+    "exam_focus": true,
+    "problem_en": "Find the Cholesky factorization $A = LL^t$ for the $4 \\times 4$ matrix:\n$$A = \\begin{bmatrix} 4 & 1 & 1 & 1 \\\\ 1 & 3 & -1 & 1 \\\\ 1 & -1 & 2 & 0 \\\\ 1 & 1 & 0 & 2 \\end{bmatrix}$$",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Áp dụng thuật toán Cholesky cấp 4 từng cột từ trái sang phải.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận $A$ cấp 4 đối xứng.",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\nQuá trình phân tích Cholesky tính được ma trận tam giác dưới $L$:\n$$L = \\begin{bmatrix} 2 & 0 & 0 & 0 \\\\ 0.5 & 1.6583 & 0 & 0 \\\\ 0.5 & -0.7538 & 1.0871 & 0 \\\\ 0.5 & 0.4523 & 0.0836 & 1.2403 \\end{bmatrix}$$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nKiểm tra tính xác định dương: các phần tử đường chéo của $L$ đều thực và dương: $l_{11}=2, l_{22}=\\sqrt{11/4}\\dots$"
+    ],
+    "final_answer": "l_{11} = 2.0000, \\; l_{22} \\approx 1.6583, \\; l_{33} \\approx 1.0871",
+    "expected_numeric_value": 2.0
+  },
+  {
+    "id": "ch03-burden-sec7.2-p1",
+    "source_problem": "Exercise 7.2 - Problem 1 (Burden & Faires 9th)",
+    "method_tag": "Eigenvalues and Eigenvectors",
+    "exam_focus": true,
+    "problem_en": "Find the eigenvalues and associated eigenvectors of the matrix $A = \\begin{bmatrix} 2 & -1 \\\\ -1 & 2 \\end{bmatrix}$.",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Giải phương trình đặc trưng $\\det(A - \\lambda I) = 0$ để tìm các giá trị riêng $\\lambda$. Với mỗi $\\lambda$, giải hệ thuần nhất $(A - \\lambda I)v = 0$ để tìm vector riêng tương ứng.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nPhương trình đặc trưng:\n$$\\det(A - \\lambda I) = \\begin{vmatrix} 2 - \\lambda & -1 \\\\ -1 & 2 - \\lambda \\end{vmatrix} = (2-\\lambda)^2 - 1 = \\lambda^2 - 4\\lambda + 3 = 0$$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n- Nghiệm phương trình đặc trưng: $\\lambda_1 = 3, \\lambda_2 = 1$.\n- Vector riêng tương ứng với $\\lambda_1 = 3$:\n  $$(A - 3I)v = \\begin{bmatrix} -1 & -1 \\\\ -1 & -1 \\end{bmatrix} \\begin{Bmatrix} v_1 \\\\ v_2 \\end{Bmatrix} = 0 \\implies v^{(1)} = \\begin{Bmatrix} 1 \\\\ -1 \\end{Bmatrix}$$\n- Vector riêng tương ứng với $\\lambda_2 = 1$:\n  $$(A - I)v = \\begin{bmatrix} 1 & -1 \\\\ -1 & 1 \\end{bmatrix} \\begin{Bmatrix} v_1 \\\\ v_2 \\end{Bmatrix} = 0 \\implies v^{(2)} = \\begin{Bmatrix} 1 \\\\ 1 \\end{Bmatrix}$$",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nHai giá trị riêng thực: $\\lambda_1 = 3$ (vector riêng $[1, -1]^T$) và $\\lambda_2 = 1$ (vector riêng $[1, 1]^T$). Bán kính phổ $\\rho(A) = 3$."
+    ],
+    "final_answer": "\\lambda_1 = 3.0000, \\; \\lambda_2 = 1.0000",
+    "expected_numeric_value": 3.0
+  },
+  {
+    "id": "ch03-burden-sec9.3-p1a",
+    "source_problem": "Exercise 9.3 - Problem 1(a) (Burden & Faires 9th)",
+    "method_tag": "The Power Method",
+    "exam_focus": true,
+    "problem_en": "Find the first three iterations obtained by the Power method applied to the matrix\n$$A = \\begin{bmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{bmatrix}$$\nusing the initial vector $x^{(0)} = (1, -1, 2)^t$.",
+    "glossary": {
+      "Gaussian elimination": "phương pháp khử Gauss",
+      "backward substitution": "phép thế ngược",
+      "matrix inversion": "tìm ma trận nghịch đảo",
+      "determinant": "định thức của ma trận",
+      "Cholesky factorization": "phân tích Cholesky LL^T",
+      "eigenvalue": "giá trị riêng",
+      "eigenvector": "vector riêng",
+      "Power method": "phương pháp lũy thừa tìm trị riêng trội"
+    },
+    "hint": "Tại mỗi bước lặp: tính $y^{(k)} = A x^{(k-1)}$, chọn $\\mu^{(k)} = y^{(k)}_{p_k}$ có độ lớn cực đại (chuẩn $L_\\infty$), và chuẩn hóa vector $x^{(k)} = y^{(k)} / \\mu^{(k)}$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và ma trận ban đầu**\nMa trận $A = \\begin{bmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{bmatrix}$, vector xuất phát $x^{(0)} = [1, -1, 2]^T$",
+      "**Bước 2: Quá trình biến đổi số học (Kiểm chứng từ Python)**\n| Bước $k$ | $y^{(k)} = A x^{(k-1)}$ | $\\mu^{(k)}$ (Trị riêng xấp xỉ) | $x^{(k)} = y^{(k)} / \\mu^{(k)}$ |\n| :---: | :---: | :---: | :---: |\n| 1 | \\begin{Bmatrix} 3 \\\\ 1 \\\\ 4 \\end{Bmatrix} | 4.0000 | \\begin{Bmatrix} 0.75 \\\\ 0.25 \\\\ 1 \\end{Bmatrix} |\n| 2 | \\begin{Bmatrix} 2.75 \\\\ 2.25 \\\\ 3 \\end{Bmatrix} | 3.0000 | \\begin{Bmatrix} 0.9167 \\\\ 0.75 \\\\ 1 \\end{Bmatrix} |\n| 3 | \\begin{Bmatrix} 3.5833 \\\\ 3.4167 \\\\ 3.6667 \\end{Bmatrix} | 3.6667 | \\begin{Bmatrix} 0.9773 \\\\ 0.9318 \\\\ 1 \\end{Bmatrix} |",
+      "**Bước 3: Kết luận nghiệm và đối chiếu đáp án**\nSau 3 bước lặp, giá trị riêng trội xấp xỉ là $\\mu^{(3)} = 3.6667$. Giá trị riêng chính xác của $A$ là $\\lambda_1 = 4.0000$. Phương pháp lũy thừa hội tụ nhanh về trị riêng trội."
+    ],
+    "final_answer": "\\mu^{(3)} \\approx 3.6667, \\; \\lambda_1 = 4.0000",
+    "expected_numeric_value": 3.6666666666666665
+  }
+]

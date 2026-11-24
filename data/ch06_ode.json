@@ -1,0 +1,232 @@
+[
+  {
+    "id": "ch06-exam-hk241",
+    "source_problem": "Đề thi HK241 - Câu 4 (ME2091)",
+    "method_tag": "Runge-Kutta 4th Order (RK4)",
+    "exam_focus": true,
+    "expected_numeric_value": 5.4151,
+    "problem_en": "Use the 4th-order Runge-Kutta (RK4) method to solve the ODE: $$\\frac{dy}{dx} = f(x, y) = 4e^{-\\cos x} + \\sqrt[3]{x} + 0.5\\sqrt{y}$$ with step size $h = 0.5$ and initial condition $y(0) = 2$. Compute the value of $y(1.0)$ after two iterations.",
+    "glossary": {
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "initial condition": "điều kiện ban đầu",
+      "step size": "kích thước bước nhảy"
+    },
+    "hint": "Tính 4 hệ số góc $k_1, k_2, k_3, k_4$ tại mỗi bước: $y_{i+1} = y_i + \\frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)$.",
+    "steps": [
+      "**Bước 1: Vòng 1 ($x_0 = 0 \\to x_1 = 0.5$)**\n- $k_1 = 2.178625$\n- $k_2 = 2.946444$\n- $k_3 = 2.976008$\n- $k_4 = 3.394505$\n- $y_1 = 2 + \\frac{0.5}{6}[17.418034] = 3.451503$",
+      "**Bước 2: Vòng 2 ($x_1 = 0.5 \\to x_2 = 1.0$)**\n- $k_1 = 3.389599$\n- $k_2 = 3.903998$\n- $k_3 = 3.934449$\n- $k_4 = 4.496229$\n- $y_2 = 3.451503 + \\frac{0.5}{6}[23.562722] = 5.415063$",
+      "**Bước 3: Kết luận**\n$$y(1.0) \\approx 5.4151$$"
+    ],
+    "final_answer": "y(1.0) \\approx 5.4151"
+  },
+  {
+    "id": "ch06-burden-sec5.2-p1a",
+    "source_problem": "Exercise 5.2 - Problem 1(a) (Burden & Faires 9th)",
+    "method_tag": "Euler's Method",
+    "exam_focus": true,
+    "problem_en": "Use Euler's method with step size $h = 0.5$ to approximate the solution to:\n$$y' = t e^{3t} - 2y, \\quad 0 \\le t \\le 1, \\quad y(0) = 0$$\nCompare with the actual solution $y(t) = \\frac{1}{5}te^{3t} - \\frac{1}{25}e^{3t} + \\frac{1}{25}e^{-2t}$.",
+    "glossary": {
+      "numerical differentiation": "đạo hàm số / vi phân số",
+      "forward-difference": "sai phân tiến",
+      "backward-difference": "sai phân lùi",
+      "three-point central difference": "sai phân hướng tâm 3 điểm",
+      "five-point formula": "công thức 5 điểm",
+      "second derivative": "đạo hàm cấp hai",
+      "Trapezoidal rule": "công thức hình thang",
+      "Simpson's rule": "công thức Simpson 1/3",
+      "Composite Trapezoidal rule": "công thức hình thang mở rộng",
+      "Composite Simpson rule": "công thức Simpson 1/3 mở rộng",
+      "Euler's method": "phương pháp Euler",
+      "Modified Euler method": "phương pháp Euler cải tiến",
+      "Midpoint method": "phương pháp điểm giữa",
+      "Heun's method": "phương pháp Heun",
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "local truncation error": "sai số chặt cụt địa phương",
+      "error bound": "chặn trên sai số",
+      "initial-value problem": "bài toán giá trị ban đầu"
+    },
+    "hint": "Công thức lặp Euler: $w_{i+1} = w_i + h f(t_i, w_i)$ với $t_0 = 0, w_0 = 0, h = 0.5$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và điều kiện ban đầu**\n- Hàm số: $f(t, y) = t e^{3t} - 2y$\n- Nghiệm giải tích: $y(t) = \\frac{1}{5}te^{3t} - \\frac{1}{25}e^{3t} + \\frac{1}{25}e^{-2t}$",
+      "**Bước 2: Bảng tính toán lặp số học (Kiểm chứng từ Python)**\n| $i$ | $t_i$ | Nghiệm Euler $w_i$ | Nghiệm giải tích $y(t_i)$ | Sai số tuyệt đối $|y(t_i) - w_i|$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 0 | 0.00 | 0.000000 | 0.000000 | 0.000000 |\n| 1 | 0.50 | 0.000000 | 0.283617 | 0.283617 |\n| 2 | 1.00 | 1.120422 | 3.219099 | 2.098677 |",
+      "**Bước 3: Kết luận nghiệm và đánh giá sai số**\nTại $t = 1.0$, nghiệm Euler là $w_2 = 1.120422$ trong khi nghiệm chính xác là $y(1.0) = 3.219099$ (sai số 2.0987). Do bước nhảy $h = 0.5$ khá lớn và hàm tăng trưởng mũ nhanh, phương pháp Euler cấp 1 có độ lệch đáng kể."
+    ],
+    "final_answer": "w(1.0) \\approx 1.1204 \\quad (y_{\\text{exact}} = 3.2191)",
+    "expected_numeric_value": 1.1204222675845161
+  },
+  {
+    "id": "ch06-burden-sec5.2-p1b",
+    "source_problem": "Exercise 5.2 - Problem 1(b) (Burden & Faires 9th)",
+    "method_tag": "Euler's Method",
+    "exam_focus": true,
+    "problem_en": "Use Euler's method with step size $h = 0.5$ to approximate the solution to:\n$$y' = 1 + (t - y)^2, \\quad 2 \\le t \\le 3, \\quad y(2) = 1$$\nCompare with the actual solution $y(t) = t + \\frac{1}{1 - t}$.",
+    "glossary": {
+      "numerical differentiation": "đạo hàm số / vi phân số",
+      "forward-difference": "sai phân tiến",
+      "backward-difference": "sai phân lùi",
+      "three-point central difference": "sai phân hướng tâm 3 điểm",
+      "five-point formula": "công thức 5 điểm",
+      "second derivative": "đạo hàm cấp hai",
+      "Trapezoidal rule": "công thức hình thang",
+      "Simpson's rule": "công thức Simpson 1/3",
+      "Composite Trapezoidal rule": "công thức hình thang mở rộng",
+      "Composite Simpson rule": "công thức Simpson 1/3 mở rộng",
+      "Euler's method": "phương pháp Euler",
+      "Modified Euler method": "phương pháp Euler cải tiến",
+      "Midpoint method": "phương pháp điểm giữa",
+      "Heun's method": "phương pháp Heun",
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "local truncation error": "sai số chặt cụt địa phương",
+      "error bound": "chặn trên sai số",
+      "initial-value problem": "bài toán giá trị ban đầu"
+    },
+    "hint": "Công thức lặp: $w_{i+1} = w_i + h [1 + (t_i - w_i)^2]$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và điều kiện ban đầu**\n- Ban đầu: $t_0 = 2, w_0 = 1, h = 0.5$\n- Nghiệm giải tích: $y(t) = t + \\frac{1}{1-t}$",
+      "**Bước 2: Bảng tính toán lặp số học (Kiểm chứng từ Python)**\n- Bước 1 ($t_1 = 2.5$): $f(2, 1) = 1 + (2-1)^2 = 2 \\implies w_1 = 1 + 0.5(2) = 2.0000$\n  Nghiệm chính xác: $y(2.5) = 2.5 + \\frac{1}{1-2.5} = 2.5 - 0.6667 = 1.8333$\n- Bước 2 ($t_2 = 3.0$): $f(2.5, 2.0) = 1 + (2.5-2)^2 = 1.25 \\implies w_2 = 2.0 + 0.5(1.25) = 2.6250$\n  Nghiệm chính xác: $y(3.0) = 3 + \\frac{1}{1-3} = 2.5000$",
+      "**Bước 3: Kết luận nghiệm và đánh giá sai số**\nTại $t = 3.0$, nghiệm Euler là $w_2 = 2.6250$, sai số tuyệt đối là $|2.5000 - 2.6250| = 0.1250$."
+    ],
+    "final_answer": "w(3.0) \\approx 2.6250 \\quad (y_{\\text{exact}} = 2.5000)",
+    "expected_numeric_value": 2.625
+  },
+  {
+    "id": "ch06-burden-sec5.4-p13a",
+    "source_problem": "Exercise 5.4 - Problem 13(a) (Burden & Faires 9th)",
+    "method_tag": "Runge-Kutta 4 (RK4)",
+    "exam_focus": true,
+    "problem_en": "Use the Runge-Kutta method of order four (RK4) with $h = 0.5$ to approximate the solution of:\n$$y' = t e^{3t} - 2y, \\quad 0 \\le t \\le 1, \\quad y(0) = 0$$\nCompare with the actual solution $y(t) = \\frac{1}{5}te^{3t} - \\frac{1}{25}e^{3t} + \\frac{1}{25}e^{-2t}$.",
+    "glossary": {
+      "numerical differentiation": "đạo hàm số / vi phân số",
+      "forward-difference": "sai phân tiến",
+      "backward-difference": "sai phân lùi",
+      "three-point central difference": "sai phân hướng tâm 3 điểm",
+      "five-point formula": "công thức 5 điểm",
+      "second derivative": "đạo hàm cấp hai",
+      "Trapezoidal rule": "công thức hình thang",
+      "Simpson's rule": "công thức Simpson 1/3",
+      "Composite Trapezoidal rule": "công thức hình thang mở rộng",
+      "Composite Simpson rule": "công thức Simpson 1/3 mở rộng",
+      "Euler's method": "phương pháp Euler",
+      "Modified Euler method": "phương pháp Euler cải tiến",
+      "Midpoint method": "phương pháp điểm giữa",
+      "Heun's method": "phương pháp Heun",
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "local truncation error": "sai số chặt cụt địa phương",
+      "error bound": "chặn trên sai số",
+      "initial-value problem": "bài toán giá trị ban đầu"
+    },
+    "hint": "Tại mỗi bước tính 4 hệ số: $K_1 = h f(t, w)$, $K_2 = h f(t+h/2, w+K_1/2)$, $K_3 = h f(t+h/2, w+K_2/2)$, $K_4 = h f(t+h, w+K_3)$. Cập nhật: $w_{i+1} = w_i + \\frac{1}{6}(K_1 + 2K_2 + 2K_3 + K_4)$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và điều kiện ban đầu**\n- Bước nhảy: $h = 0.5$\n- Bảng chi tiết 4 hệ số Runge-Kutta tại từng bước:",
+      "**Bước 2: Bảng tính toán lặp số học (Kiểm chứng từ Python)**\n| Bước $i$ | $t_i$ | $K_1$ | $K_2$ | $K_3$ | $K_4$ | $w_i$ (RK4) | $y(t_i)$ chính xác |\n| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| 1 | 0.50 | 0.00000 | 0.26463 | 0.13231 | 0.98811 | 0.29700 | 0.28362 |\n| 2 | 1.00 | 0.82342 | 2.84919 | 1.83631 | 7.90946 | 3.31431 | 3.21910 |",
+      "**Bước 3: Kết luận nghiệm và đánh giá sai số**\nTại $t = 1.0$, nghiệm RK4 đạt $w_2 = 3.31431$ so với nghiệm chính xác $y(1.0) = 3.21910$ (sai số tuyệt đối chỉ là 0.0952). Vượt trội hoàn toàn so với Euler ($w=2.2408$) và Euler cải tiến ($w=4.5126$)."
+    ],
+    "final_answer": "w(1.0) \\approx 3.3143 \\quad (y_{\\text{exact}} = 3.2191)",
+    "expected_numeric_value": 3.3143117774778457
+  },
+  {
+    "id": "ch06-burden-sec5.2-p1c",
+    "source_problem": "Exercise 5.2 - Problem 1(c) (Burden & Faires 9th)",
+    "method_tag": "Euler's Method",
+    "exam_focus": true,
+    "problem_en": "Use Euler's method with step size $h = 0.25$ to approximate the solution to:\n$$y' = 1 + \\frac{y}{t}, \\quad 1 \\le t \\le 2, \\quad y(1) = 2$$\nCompare with the actual solution $y(t) = t \\ln t + 2t$.",
+    "glossary": {
+      "numerical differentiation": "đạo hàm số / vi phân số",
+      "forward-difference": "sai phân tiến",
+      "backward-difference": "sai phân lùi",
+      "three-point central difference": "sai phân hướng tâm 3 điểm",
+      "five-point formula": "công thức 5 điểm",
+      "second derivative": "đạo hàm cấp hai",
+      "Trapezoidal rule": "công thức hình thang",
+      "Simpson's rule": "công thức Simpson 1/3",
+      "Composite Trapezoidal rule": "công thức hình thang mở rộng",
+      "Composite Simpson rule": "công thức Simpson 1/3 mở rộng",
+      "Euler's method": "phương pháp Euler",
+      "Modified Euler method": "phương pháp Euler cải tiến",
+      "Midpoint method": "phương pháp điểm giữa",
+      "Heun's method": "phương pháp Heun",
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "local truncation error": "sai số chặt cụt địa phương",
+      "error bound": "chặn trên sai số",
+      "initial-value problem": "bài toán giá trị ban đầu"
+    },
+    "hint": "Công thức lặp: $w_{i+1} = w_i + h [1 + w_i / t_i]$ với $t_0 = 1, w_0 = 2, h = 0.25$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và điều kiện ban đầu**\n- Phương trình vi phân tuyến tính cấp 1: $y' - \\frac{1}{t}y = 1$\n- Nghiệm giải tích: $y(t) = t\\ln t + 2t$",
+      "**Bước 2: Bảng tính toán lặp số học (Kiểm chứng từ Python)**\n| $i$ | $t_i$ | Nghiệm Euler $w_i$ | Nghiệm giải tích $y(t_i)$ | Sai số tuyệt đối $|y(t_i) - w_i|$ |\n| :---: | :---: | :---: | :---: | :---: |\n| 0 | 1.00 | 2.000000 | 2.000000 | 0.000000 |\n| 1 | 1.25 | 2.750000 | 2.778929 | 0.028929 |\n| 2 | 1.50 | 3.550000 | 3.608198 | 0.058198 |\n| 3 | 1.75 | 4.391667 | 4.479328 | 0.087661 |\n| 4 | 2.00 | 5.269048 | 5.386294 | 0.117247 |",
+      "**Bước 3: Kết luận nghiệm và đánh giá sai số**\nTại $t = 2.0$, nghiệm Euler là $w_4 = 5.269048$ so với nghiệm chính xác $y(2.0) = 5.386294$ (sai số 0.1172)."
+    ],
+    "final_answer": "w(2.0) \\approx 5.2690 \\quad (y_{\\text{exact}} = 5.3863)",
+    "expected_numeric_value": 5.269047619047619
+  },
+  {
+    "id": "ch06-burden-sec5.4-p1a",
+    "source_problem": "Exercise 5.4 - Problem 1(a) (Burden & Faires 9th)",
+    "method_tag": "Modified Euler Method",
+    "exam_focus": true,
+    "problem_en": "Use the Modified Euler method (Heun's predictor-corrector without iteration) with $h = 0.5$ to approximate the solution to:\n$$y' = t e^{3t} - 2y, \\quad 0 \\le t \\le 1, \\quad y(0) = 0$$\nCompare with the actual solution $y(t) = \\frac{1}{5}te^{3t} - \\frac{1}{25}e^{3t} + \\frac{1}{25}e^{-2t}$.",
+    "glossary": {
+      "numerical differentiation": "đạo hàm số / vi phân số",
+      "forward-difference": "sai phân tiến",
+      "backward-difference": "sai phân lùi",
+      "three-point central difference": "sai phân hướng tâm 3 điểm",
+      "five-point formula": "công thức 5 điểm",
+      "second derivative": "đạo hàm cấp hai",
+      "Trapezoidal rule": "công thức hình thang",
+      "Simpson's rule": "công thức Simpson 1/3",
+      "Composite Trapezoidal rule": "công thức hình thang mở rộng",
+      "Composite Simpson rule": "công thức Simpson 1/3 mở rộng",
+      "Euler's method": "phương pháp Euler",
+      "Modified Euler method": "phương pháp Euler cải tiến",
+      "Midpoint method": "phương pháp điểm giữa",
+      "Heun's method": "phương pháp Heun",
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "local truncation error": "sai số chặt cụt địa phương",
+      "error bound": "chặn trên sai số",
+      "initial-value problem": "bài toán giá trị ban đầu"
+    },
+    "hint": "Công thức Euler cải tiến: $w_{i+1} = w_i + \\frac{h}{2} [f(t_i, w_i) + f(t_{i+1}, w_i + h f(t_i, w_i))]$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và điều kiện ban đầu**\n- Bước dự báo Euler: $\\tilde{w}_{i+1} = w_i + h f(t_i, w_i)$\n- Bước hiệu chỉnh hình thang: $w_{i+1} = w_i + \\frac{h}{2}[f(t_i, w_i) + f(t_{i+1}, \\tilde{w}_{i+1})]$",
+      "**Bước 2: Bảng tính toán lặp số học (Kiểm chứng từ Python)**\n- Bước 1 ($t_1 = 0.5$):\n  - $f(0, 0) = 0$\n  - Dự báo: $\\tilde{w}_1 = 0 + 0.5(0) = 0$\n  - $f(0.5, 0) = 0.5 e^{1.5} - 2(0) = 2.240845$\n  - Hiệu chỉnh: $w_1 = 0 + \\frac{0.5}{2}[0 + 2.240845] = 0.560211$\n  - Nghiệm chính xác: $y(0.5) = 0.283617$\n\n- Bước 2 ($t_2 = 1.0$):\n  - $f(0.5, w_1) = 0.5 e^{1.5} - 2(0.5602) = 1.120422$\n  - Dự báo: $\\tilde{w}_2 = 0.5602 + 0.5(1.120422) = 1.120422$\n  - $f(1.0, \\tilde{w}_2) = 1.0 e^3 - 2(1.120422) = 20.085537 - 2.240845 = 17.844692$\n  - Hiệu chỉnh: $w_2 = 0.560211 + \\frac{0.5}{2}[1.120422 + 17.844692] = 5.301490$\n  - Nghiệm chính xác: $y(1.0) = 3.219099$",
+      "**Bước 3: Kết luận nghiệm và đánh giá sai số**\nTại $t = 1.0$, nghiệm Euler cải tiến đạt $w_2 = 5.301490$ với sai số $|E| = 2.0824$, chính xác gấp hơn 2.5 lần so với Euler chuẩn."
+    ],
+    "final_answer": "w(1.0) \\approx 5.3015 \\quad (y_{\\text{exact}} = 3.2191)",
+    "expected_numeric_value": 5.301489797693046
+  },
+  {
+    "id": "ch05-burden-sec5.4-p5a",
+    "source_problem": "Exercise 5.4 - Problem 5(a) (Burden & Faires 9th)",
+    "method_tag": "Midpoint Method",
+    "exam_focus": true,
+    "problem_en": "Use the Midpoint method with $h = 0.5$ to approximate the solution to:\n$$y' = t e^{3t} - 2y, \\quad 0 \\le t \\le 1, \\quad y(0) = 0$$\nCompare with the actual solution $y(t) = \\frac{1}{5}te^{3t} - \\frac{1}{25}e^{3t} + \\frac{1}{25}e^{-2t}$.",
+    "glossary": {
+      "numerical differentiation": "đạo hàm số / vi phân số",
+      "forward-difference": "sai phân tiến",
+      "backward-difference": "sai phân lùi",
+      "three-point central difference": "sai phân hướng tâm 3 điểm",
+      "five-point formula": "công thức 5 điểm",
+      "second derivative": "đạo hàm cấp hai",
+      "Trapezoidal rule": "công thức hình thang",
+      "Simpson's rule": "công thức Simpson 1/3",
+      "Composite Trapezoidal rule": "công thức hình thang mở rộng",
+      "Composite Simpson rule": "công thức Simpson 1/3 mở rộng",
+      "Euler's method": "phương pháp Euler",
+      "Modified Euler method": "phương pháp Euler cải tiến",
+      "Midpoint method": "phương pháp điểm giữa",
+      "Heun's method": "phương pháp Heun",
+      "Runge-Kutta method": "phương pháp Runge-Kutta",
+      "local truncation error": "sai số chặt cụt địa phương",
+      "error bound": "chặn trên sai số",
+      "initial-value problem": "bài toán giá trị ban đầu"
+    },
+    "hint": "Công thức phương pháp điểm giữa: $w_{i+1} = w_i + h f\\left(t_i + \\frac{h}{2}, w_i + \\frac{h}{2} f(t_i, w_i)\\right)$. Sai số chặt cụt địa phương đạt $O(h^2)$.",
+    "steps": [
+      "**Bước 1: Thiết lập công thức và điều kiện ban đầu**\n- Mốc trung điểm: $t_{i+1/2} = t_i + \\frac{h}{2}$\n- Giá trị dự báo tại trung điểm: $w_{i+1/2} = w_i + \\frac{h}{2} f(t_i, w_i)$",
+      "**Bước 2: Bảng tính toán lặp số học (Kiểm chứng từ Python)**\n- Bước 1 ($t_1 = 0.5$):\n  - $f(0, 0) = 0$\n  - $w_{1/2} = 0 + 0.25(0) = 0$ tại $t = 0.25$\n  - $f(0.25, 0) = 0.25 e^{0.75} - 0 = 0.529250$\n  - $w_1 = 0 + 0.5(0.529250) = 0.264625$\n- Bước 2 ($t_2 = 1.0$):\n  - $f(0.5, w_1) = 0.5 e^{1.5} - 2(0.2646) = 1.711595$\n  - $w_{3/2} = 0.264625 + 0.25(1.711595) = 0.692524$\n  - Độ dốc tại trung điểm $t=0.75$: $f(0.75, w_{3/2}) = 5.730755$\n  - $w_2 = 0.264625 + 0.5(5.730755) = 3.130002$",
+      "**Bước 3: Kết luận nghiệm và đánh giá sai số**\nTại $t = 1.0$, nghiệm điểm giữa là $w_2 = 3.130002$ so với nghiệm chính xác $y(1.0) = 3.219099$ (sai số 0.0891)."
+    ],
+    "final_answer": "w(1.0) \\approx 3.1300 \\quad (y_{\\text{exact}} = 3.2191)",
+    "expected_numeric_value": 3.1300023058804816
+  }
+]

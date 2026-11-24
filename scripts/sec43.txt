@@ -1,0 +1,469 @@
+200
+C H A P T E R 4
+Numerical Differentiation and Integration
+Figure 4.6
+y
+x
+a  x1
+xn1  b
+x0
+x1
+x2
+xn
+y = Pn(x)
+y = f (x)
+The following theorem is analogous to Theorem 4.2; its proof is contained in [IK],
+p. 314.
+Theorem 4.3
+Suppose that n
+i=0 aif (xi) denotes the (n + 1)-point open Newton-Cotes formula with
+x−1 = a, xn+1 = b, and h = (b −a)/(n + 2). There exists ξ ∈(a, b) for which
+ b
+a
+f (x) dx =
+n
+
+i=0
+aif (xi) + hn+3f (n+2)(ξ)
+(n + 2)!
+ n+1
+−1
+t2(t −1) · · · (t −n) dt,
+if n is even and f ∈Cn+2[a, b], and
+ b
+a
+f (x) dx =
+n
+
+i=0
+aif (xi) + hn+2f (n+1)(ξ)
+(n + 1)!
+ n+1
+−1
+t(t −1) · · · (t −n) dt,
+if n is odd and f ∈Cn+1[a, b].
+Notice, as in the case of the closed methods, we have the degree of precision compar-
+atively higher for the even methods than for the odd methods.
+Some of the common open Newton-Cotes formulas with their error terms are as
+follows:
+n = 0: Midpoint rule
+ x1
+x−1
+f (x) dx = 2hf (x0) + h3
+3 f ′′(ξ),
+where
+x−1 < ξ < x1.
+(4.29)
+n = 1:
+ x2
+x−1
+f (x) dx = 3h
+2 [f (x0) + f (x1)] + 3h3
+4 f ′′(ξ),
+where
+x−1 < ξ < x2.
+(4.30)
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+4.3
+Elements of Numerical Integration
+201
+n = 2:
+ x3
+x−1
+f (x) dx = 4h
+3 [2f (x0) −f (x1) + 2f (x2)] + 14h5
+45 f (4)(ξ),
+(4.31)
+where
+x−1 < ξ < x3.
+n = 3:
+ x4
+x−1
+f (x) dx = 5h
+24[11f (x0) + f (x1) + f (x2) + 11f (x3)] + 95
+144h5f (4)(ξ),
+(4.32)
+where
+x−1 < ξ < x4.
+Example 2
+Compare the results of the closed and open Newton-Cotes formulas listed as (4.25)–(4.28)
+and (4.29)–(4.32) when approximating
+ π/4
+0
+sin x dx = 1 −
+√
+2/2 ≈0.29289322.
+Solution
+For the closed formulas we have
+n = 1 :
+(π/4)
+2
+
+sin 0 + sin π
+4
+
+≈0.27768018
+n = 2 :
+(π/8)
+3
+
+sin 0 + 4 sin π
+8 + sin π
+4
+
+≈0.29293264
+n = 3 :
+3(π/12)
+8
+
+sin 0 + 3 sin π
+12 + 3 sin π
+6 + sin π
+4
+
+≈0.29291070
+n = 4 :
+2(π/16)
+45
+
+7 sin 0 + 32 sin π
+16 + 12 sin π
+8 + 32 sin 3π
+16 + 7 sin π
+4
+
+≈0.29289318
+and for the open formulas we have
+n = 0 :
+2(π/8)
+
+sin π
+8
+
+≈0.30055887
+n = 1 :
+3(π/12)
+2
+
+sin π
+12 + sin π
+6
+
+≈0.29798754
+n = 2 :
+4(π/16)
+3
+
+2 sin π
+16 −sin π
+8 + 2 sin 3π
+16
+
+≈0.29285866
+n = 3 :
+5(π/20)
+24
+
+11 sin π
+20 + sin π
+10 + sin 3π
+20 + 11 sin π
+5
+
+≈0.29286923
+Table 4.8 summarizes these results and shows the approximation errors.
+Table 4.8
+n
+0
+1
+2
+3
+4
+Closed formulas
+0.27768018
+0.29293264
+0.29291070
+0.29289318
+Error
+0.01521303
+0.00003942
+0.00001748
+0.00000004
+Open formulas
+0.30055887
+0.29798754
+0.29285866
+0.29286923
+Error
+0.00766565
+0.00509432
+0.00003456
+0.00002399
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+202
+C H A P T E R 4
+Numerical Differentiation and Integration
+E X E R C I S E S E T 4.3
+1.
+Approximate the following integrals using the Trapezoidal rule.
+a.
+ 1
+0.5
+x4 dx
+b.
+ 0.5
+0
+2
+x −4 dx
+c.
+ 1.5
+1
+x2 ln x dx
+d.
+ 1
+0
+x2e−x dx
+e.
+ 1.6
+1
+2x
+x2 −4 dx
+f.
+ 0.35
+0
+2
+x2 −4 dx
+g.
+ π/4
+0
+x sin x dx
+h.
+ π/4
+0
+e3x sin 2x dx
+2.
+Approximate the following integrals using the Trapezoidal rule.
+a.
+ 0.25
+−0.25
+(cos x)2 dx
+b.
+ 0
+−0.5
+x ln(x + 1) dx
+c.
+ 1.3
+0.75
+
+(sin x)2 −2x sin x + 1
+
+dx
+d.
+ e+1
+e
+1
+x ln x dx
+3.
+Find a bound for the error in Exercise 1 using the error formula, and compare this to the actual error.
+4.
+Find a bound for the error in Exercise 2 using the error formula, and compare this to the actual error.
+5.
+Repeat Exercise 1 using Simpson’s rule.
+6.
+Repeat Exercise 2 using Simpson’s rule.
+7.
+Repeat Exercise 3 using Simpson’s rule and the results of Exercise 5.
+8.
+Repeat Exercise 4 using Simpson’s rule and the results of Exercise 6.
+9.
+Repeat Exercise 1 using the Midpoint rule.
+10.
+Repeat Exercise 2 using the Midpoint rule.
+11.
+Repeat Exercise 3 using the Midpoint rule and the results of Exercise 9.
+12.
+Repeat Exercise 4 using the Midpoint rule and the results of Exercise 10.
+13.
+The Trapezoidal rule applied to
+ 2
+0 f (x) dx gives the value 4, and Simpson’s rule gives the value 2.
+What is f (1)?
+14.
+The Trapezoidal rule applied to
+ 2
+0 f (x) dx gives the value 5, and the Midpoint rule gives the value 4.
+What value does Simpson’s rule give?
+15.
+Find the degree of precision of the quadrature formula
+ 1
+−1
+f (x) dx = f
+
+−
+√
+3
+3
+
++ f
+√
+3
+3
+
+.
+16.
+Let h = (b −a)/3, x0 = a, x1 = a + h, and x2 = b. Find the degree of precision of the quadrature
+formula
+ b
+a
+f (x) dx = 9
+4hf (x1) + 3
+4hf (x2).
+17.
+The quadrature formula
+ 1
+−1 f (x) dx = c0f (−1) + c1f (0) + c2f (1) is exact for all polynomials of
+degree less than or equal to 2. Determine c0, c1, and c2.
+18.
+The quadrature formula
+ 2
+0 f (x) dx = c0f (0) + c1f (1) + c2f (2) is exact for all polynomials of
+degree less than or equal to 2. Determine c0, c1, and c2.
+19.
+Find the constants c0, c1, and x1 so that the quadrature formula
+ 1
+0
+f (x) dx = c0f (0) + c1f (x1)
+has the highest possible degree of precision.
+20.
+Find the constants x0, x1, and c1 so that the quadrature formula
+ 1
+0
+f (x) dx = 1
+2f (x0) + c1f (x1)
+has the highest possible degree of precision.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
+4.4
+Composite Numerical Integration
+203
+21.
+Approximate the following integrals using formulas (4.25) through (4.32). Are the accuracies of
+the approximations consistent with the error formulas? Which of parts (d) and (e) give the better
+approximation?
+a.
+ 0.1
+0
+√
+1 + x dx
+b.
+ π/2
+0
+(sin x)2 dx
+c.
+ 1.5
+1.1
+ex dx
+d.
+ 10
+1
+1
+x dx
+e.
+ 5.5
+1
+1
+x dx +
+ 10
+5.5
+1
+x dx
+f.
+ 1
+0
+x1/3 dx
+22.
+Given the function f at the following values,
+x
+1.8
+2.0
+2.2
+2.4
+2.6
+f (x)
+3.12014
+4.42569
+6.04241
+8.03014
+10.46675
+approximate
+ 2.6
+1.8 f (x) dx using all the appropriate quadrature formulas of this section.
+23.
+Suppose that the data of Exercise 22 have round-off errors given by the following table.
+x
+1.8
+2.0
+2.2
+2.4
+2.6
+Error in f (x)
+2 × 10−6
+−2 × 10−6
+−0.9 × 10−6
+−0.9 × 10−6
+2 × 10−6
+Calculate the errors due to round-off in Exercise 22.
+24.
+Derive Simpson’s rule with error term by using
+ x2
+x0
+f (x) dx = a0f (x0) + a1f (x1) + a2f (x2) + kf (4)(ξ).
+Find a0, a1, and a2 from the fact that Simpson’s rule is exact for f (x) = xn when n = 1, 2, and 3.
+Then ﬁnd k by applying the integration formula with f (x) = x4.
+25.
+Prove the statement following Deﬁnition 4.1; that is, show that a quadrature formula has degree of
+precision n if and only if the error E(P(x)) = 0 for all polynomials P(x) of degree k = 0, 1, . . . , n,
+but E(P(x))̸ = 0 for some polynomial P(x) of degree n + 1.
+26.
+Derive Simpson’s three-eighths rule (the closed rule with n = 3) with error term by using
+Theorem 4.2.
+27.
+Derive the open rule with n = 1 with error term by using Theorem 4.3.
+4.4
+Composite Numerical Integration
+The Newton-Cotes formulas are generally unsuitable for use over large integration inter-
+vals. High-degree formulas would be required, and the values of the coefﬁcients in these
+formulas are difﬁcult to obtain. Also, the Newton-Cotes formulas are based on interpola-
+tory polynomials that use equally-spaced nodes, a procedure that is inaccurate over large
+intervals because of the oscillatory nature of high-degree polynomials.
+In this section, we discuss a piecewise approach to numerical integration that uses the
+low-order Newton-Cotes formulas. These are the techniques most often applied.
+Piecewise approximation is often
+effective. Recall that this was
+used for spline interpolation.
+Example 1
+Use Simpson’s rule to approximate
+ 4
+0 ex dx and compare this to the results obtained
+by adding the Simpson’s rule approximations for
+ 2
+0 ex dx and
+ 4
+2 ex dx. Compare these
+approximations to the sum of Simpson’s rule for
+ 1
+0 ex dx,
+ 2
+1 ex dx,
+ 3
+2 ex dx, and
+ 4
+3 ex dx.
+Copyright 2010 Cengage Learning. All Rights Reserved. May not be copied, scanned, or duplicated, in whole or in part. Due to electronic rights, some third party content may be suppressed from the eBook and/or eChapter(s).
+Editorial review has deemed that any suppressed content does not materially affect the overall learning experience. Cengage Learning reserves the right to remove additional content at any time if subsequent rights restrictions require it.
+
