@@ -75,7 +75,10 @@ export default function MarkdownView({ content }) {
         const text = block.text;
         const diagram = text.match(/^!\[([^\]]+)\]\((\/images\/logan_p4_\d+_shear_moment\.svg)\)$/);
         if (diagram) {
-          return <img key={bIdx} src={diagram[2]} alt={diagram[1]} className="w-full max-w-3xl" loading="lazy" />;
+          const base = import.meta.env.BASE_URL || '/';
+          const cleanBase = base.endsWith('/') ? base : `${base}/`;
+          const cleanSrc = diagram[2].startsWith('/') ? diagram[2].slice(1) : diagram[2];
+          return <img key={bIdx} src={`${cleanBase}${cleanSrc}`} alt={diagram[1]} className="w-full max-w-3xl" loading="lazy" />;
         }
         if (text.startsWith('- ')) {
           return (

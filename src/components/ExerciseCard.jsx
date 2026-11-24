@@ -3,6 +3,15 @@ import MathRenderer from './MathRenderer';
 import MarkdownView from './MarkdownView';
 import { Lightbulb, CheckCircle2, Flame, Eye, EyeOff, Send, RotateCcw, AlertTriangle, XCircle, Trophy } from 'lucide-react';
 
+export const resolveImagePath = (src) => {
+  if (!src) return '';
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
+  return `${cleanBase}${cleanSrc}`;
+};
+
 export default function ExerciseCard({ problem, index }) {
   // Layer states
   const [showHint, setShowHint] = useState(false);
@@ -213,7 +222,7 @@ export default function ExerciseCard({ problem, index }) {
             </div>
             <div className="flex justify-center bg-slate-50/50 p-2 rounded border border-slate-100">
               <img
-                src={figure_image}
+                src={resolveImagePath(figure_image)}
                 alt={source_problem}
                 className="max-h-64 object-contain rounded hover:scale-105 transition-transform duration-200"
                 loading="lazy"
